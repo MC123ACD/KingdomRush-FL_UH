@@ -2,7 +2,6 @@ local log = require("klua.log"):new("UH")
 
 local HOOK = require("hook_utils").HOOK
 require("UH.utils_UH")
--- local upgrades_FL = require("upgrades_FL")
 
 local function get_hero_stats(p)
 	local out = {}
