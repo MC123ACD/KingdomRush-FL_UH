@@ -1,4 +1,26 @@
 local log = require("klua.log"):new("scripts_UH")
+local GR = require("grid_db")
+local GS = require("game_settings")
+local P = require("path_db")
+local S = require("sound_db")
+local UP = require("upgrades")
+local LU = require("level_utils")
+local W = require("wave_db")
+require("gg_views_custom")
+local game_gui = require("game_gui")
+local game = require("game")
+local scripts = require("scripts")
+local scripts5 = require("scripts_5")
+local function v(v1, v2)
+	return {
+		x = v1,
+		y = v2
+	}
+end
+local function tpos(e)
+	return e.tower and e.tower.range_offset and V.v(e.pos.x + e.tower.range_offset.x, e.pos.y + e.tower.range_offset.y) or
+	e.pos
+end
 
 -- 这里是修改函数的模块
 

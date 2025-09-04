@@ -2,7 +2,28 @@ local log = require("klua.log"):new("UH")
 
 local HOOK = require("hook_utils").HOOK
 require("UH.utils_UH")
+local scripts = require("scripts")
+local scripts5 = require("scripts_5")
+local sys = require("systems")
+local A = require("data.game_animations")
+local A_db = require("animation_db")
+local A_UH = require("UH.animations_UH")
+local screen_map = require("screen_map")
+local LU = require("level_utils")
+local GS = require("game_settings")
+local DI = require("difficulty")
+local game = require("game")
+local game_gui = require("game_gui")
+local i18n = require("i18n")
+local S = require("sound_db")
+local v = V.v
+local HOOK = require("hook_utils").HOOK
+-- local upgrades_FL = require("upgrades_FL")
 
+local DI = require("difficulty")
+local function CJK(default, zh, ja, kr)
+	return i18n:cjk(default, zh, ja, kr)
+end
 local function get_hero_stats(p)
 	local out = {}
 	local index, hero_name

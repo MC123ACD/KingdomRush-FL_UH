@@ -1,5 +1,28 @@
 local log = require("klua.log"):new("animations_UH")
 
+local A = require("data.game_animations")
+local A_db = require("animation_db")
+local function v(v1, v2)
+	return {
+		x = v1,
+		y = v2
+	}
+end
+local function vv(v1)
+	return {
+		x = v1,
+		y = v1
+	}
+end
+local function np(pi, spi, ni)
+	return {
+		dir = 1,
+		pi = pi,
+		spi = spi,
+		ni = ni
+	}
+end
+
 local function forlist(list)
 	for i, v in pairs(list) do
 		if type(v) == "table" then

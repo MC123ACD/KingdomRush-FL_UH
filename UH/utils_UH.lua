@@ -1,15 +1,14 @@
 SU5 = require("script_utils_5")
 U5 = require("utils_5")
-scripts5 = require("scripts_5")
-balance = require("balance/balance")
 GU5 = require("gui_utils_5")
+balance = require("balance/balance")
 map_data = require("data.map_data")
 hero_game_ver = map_data.hero_game_ver
 scripts_UH = require("UH.scripts_UH")
 upgrades_hero = require("UH.upgrades_hero")
 A_UH = require("UH.animations_UH")
 
-function hero_buy_set(t)
+function hero_buy_template_set(t)
     if type(t) == "string" then
         local nt = string.gsub(t, "_2$", "")
 

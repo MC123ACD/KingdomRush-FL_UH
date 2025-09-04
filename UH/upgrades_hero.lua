@@ -1,4 +1,55 @@
 local log = require("klua.log"):new("upgrades_hero")
+local km = require("klua.macros")
+local bit = require("bit")
+local balance = require("balance/balance")
+local storage = require("storage")
+local bor = bit.bor
+local E = require("entity_db")
+require("constants")
+local scripts = require("scripts")
+local scripts5 = require("scripts_5")
+local GS = require("game_settings")
+local IS_CONSOLE = KR_TARGET == "console"
+local UPGR = require("upgrades")
+local copy = table.deepclone
+local function v(v1, v2)
+	return {
+		x = v1,
+		y = v2
+	}
+end
+local function vv(v1)
+	return {
+		x = v1,
+		y = v1
+	}
+end
+local function r(x, y, w, h)
+	return {
+		pos = v(x, y),
+		size = v(w, h)
+	}
+end
+local function adx(v)
+	return v - anchor_x * image_x
+end
+local function ady(v)
+	return v - anchor_y * image_y
+end
+local function np(pi, spi, ni)
+	return {
+		dir = 1,
+		pi = pi,
+		spi = spi,
+		ni = ni
+	}
+end
+local function ST(name, t)
+	return E:set_template(name, t)
+end
+local function tcopy(name, t)
+	return ST(name, copy(T(t)))
+end
 
 GS.hero_xp_gain_per_difficulty_mode = {
 	[DIFFICULTY_EASY] = 0.75,
@@ -40,7 +91,7 @@ function upgrades_hero:enhance1()
 	T("mod_gerald_courage").modifier.duration = 8
 
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_gerald_2")
+		hero_buy_template_set("hero_gerald_2")
 	end
 
 	-- 2. 小公主
@@ -105,7 +156,7 @@ function upgrades_hero:enhance1()
 	tt.dps.damage_every = fts(5)
 
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_alleria_2")
+		hero_buy_template_set("hero_alleria_2")
 	end
 
 	-- 3. 大锤
@@ -165,7 +216,7 @@ function upgrades_hero:enhance1()
 	tt.modifier.duration = 0.75
 
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_malik_2")
+		hero_buy_template_set("hero_malik_2")
 	end
 
 -- 4. 波林
@@ -270,7 +321,7 @@ function upgrades_hero:enhance1()
 	tt.bullet.hit_fx_water = "fx_explosion_water"
 	
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_bolin_2")
+		hero_buy_template_set("hero_bolin_2")
 	end
 
 -- 5. 小马哥
@@ -385,7 +436,7 @@ function upgrades_hero:enhance1()
 	tt.render.sprites[1].alpha = 100
 
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_magnus_2")
+		hero_buy_template_set("hero_magnus_2")
 	end
 
 -- 6. 火男
@@ -432,7 +483,7 @@ function upgrades_hero:enhance1()
 	tt.dps.damage_inc = 2
 
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_ignus_2")
+		hero_buy_template_set("hero_ignus_2")
 	end
 
 -- 7. 迪纳斯
@@ -483,7 +534,7 @@ function upgrades_hero:enhance1()
 	T("hero_denas").sale = 20
 
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_denas_2")
+		hero_buy_template_set("hero_denas_2")
 	end
 
 -- 8. 冰女
@@ -522,7 +573,7 @@ function upgrades_hero:enhance1()
 	T("bolt_elora_freeze").bullet.xp_gain_factor = 0.4
 
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_elora_2")
+		hero_buy_template_set("hero_elora_2")
 	end
 
 -- 9. 熊人
@@ -577,7 +628,7 @@ function upgrades_hero:enhance1()
 	T("hero_ingvar").timed_attacks.list[2].transform_health_factor = 0.25
 
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_ingvar_2")
+		hero_buy_template_set("hero_ingvar_2")
 	end
 
 -- 10. 钢锯
@@ -625,7 +676,7 @@ function upgrades_hero:enhance1()
 	T("hero_hacksaw").melee.attacks[2].fn_can = scripts.hero_hacksaw.fn_can_timber
 
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_hacksaw_2")
+		hero_buy_template_set("hero_hacksaw_2")
 	end
 
 -- 11. 鬼侍
@@ -685,7 +736,7 @@ function upgrades_hero:enhance1()
 	T("hero_oni").melee.attacks[3].fn_can = scripts.hero_oni.fn_can_death_strike
 
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_oni_2")
+		hero_buy_template_set("hero_oni_2")
 	end
 
 -- 12. 雷神
@@ -715,7 +766,7 @@ function upgrades_hero:enhance1()
 	}
 
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_thor_2")
+		hero_buy_template_set("hero_thor_2")
 	end
 
 -- 13. 天十
@@ -751,7 +802,7 @@ function upgrades_hero:enhance1()
 	T("hero_10yr").motion.max_speed_buffed = 2.8 * FPS
 
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_10yr_2")
+		hero_buy_template_set("hero_10yr_2")
 	end
 
 -- 14. 毒蛇
@@ -770,7 +821,7 @@ function upgrades_hero:enhance1()
 	T("hero_viper").dodge.chance = 0.25
 
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_viper_2")
+		hero_buy_template_set("hero_viper_2")
 	end
 
 -- 15. 电击手
@@ -827,7 +878,7 @@ function upgrades_hero:enhance1()
 	T("hero_voltaire").melee.attacks[1].xp_gain_factor = 0.7
 
 	if T("tower_hero_buy_b") then
-		hero_buy_set("hero_voltaire_2")
+		hero_buy_template_set("hero_voltaire_2")
 	end
 end
 
@@ -849,7 +900,7 @@ function upgrades_hero:enhance2()
 	tt.aura.use_mod_offset = nil
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_alric_2")
+		hero_buy_template_set("hero_alric_2")
 	end
 
 -- 2. 幻影
@@ -886,7 +937,7 @@ function upgrades_hero:enhance2()
 	}
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_mirage_2")
+		hero_buy_template_set("hero_mirage_2")
 	end
 
 -- 3. 船长
@@ -950,7 +1001,7 @@ function upgrades_hero:enhance2()
 	}
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_pirate_2")
+		hero_buy_template_set("hero_pirate_2")
 	end
 
 -- 4. 兽王
@@ -1010,7 +1061,7 @@ function upgrades_hero:enhance2()
 	T("mod_beastmaster_lash").modifier.duration = 6
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_beastmaster_2")
+		hero_buy_template_set("hero_beastmaster_2")
 	end
 
 -- 5. 女巫
@@ -1024,7 +1075,7 @@ function upgrades_hero:enhance2()
 	T("voodoo_witch_death_aura").aura.damage = 3
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_voodoo_witch_2")
+		hero_buy_template_set("hero_voodoo_witch_2")
 	end
 
 -- 6. 大法师
@@ -1088,7 +1139,7 @@ function upgrades_hero:enhance2()
 	tt.damage_max = 50
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_wizard_2")
+		hero_buy_template_set("hero_wizard_2")
 	end
 
 -- 7. 女祭司
@@ -1105,7 +1156,7 @@ function upgrades_hero:enhance2()
 	T("hero_priest").teleport.min_distance = 0
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_priest_2")
+		hero_buy_template_set("hero_priest_2")
 	end
 
 -- 8. 石头人
@@ -1175,7 +1226,7 @@ function upgrades_hero:enhance2()
 	}
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_giant_2")
+		hero_buy_template_set("hero_giant_2")
 	end
 
 -- 9. 沙塔
@@ -1213,7 +1264,7 @@ function upgrades_hero:enhance2()
 	T("hero_alien").auras.list[1] = CC("aura_attack")
 	T("hero_alien").auras.list[1].aura = "alien_purification_drone_cursor_aura"
 	tt = RT("alien_purification_drone_cursor_aura", "decal_scripted")
-	AC(tt, "aura", "sound_events", "tween")
+	AC(tt, "aura", "sound_events")
 	tt.render.sprites[1].name = "alien_drone_attack_beam"
 	tt.render.sprites[1].hidden = true
 	tt.render.sprites[1].anchor.y = 0.08
@@ -1259,7 +1310,7 @@ function upgrades_hero:enhance2()
 	}
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_alien_2")
+		hero_buy_template_set("hero_alien_2")
 	end
 
 -- 10. 火龙
@@ -1300,7 +1351,7 @@ function upgrades_hero:enhance2()
 	tcopy("mod_dragon_reign", "mod_dragon_reign_2")
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_dragon_2")
+		hero_buy_template_set("hero_dragon_2")
 	end
 
 -- 11. 螃蟹
@@ -1370,7 +1421,7 @@ function upgrades_hero:enhance2()
 	T("mod_slow_water_bomb").slow.factor = 0.6
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_crab_2")
+		hero_buy_template_set("hero_crab_2")
 	end
 
 -- 12. 库绍
@@ -1446,7 +1497,7 @@ function upgrades_hero:enhance2()
 	tt.reduction_factor = 0.125
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_monk_2")
+		hero_buy_template_set("hero_monk_2")
 	end
 
 -- 13. 但丁
@@ -1476,7 +1527,7 @@ function upgrades_hero:enhance2()
 	T("hero_van_helsing").melee.attacks[2].cooldown = 15
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_van_helsing_2")
+		hero_buy_template_set("hero_van_helsing_2")
 	end
 
 -- 14. 骨龙
@@ -1494,7 +1545,7 @@ function upgrades_hero:enhance2()
 	}
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_dracolich_2")
+		hero_buy_template_set("hero_dracolich_2")
 	end
 
 -- 15. 米偌陶
@@ -1537,7 +1588,7 @@ function upgrades_hero:enhance2()
 	T("hero_minotaur").timed_attacks.list[1].cooldown = 8
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_minotaur_2")
+		hero_buy_template_set("hero_minotaur_2")
 	end
 
 -- 16. 猴神
@@ -1612,7 +1663,7 @@ function upgrades_hero:enhance2()
 	}
 
 	if T("tower_hero_buy_a") then
-		hero_buy_set("hero_monkey_god_2")
+		hero_buy_template_set("hero_monkey_god_2")
 	end
 end
 
@@ -1663,7 +1714,7 @@ function upgrades_hero:enhance3()
 	T("hero_elves_archer_ultimate").cooldown = 25
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_elves_archer_2")
+		hero_buy_template_set("hero_elves_archer_2")
 
 		tt = T("hero_elves_archer_2")
 		tt.melee.attacks[1].pop = {
@@ -1755,7 +1806,7 @@ function upgrades_hero:enhance3()
 	}
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_arivan_2")
+		hero_buy_template_set("hero_arivan_2")
 
 		tt = T("hero_arivan_2")
 		tt.ranged.attacks[1].bullet = "ray_arivan_simple_2"
@@ -1847,7 +1898,7 @@ function upgrades_hero:enhance3()
 	}
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_catha_2")
+		hero_buy_template_set("hero_catha_2")
 
 		tt = T("hero_catha_2")
 		tt.ranged.attacks[1].bullet = "knife_catha_2"
@@ -1914,7 +1965,7 @@ function upgrades_hero:enhance3()
 	tt.damage_type = DAMAGE_TRUE
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_regson_2")
+		hero_buy_template_set("hero_regson_2")
 
 		tt = T("hero_regson_2")
 		tt.melee.attacks[1].pop = {
@@ -1949,7 +2000,7 @@ function upgrades_hero:enhance3()
 	T("soldier_elves_denas_guard").melee.range = 90
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_elves_denas_2")
+		hero_buy_template_set("hero_elves_denas_2")
 
 		tt = T("hero_elves_denas_2")
 		tt.melee.attacks[1].pop = {
@@ -1978,7 +2029,7 @@ function upgrades_hero:enhance3()
 	T("hero_rag_ultimate").doll_duration = 15
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_rag_2")
+		hero_buy_template_set("hero_rag_2")
 
 		tt = T("hero_rag_2")
 		tt.ranged.attacks[1].bullet = "bullet_rag_2"
@@ -2047,7 +2098,7 @@ function upgrades_hero:enhance3()
 	T("hero_bravebark_ultimate").entity = "soldier_bravebark"
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_bravebark_2")
+		hero_buy_template_set("hero_bravebark_2")
 
 		tt = T("hero_bravebark_2")
 		tt.melee.attacks[1].pop = {
@@ -2076,7 +2127,7 @@ function upgrades_hero:enhance3()
 	T("mod_veznan_arcanenova").modifier.duration = 4
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_veznan_2")
+		hero_buy_template_set("hero_veznan_2")
 
 		tt = T("hero_veznan_2")
 		tt.melee.attacks[1].pop = {
@@ -2157,7 +2208,7 @@ function upgrades_hero:enhance3()
 	}
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_xin_2")
+		hero_buy_template_set("hero_xin_2")
 
 		tt = T("hero_xin_2")
 		tt.melee.attacks[1].pop = {
@@ -2210,7 +2261,7 @@ function upgrades_hero:enhance3()
 	T("hero_phoenix_ultimate").cooldown = 15
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_phoenix_2")
+		hero_buy_template_set("hero_phoenix_2")
 
 		tt = T("hero_phoenix_2")
 		tt.ranged.attacks[2].bullet = "missile_phoenix_2"
@@ -2282,7 +2333,7 @@ function upgrades_hero:enhance3()
 	tt.transfer.particles_name = "ps_durax_clone_transfer"
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_durax_2")
+		hero_buy_template_set("hero_durax_2")
 
 		tt = T("hero_durax_2")
 		tt.timed_attacks.list[1].bullet = "ray_durax_2"
@@ -2363,7 +2414,7 @@ function upgrades_hero:enhance3()
 	T("mod_lynn_ultimate").explode_range = 133
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_lynn_2")
+		hero_buy_template_set("hero_lynn_2")
 
 		tt = T("hero_lynn_2")
 		tt.melee.attacks[1].pop = {
@@ -2458,7 +2509,7 @@ function upgrades_hero:enhance3()
 	T("hero_bruce_ultimate").cooldown = 39
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_bruce_2")
+		hero_buy_template_set("hero_bruce_2")
 
 		tt = T("hero_bruce_2")
 		tt.melee.attacks[1].pop = {
@@ -2493,7 +2544,7 @@ function upgrades_hero:enhance3()
 	}
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_lilith_2")
+		hero_buy_template_set("hero_lilith_2")
 
 		tt = T("hero_lilith_2")
 		tt.melee.attacks[1].pop = {
@@ -2516,7 +2567,7 @@ function upgrades_hero:enhance3()
 	T("hero_wilbur").motion.max_speed = 2 * FPS
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_wilbur_2")
+		hero_buy_template_set("hero_wilbur_2")
 
 		tt = T("hero_wilbur_2")
 		tt.ranged.attacks[1].bullet = "shot_wilbur_2"
@@ -2587,7 +2638,7 @@ function upgrades_hero:enhance3()
 	T("hero_faustus_ultimate").cooldown = 33
 
 	if T("tower_hero_buy") then
-		hero_buy_set("hero_faustus_2")
+		hero_buy_template_set("hero_faustus_2")
 
 		tt = T("hero_faustus_2")
 		tt.ranged.attacks[1].bullet = "bolt_faustus_2"
@@ -2716,7 +2767,7 @@ function upgrades_hero:enhance5()
 	tt.bullet.damage_min = nil
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_vesper_2")
+		hero_buy_template_set("hero_vesper_2")
 	end
 
 	-- 2. 蕾琳
@@ -2742,7 +2793,7 @@ function upgrades_hero:enhance5()
 	}
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_raelyn_2")
+		hero_buy_template_set("hero_raelyn_2")
 	end
 
 	-- 3. 尼鲁
@@ -2783,7 +2834,7 @@ function upgrades_hero:enhance5()
 	}
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_muyrn_2")
+		hero_buy_template_set("hero_muyrn_2")
 	end
 
 	-- 4. 毒液
@@ -2812,7 +2863,7 @@ function upgrades_hero:enhance5()
 	}
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_venom_2")
+		hero_buy_template_set("hero_venom_2")
 	end
 
 	-- 5. 土木人
@@ -2874,7 +2925,7 @@ function upgrades_hero:enhance5()
 	tt.modifier.duration = 2
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_builder_2")
+		hero_buy_template_set("hero_builder_2")
 	end
 
 	-- 6. 战争巨头
@@ -2931,7 +2982,7 @@ function upgrades_hero:enhance5()
 	}
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_robot_2")
+		hero_buy_template_set("hero_robot_2")
 	end
 
 	-- 7. 虚空法师
@@ -2954,7 +3005,7 @@ function upgrades_hero:enhance5()
 	}
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_space_elf_2")
+		hero_buy_template_set("hero_space_elf_2")
 	end
 
 	-- 8. 哥布林机甲
@@ -3011,7 +3062,7 @@ function upgrades_hero:enhance5()
 	T("zeppelin_hero_mecha").attack_radius = 700
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_mecha_2")
+		hero_buy_template_set("hero_mecha_2")
 	end
 
 	-- 9. 圣龙
@@ -3027,7 +3078,7 @@ function upgrades_hero:enhance5()
 	T("mod_hero_lumenir_sword_hit").aura_damage_type = DAMAGE_MAGICAL
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_lumenir_2")
+		hero_buy_template_set("hero_lumenir_2")
 	end
 
 	-- 10. 安雅
@@ -3097,7 +3148,7 @@ function upgrades_hero:enhance5()
 	}
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_hunter_2")
+		hero_buy_template_set("hero_hunter_2")
 	end
 
 	-- 11. 晶龙
@@ -3132,7 +3183,7 @@ function upgrades_hero:enhance5()
 	}
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_dragon_gem_2")
+		hero_buy_template_set("hero_dragon_gem_2")
 	end
 
 	-- 12. 狮鹫
@@ -3178,7 +3229,7 @@ function upgrades_hero:enhance5()
 	}
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_bird_2")
+		hero_buy_template_set("hero_bird_2")
 	end
 
 	-- 13. 骨龙
@@ -3204,7 +3255,7 @@ function upgrades_hero:enhance5()
 	}
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_dragon_bone_2")
+		hero_buy_template_set("hero_dragon_bone_2")
 	end
 
 	-- 14. 女巫
@@ -3250,7 +3301,7 @@ function upgrades_hero:enhance5()
 	}
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_witch_2")
+		hero_buy_template_set("hero_witch_2")
 	end
 
 	-- 15. 木龙
@@ -3274,7 +3325,7 @@ function upgrades_hero:enhance5()
 	}
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_dragon_arb_2")
+		hero_buy_template_set("hero_dragon_arb_2")
 	end
 
 	-- 16. 岩浆怪
@@ -3292,7 +3343,7 @@ function upgrades_hero:enhance5()
 	T("hero_lava")._combo_ultimate.max_radius = 250
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_dragon_arb_2")
+		hero_buy_template_set("hero_dragon_arb_2")
 	end
 
 	-- 17. 蛛后
@@ -3336,7 +3387,7 @@ function upgrades_hero:enhance5()
 	T("mod_soldier_hero_spider_ultimate_stun").stun_chance = 0.25
 
 	if T("tower_hero_buy_c") then
-		hero_buy_set("hero_spider_2")
+		hero_buy_template_set("hero_spider_2")
 	end
 end
 
