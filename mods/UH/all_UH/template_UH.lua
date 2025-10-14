@@ -1,4 +1,4 @@
-local log = require("klua.log"):new("upgrades_hero")
+local log = require("klua.log"):new("template_UH")
 local scripts = require("scripts")
 local scripts5 = require("scripts_5")
 local GS = require("game_settings")
@@ -44,14 +44,14 @@ GS.hero_xp_gain_per_difficulty_mode = {
 	[DIFFICULTY_IMPOSSIBLE] = 1
 }
 
-local upgrades_hero = {}
+local template_UH = {}
 
-upgrades_hero.old = {}
-function upgrades_hero:save_o(m)
+template_UH.old = {}
+function template_UH:save_o(m)
 	self.old.templates = copy(E.entities)
 end
 
-function upgrades_hero:enhance1()
+function template_UH:enhance1()
 	-- 1. 爵士
 	T("hero_gerald").hero.level_stats.regen_health = {
 		40,
@@ -868,7 +868,7 @@ function upgrades_hero:enhance1()
 	end
 end
 
-function upgrades_hero:enhance2()
+function template_UH:enhance2()
 -- 1. 沙王
 	T("hero_alric").main_script.insert = scripts.hero_alric.insert
 	T("hero_alric").hero.fn_level_up = scripts.hero_alric.level_up
@@ -1653,7 +1653,7 @@ function upgrades_hero:enhance2()
 	end
 end
 
-function upgrades_hero:enhance3()
+function template_UH:enhance3()
 	-- 1. 艾莉丹
 	T("hero_elves_archer").hero.fn_level_up = scripts.hero_elves_archer.level_up
 	T("hero_elves_archer").main_script.update = scripts.hero_elves_archer.update
@@ -2640,12 +2640,12 @@ function upgrades_hero:enhance3()
 	end
 end
 
-function upgrades_hero:enhance4()
+function template_UH:enhance4()
 	-- 1. 电云
 	T("hero_dianyun").motion.max_speed = 2.3 * FPS
 end
 
-function upgrades_hero:enhance5()
+function template_UH:enhance5()
 	-- 1. 维斯珀
 	T("hero_vesper").hero.fn_level_up = scripts5.hero_vesper.level_up
 	T("hero_vesper").main_script.insert = scripts5.hero_vesper.insert
@@ -3377,4 +3377,4 @@ function upgrades_hero:enhance5()
 	end
 end
 
-return upgrades_hero
+return template_UH

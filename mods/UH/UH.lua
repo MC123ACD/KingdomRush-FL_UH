@@ -9,6 +9,8 @@ local sys = require("systems")
 local A = require("data.game_animations")
 local A_db = require("animation_db")
 local A_UH = require("animations_UH")
+local template_UH = require("template_UH")
+local scripts_UH = require("scripts_UH")
 local screen_map = require("screen_map")
 local LU = require("level_utils")
 local GS = require("game_settings")
@@ -18,7 +20,7 @@ local game_gui = require("game_gui")
 local i18n = require("i18n")
 local S = require("sound_db")
 local DI = require("difficulty")
-balance = require("data.balance.balance")
+balance = require("balance.balance")
 local function CJK(default, zh, ja, kr)
 	return i18n:cjk(default, zh, ja, kr)
 end
@@ -127,11 +129,11 @@ local function load_UH()
     scripts_UH:enhance3()
     scripts_UH:enhance4()
     scripts_UH:enhance5()
-    upgrades_hero:enhance1()
-    upgrades_hero:enhance2()
-    upgrades_hero:enhance3()
-    upgrades_hero:enhance4()
-    upgrades_hero:enhance5()
+    template_UH:enhance1()
+    template_UH:enhance2()
+    template_UH:enhance3()
+    template_UH:enhance4()
+    template_UH:enhance5()
 end
 
 local hook = {}
@@ -173,7 +175,7 @@ function hook.E.load(load, self)
 	load(self)
 
 	if not self.save_o then
-		upgrades_hero:save_o()
+		template_UH:save_o()
 		scripts_UH:save_o()
 		self.save_o = true
 	end
@@ -227,7 +229,7 @@ function hook.hero_room.init(init, self, sw, sh)
         screen_map.user_data.liuhui.balance_hero = not screen_map.user_data.liuhui.balance_hero
         storage:save_slot(screen_map.user_data)
 
-        E.entities = copy(upgrades_hero.old.templates)
+        E.entities = copy(template_UH.old.templates)
         scripts = copy(scripts_UH.old.scripts)
         scripts5 = copy(scripts_UH.old.scripts5)
 		-- U = copy(scripts_UH.old.utils)
