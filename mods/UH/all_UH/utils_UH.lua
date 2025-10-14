@@ -8,7 +8,9 @@ scripts_UH = require("scripts_UH")
 upgrades_hero = require("upgrades_hero")
 A_UH = require("animations_UH")
 
-function hero_buy_template_set(t)
+local utils_UH = {}
+
+function utils_UH:hero_buy_template_set(t)
     if type(t) == "string" then
         local nt = string.gsub(t, "_2$", "")
 

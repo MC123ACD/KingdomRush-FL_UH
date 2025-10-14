@@ -1,18 +1,9 @@
 local log = require("klua.log"):new("upgrades_hero")
-local balance = require("balance/balance")
-local storage = require("storage")
-local bor = bit.bor
-require("constants")
 local scripts = require("scripts")
 local scripts5 = require("scripts_5")
 local GS = require("game_settings")
-local UPGR = require("upgrades")
-local function v(v1, v2)
-	return {
-		x = v1,
-		y = v2
-	}
-end
+local utils_UH = require("utils_UH")
+local hero_buy_template_set = utils_UH.hero_buy_template_set
 local function vv(v1)
 	return {
 		x = v1,
