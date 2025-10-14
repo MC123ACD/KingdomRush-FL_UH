@@ -35,3 +35,5 @@ function utils_UH:hero_buy_template_set(t)
         end
     end
 end
+
+return utils_UH
