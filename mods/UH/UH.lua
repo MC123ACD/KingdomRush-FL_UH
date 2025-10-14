@@ -1,6 +1,7 @@
 local log = require("klua.log"):new("UH")
 
-local HOOK = require("mod_utils").HOOK
+local mod_utils = require("mod_utils")
+local HOOK = mod_utils.HOOK
 require("utils_UH")
 local scripts = require("scripts")
 local scripts5 = require("scripts_5")
@@ -16,9 +17,6 @@ local game = require("game")
 local game_gui = require("game_gui")
 local i18n = require("i18n")
 local S = require("sound_db")
-local v = V.v
--- local upgrades_FL = require("upgrades_FL")
-
 local DI = require("difficulty")
 local function CJK(default, zh, ja, kr)
 	return i18n:cjk(default, zh, ja, kr)
@@ -134,38 +132,12 @@ local function load_UH()
     upgrades_hero:enhance4()
     upgrades_hero:enhance5()
 end
--- local function load_UF()
---     if user_data.liuhui_hero and user_data.liuhui_hero.usedoublehero then
---         upgrades_FL:enhance_hero1()
---         upgrades_FL:enhance_hero2()
---         upgrades_FL:enhance_hero3()
---     end
---     if user_data.liuhui_hero and not user_data.liuhui_hero.usedoublehero then
---         upgrades_FL:enhance_hero5()
---     end
--- end
-local my_hook = {
-    ok = false
-}
 
--- 元表：自动创建不存在表
-auto_table_mt = {
-	__index = function(table, key)
-		local new = {}
-		setmetatable(new, auto_table_mt)
+local hook = {}
 
-		rawset(table, key, new)
-		return new
-	end
-}
+setmetatable(hook, mod_utils.auto_table_mt)
 
-setmetatable(my_hook, auto_table_mt)
-
-function my_hook:init()
-    if self.ok then
-        return
-    end
-
+function hook:init()
     require("game_scripts")
     require("game_scripts-1")
     require("game_scripts-2")
@@ -174,64 +146,30 @@ function my_hook:init()
 
     HOOK(E, "load", self.E.load)
     HOOK(E, "register_t", self.E.RT)
-    HOOK(A_db, "fni", self.A.fni)
     HOOK(HeroRoomView, "initialize", self.hero_room.init)
     HOOK(HeroRoomView, "show", self.hero_room.show)
 	HOOK(screen_map, "init", self.screen_map.init)
 	HOOK(game_gui, "init", self.game_gui.init)
-	HOOK(game_gui, "restart_game", self.game_gui.restart_game)
 	HOOK(sys.level, "init", self.sys.level.init)
-    -- HOOK(screen_map, "init", self.screen_map_init)
-	HOOK(game, "init", self.game.init)
 	HOOK(game, "mousepressed", self.game.mousepressed)
-    self.ok = true
 end
 
 -- 将模板已存在时报错，改为返回已存在的模板
-function my_hook.E.RT(origin, self, name, base)
+function hook.E.RT(register_t, self, name, base)
 	if self.entities[name] then
         return self.entities[name]
 	end
 
-	local t
-
-	if base then
-		if type(base) == "string" then
-			base = self.entities[base]
-		end
-
-		if base == nil then
-			log.error("template base %s does not exist", base)
-
-			return
-		end
-
-		t = copy(base)
-	else
-		t = {}
-	end
-
-	if self.debug_info then
-		if t.hierarchy_debug then
-			t.hierarchy_debug = t.hierarchy_debug .. "|" .. name
-		else
-			t.hierarchy_debug = name
-		end
-	end
-
-	t.template_name = name
-	self.entities[name] = t
-
-	return t
+	return register_t(self, name, base)
 end
 
-function my_hook.E.load(origin, self, ...)
+function hook.E.load(load, self)
     package.loaded["game_scripts-1"] = nil
     package.loaded["game_scripts-2"] = nil
     package.loaded["game_scripts-4"] = nil
     package.loaded["game_scripts-5"] = nil
 
-    origin(self, ...)
+	load(self)
 
 	if not self.save_o then
 		upgrades_hero:save_o()
@@ -246,15 +184,8 @@ function my_hook.E.load(origin, self, ...)
     end
 end
 
--- 为单独修改动画速度增加支持
-function my_hook.A.fni(origin, self, animation, time_offset, loop, fps, tick_length)
-    fps = animation.fps or self.fps
-    
-    return origin(self, animation, time_offset, loop, fps, tick_length)
-end
-
-function my_hook.sys.level.init(origin, ...)
-    origin(...)
+function hook.sys.level.init(init, ...)
+	init(...)
 
 	local user_data = storage:load_slot()
 
@@ -265,20 +196,11 @@ function my_hook.sys.level.init(origin, ...)
 		A_UH:a4()
 		A_UH:a5()
 	end
-
-	T("hero_alleria_g3").hero.level = 3
-	T("hero_alleria_g3").hero.xp = 0
-
 end
 
--- function my_hook.screen_map_init(origin, ...)
---     origin(...)
-
--- end
-
 -- 按钮
-function my_hook.hero_room.init(origin, self, sw, sh)
-    origin(self, sw, sh)
+function hook.hero_room.init(init, self, sw, sh)
+	init(self, sw, sh)
 
     if screen_map.user_data.liuhui == nil then
         screen_map.user_data.liuhui = {}
@@ -365,15 +287,15 @@ function my_hook.hero_room.init(origin, self, sw, sh)
 end
 
 -- 每次显示英雄殿堂刷新英雄属性
-function my_hook.hero_room.show(origin, self)
-    origin(self)
+function hook.hero_room.show(show, self)
+	show(self)
 
     self:construct_hero(self.selected_index)
 end
 
 -- 修改地图按钮
-function my_hook.screen_map.init(origin, self, w, h, done_callback)
-	origin(self, w, h, done_callback)
+function hook.screen_map.init(init, self, w, h, done_callback)
+	init(self, w, h, done_callback)
 
 	-- 修改敌人血量倍数按钮
 	self.tower_room.children[1].children[1].children[12].on_click = function()
@@ -392,43 +314,28 @@ function my_hook.screen_map.init(origin, self, w, h, done_callback)
 end
 
 -- game_gui 初始化
-function my_hook.game_gui.init(origin, self, w, h, game)
-	origin(self, w, h, game)
+function hook.game_gui.init(init, self, w, h, game)
+	init(self, w, h, game)
 
 	self.mouse_pointer.window = self.mouse_pointer:get_window()
 end
 
-function my_hook.game_gui.restart_game(origin, self)
-    local user_data = storage:load_slot()
+function hook.game.mousepressed(mousepressed, self, x, y, button, istouch)
+	if not self.mp then
+		self.mp = {
+			pos = {},
+			button = {},
+			istouch = nil
+		}
+	end
 
-    if self.game.store.main_hero and not GS.hero_xp_ephemeral then
-        save_xp(self.game.store.main_hero)
-    end
-
-	S:stop_all()
-	S:resume()
-	signal.emit("game-restart", self.game.store)
-	game_gui.game:restart()
-end
-
-function my_hook.game.init(origin, self, screen_w, screen_h, done_callback)
-	origin(self, screen_w, screen_h, done_callback)
-
-	self.mp = {
-		pos = {},
-		button = {},
-		istouch = nil
-	}
-end
-
-function my_hook.game.mousepressed(origin, self, x, y, button, istouch)
 	for i, v in pairs(self.mp.button) do
 		i = nil
 	end
 	self.mp.pos = {}
 	self.mp.istouch = nil
 
-	origin(self, x, y, button, istouch)
+	mousepressed(self, x, y, button, istouch)
 
 	if button == 2 then
 		self.mp.button[2] = true
@@ -437,4 +344,4 @@ function my_hook.game.mousepressed(origin, self, x, y, button, istouch)
 	end
 end
 
-return my_hook
+return hook

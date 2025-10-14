@@ -1,41 +1,10 @@
 local log = require("klua.log"):new("animations_UH")
-
-local A_db = require("animation_db")
-local function v(v1, v2)
-	return {
-		x = v1,
-		y = v2
-	}
-end
-local function vv(v1)
-	return {
-		x = v1,
-		y = v1
-	}
-end
-local function np(pi, spi, ni)
-	return {
-		dir = 1,
-		pi = pi,
-		spi = spi,
-		ni = ni
-	}
-end
-
-local function forlist(list)
-	for i, v in pairs(list) do
-		if type(v) == "table" then
-			A_db.db[i] = v
-		end
-	end
-end
-
-local re_a_list
+local mod_utils = require("mod_utils")
 
 local animations_UH = {}
 
 function animations_UH.a1()
-	re_a_list = {
+	mod_utils:a_db_reset({
 		-- 波林
 		hero_bolin_mine = {
 			prefix = "hero_artillery",
@@ -91,13 +60,11 @@ function animations_UH.a1()
 			},
 			fps = 40
 		},
-	}
-
-	forlist(re_a_list)
+	})
 end
 
 function animations_UH.a2()
-	re_a_list = {
+	mod_utils:a_db_reset({
 		-- 大法师
 		hero_wizard_shoot = {
 			prefix = "hero_mage",
@@ -222,13 +189,11 @@ function animations_UH.a2()
 			from = 214,
 			fps = 40
 		},
-	}
-	
-	forlist(re_a_list)
+	})
 end
 
 function animations_UH.a3()
-	re_a_list = {
+	mod_utils:a_db_reset({
 		-- 艾莉丹
 		hero_elves_archer_walk = {
 			prefix = "archer_hero",
@@ -340,9 +305,7 @@ function animations_UH.a3()
 		from = 235,
 		fps = 40
 		},
-	}
-
-	forlist(re_a_list)
+	})
 end
 
 function animations_UH.a4()
@@ -350,7 +313,7 @@ function animations_UH.a4()
 end
 
 function animations_UH.a5()
-	re_a_list = {
+	mod_utils:a_db_reset({
 		-- 维斯珀
 		hero_vesper_vesper_melee_attack_1 = {
 			prefix = "hero_vesper_vesper",
@@ -428,9 +391,7 @@ function animations_UH.a5()
 			from = 97,
 			fps = 38
 		},
-	}
-
-	forlist(re_a_list)
+	})
 end
 
 return animations_UH
