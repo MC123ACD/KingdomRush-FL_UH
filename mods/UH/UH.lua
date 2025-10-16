@@ -1,7 +1,8 @@
 local log = require("klua.log"):new("UH")
 
 local mod_utils = require("mod_utils")
-local HOOK = mod_utils.HOOK
+local hook_utils = require("hook_utils")
+local HOOK = hook_utils.HOOK
 require("utils_UH")
 local scripts = require("scripts")
 local scripts5 = require("scripts_5")
@@ -19,7 +20,6 @@ local game = require("game")
 local game_gui = require("game_gui")
 local i18n = require("i18n")
 local S = require("sound_db")
-local DI = require("difficulty")
 balance = require("balance.balance")
 local function CJK(default, zh, ja, kr)
 	return i18n:cjk(default, zh, ja, kr)
@@ -106,19 +106,7 @@ local function get_hero_stats(p)
 
 	return out, h
 end
-local function creat_status_1(slot, hero)
-	if not slot.heroes.status_1 then
-		slot.heroes.status_1 = {}
-	end
 
-	if not slot.heroes.status_1[hero.template_name] then
-		slot.heroes.status_1[hero.template_name] = {
-			xp = 0
-		}
-	end
-
-	return slot.heroes.status_1[hero.template_name]
-end
 local function load_UH()
 	scripts_UH:init()
 	scripts_UH:utils()
@@ -151,7 +139,6 @@ function hook:init()
     HOOK(E, "register_t", self.E.RT)
     HOOK(HeroRoomView, "initialize", self.hero_room.init)
     HOOK(HeroRoomView, "show", self.hero_room.show)
-	HOOK(screen_map, "init", self.screen_map.init)
 	HOOK(game_gui, "init", self.game_gui.init)
 	HOOK(sys.level, "init", self.sys.level.init)
 	HOOK(game, "mousepressed", self.game.mousepressed)
@@ -294,26 +281,6 @@ function hook.hero_room.show(show, self)
 	show(self)
 
     self:construct_hero(self.selected_index)
-end
-
--- 修改地图按钮
-function hook.screen_map.init(init, self, w, h, done_callback)
-	init(self, w, h, done_callback)
-
-	-- 修改敌人血量倍数按钮
-	self.tower_room.children[1].children[1].children[12].on_click = function()
-		local impossiblerate = screen_map.user_data.liuhui.impossiblerate
-		if impossiblerate and impossiblerate < 3 then
-			impossiblerate = impossiblerate + 0.05
-		else
-			impossiblerate = 3
-		end
-		screen_map.user_data.liuhui.impossiblerate = impossiblerate
-		GS.difficulty_enemy_hp_max_factor[4] = screen_map.user_data.liuhui.impossiblerate
-		storage:save_slot(screen_map.user_data)
-		self.tower_room:update_selected_tower()
-		S:queue("GUIButtonCommon")
-	end
 end
 
 -- game_gui 初始化
