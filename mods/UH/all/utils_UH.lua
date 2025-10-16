@@ -1,3 +1,9 @@
+local function v(v1, v2)
+    return {
+        x = v1,
+        y = v2
+    }
+end
 local utils_UH = {}
 
 function utils_UH:hero_buy_template_set(t)

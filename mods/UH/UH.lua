@@ -21,6 +21,12 @@ local game_gui = require("game_gui")
 local i18n = require("i18n")
 local S = require("sound_db")
 balance = require("balance.balance")
+local function v(v1, v2)
+	return {
+		x = v1,
+		y = v2
+	}
+end
 local function CJK(default, zh, ja, kr)
 	return i18n:cjk(default, zh, ja, kr)
 end

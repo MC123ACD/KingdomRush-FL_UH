@@ -4,6 +4,12 @@ local scripts5 = require("scripts_5")
 local GS = require("game_settings")
 local utils_UH = require("utils_UH")
 local hero_buy_template_set = utils_UH.hero_buy_template_set
+local function v(v1, v2)
+	return {
+		x = v1,
+		y = v2
+	}
+end
 local function vv(v1)
 	return {
 		x = v1,

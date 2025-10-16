@@ -12,6 +12,12 @@ local game_gui = require("game_gui")
 local DI = require("difficulty")
 balance = require("balance.balance")
 
+local function v(v1, v2)
+	return {
+		x = v1,
+		y = v2
+	}
+end
 local function CJK(default, zh, ja, kr)
 	return i18n:cjk(default, zh, ja, kr)
 end
