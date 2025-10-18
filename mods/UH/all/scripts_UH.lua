@@ -6844,7 +6844,6 @@ function scripts_UH:enhance3()
 		local hp_max = owner.health.hp_max
 		local hp_loss = 0
 		local hp_last = hp_max
-		local user_data = storage:load_slot()
 
 		while true do
 			local hp = owner.health.hp
@@ -6858,18 +6857,10 @@ function scripts_UH:enhance3()
 					while hp_loss >= every_hp do	
 						-- 当损失血量大于等于设定的阈值
 						hp_loss = hp_loss - every_hp
-						
-						if user_data.liuhui_hero and user_data.liuhui_hero.usedoublehero then
-							local hero_in = user_data.liuhui_hero.herolist
 
-							if hero_in[1] == 13 and game_gui.power_1.cooldown_view.start_ts then
-								game_gui.power_1.cooldown_view.start_ts = game_gui.power_1.cooldown_view.start_ts - this.aura.every_tick
-							elseif hero_in[2] == 13 and game_gui.power_3.cooldown_view.start_ts then
-								game_gui.power_3.cooldown_view.start_ts = game_gui.power_3.cooldown_view.start_ts - this.aura.every_tick
-							end
-						elseif not user_data.liuhui_hero.usedoublehero and game_gui.power_3.cooldown_view.start_ts then
-							game_gui.power_3.cooldown_view.start_ts = game_gui.power_3.cooldown_view.start_ts - this.aura.every_tick
-						end
+						local power_ts = utils_UH.get_power_ts(store, 3)
+						
+						utils_UH.set_power_ts(power_ts - this.aura.every_tick, 3, 13)
 					end
 				end
 				
@@ -8546,6 +8537,10 @@ function scripts_UH:enhance5()
 					owner.teleport_start_aura = create_teleport_aura(this.auras[1])
 				elseif not owner.teleport_end_aura then
 					owner.teleport_end_aura = create_teleport_aura(this.auras[2])
+				else
+					local power_ts = utils_UH.get_power_ts(store, 3)
+
+					utils_UH.set_power_ts(power_ts - this.compensate_cooldown, 3, 51)
 				end
 			end
 		end
@@ -8555,37 +8550,60 @@ function scripts_UH:enhance5()
 
 	scripts5.venom_teleport_start_aura = {}
 
+	function scripts5.venom_teleport_start_aura.insert(this, store)
+		local nodes = P:nearest_nodes(this.pos.x, this.pos.y, nil,
+        nil, true)
+
+		if #nodes < 1 then
+			return false
+		end
+
+		this.on_node = nodes[1][3]
+
+		return true
+	end
+
 	function scripts5.venom_teleport_start_aura.update(this, store)
 		local aura = this.aura
 		local owner = store.entities[aura.source_id]
 
-		while true do
-			if this.render.sprites[1].name == "in" and U.animation_finished(this) then
-				U.animation_start(this, "idle", false, store.tick_ts, true)
-			end
+		U.y_animation_play(this, "in", false, store.tick_ts, false)
 
+		while true do
 			local targets = U.find_targets_in_range(store.entities, this.pos, 0, aura.radius, aura.vis_flags,
 				aura.vis_bans)
 
 			if targets and store.tick_ts - this.ts > aura.cycle_time then
-				U.y_animation_play(this, "attack", false, store.tick_ts)
+				U.animation_start(this, "attack", false, store.tick_ts)
+
+				U.y_wait(store, aura.hit_time)
 
 				this.ts = store.tick_ts
 
 				for _, t in pairs(targets) do
-					local d = create_entity("damage")
-					d.target_id = t.id
-					d.source_id = aura.source_id
-					d.damage_type = aura.damage_type
-					d.value = math.random(aura.damage_min, aura.damage_max)
-
-					queue_damage(store, d)
+					if t.enemy then
+						local d = create_entity("damage")
+						d.target_id = t.id
+						d.source_id = aura.source_id
+						d.damage_type = aura.damage_type
+						d.value = math.random(aura.damage_min, aura.damage_max)
+	
+						queue_damage(store, d)
+					end
 				end
 
 				if not this.disabled and owner.teleport_end_aura then					
-					owner.teleport_end_aura.disabled = true
-
-					utils_UH.set_entity_pos(store, targets[1], owner.teleport_end_aura.pos)
+					if targets[1].enemy and this.on_node > owner.teleport_end_aura.on_node then
+						owner.teleport_end_aura.disabled = true
+						owner.teleport_end_aura.ts = store.tick_ts
+	
+						utils_UH.set_entity_pos(store, targets[1].id, owner.teleport_end_aura.pos)
+					elseif targets[1].soldier then
+						owner.teleport_end_aura.disabled = true
+						owner.teleport_end_aura.ts = store.tick_ts
+	
+						utils_UH.set_entity_pos(store, targets[1].id, owner.teleport_end_aura.pos)
+					end
 				end
 			end
 
@@ -8611,37 +8629,60 @@ function scripts_UH:enhance5()
 
 	scripts5.venom_teleport_end_aura = {}
 
+	function scripts5.venom_teleport_end_aura.insert(this, store)
+		local nodes = P:nearest_nodes(this.pos.x, this.pos.y, nil,
+        nil, true)
+
+		if #nodes < 1 then
+			return false
+		end
+
+		this.on_node = nodes[1][3]
+
+		return true
+	end
+
 	function scripts5.venom_teleport_end_aura.update(this, store)
 		local aura = this.aura
 		local owner = store.entities[aura.source_id]
 
-		while true do
-			if this.render.sprites[1].name == "in" and U.animation_finished(this) then
-				U.animation_start(this, "idle", false, store.tick_ts, true)
-			end
+		U.y_animation_play(this, "in", false, store.tick_ts, false)
 
+		while true do
 			local targets = U.find_targets_in_range(store.entities, this.pos, 0, aura.radius, aura.vis_flags,
 				aura.vis_bans)
 
 			if targets and store.tick_ts - this.ts > aura.cycle_time then
-				U.y_animation_play(this, "attack", false, store.tick_ts)
+				U.animation_start(this, "attack", false, store.tick_ts)
+
+				U.y_wait(store, aura.hit_time)
 
 				this.ts = store.tick_ts
 
 				for _, t in pairs(targets) do
-					local d = create_entity("damage")
-					d.target_id = t.id
-					d.source_id = aura.source_id
-					d.damage_type = aura.damage_type
-					d.value = math.random(aura.damage_min, aura.damage_max)
+					if t.enemy then
+						local d = create_entity("damage")
+						d.target_id = t.id
+						d.source_id = aura.source_id
+						d.damage_type = aura.damage_type
+						d.value = math.random(aura.damage_min, aura.damage_max)
 
-					queue_damage(store, d)
+						queue_damage(store, d)
+					end
 				end
 
 				if not this.disabled and owner.teleport_start_aura then
-					owner.teleport_start_aura.disabled = true
-
-					utils_UH.set_entity_pos(store, targets[1], owner.teleport_start_aura.pos)
+					if targets[1].enemy and this.on_node > owner.teleport_start_aura.on_node then
+						owner.teleport_start_aura.disabled = true
+						owner.teleport_start_aura.ts = store.tick_ts
+	
+						utils_UH.set_entity_pos(store, targets[1].id, owner.teleport_start_aura.pos)
+					elseif targets[1].soldier then
+						owner.teleport_start_aura.disabled = true
+						owner.teleport_start_aura.ts = store.tick_ts
+	
+						utils_UH.set_entity_pos(store, targets[1].id, owner.teleport_start_aura.pos)
+					end
 				end
 			end
 

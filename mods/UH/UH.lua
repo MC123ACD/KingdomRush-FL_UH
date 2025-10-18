@@ -15,11 +15,14 @@ local scripts_UH = require("scripts_UH")
 local screen_map = require("screen_map")
 local LU = require("level_utils")
 local GS = require("game_settings")
+local GU5 = require("gui_utils_5")
 local DI = require("difficulty")
 local game = require("game")
 local game_gui = require("game_gui")
 local i18n = require("i18n")
 local S = require("sound_db")
+local map_data = require("data.map_data")
+
 balance = require("balance.balance")
 local function v(v1, v2)
 	return {
@@ -29,88 +32,6 @@ local function v(v1, v2)
 end
 local function CJK(default, zh, ja, kr)
 	return i18n:cjk(default, zh, ja, kr)
-end
-local function get_hero_stats(p)
-	local out = {}
-	local index, hero_name
-
-	if type(p) == "number" then
-		index = p
-	else
-		index = get_hero_index(p)
-	end
-
-	local data = screen_map.hero_data[index]
-
-	hero_name = data.name
-
-	local user_data = storage:load_slot()
-
-	local status = user_data.heroes.status[hero_name]
-
-	if not status then
-		log.debug("hero status for %s not found in slot. overwritting from template", hero_name)
-
-		local template = require("data.slot_template")
-
-		user_data.heroes.status[hero_name] = template.heroes.status[hero_name]
-		status = template.heroes.status[hero_name]
-	end
-
-	local h = E:create_entity(hero_name)
-
-	h.hero.xp = status.xp
-
-	local level, level_progress = U.get_hero_level(h.hero.xp, GS.hero_xp_thresholds)
-
-	h.hero.level = level
-	if h.hero.level < data.starting_level then
-		h.hero.level = data.starting_level
-		h.hero.xp = GS.hero_xp_thresholds[h.hero.level]
-	end
-
-	out.skill_names = {}
-	out.skill_names_i18n = {}
-
-	local used_points = 0
-
-	for k, v in pairs(status.skills) do
-		h.hero.skills[k].level = v
-
-		local i = h.hero.skills[k].hr_order
-
-		out.skill_names[i] = k
-		out.skill_names_i18n[i] = h.hero.skills[k].key
-
-		for j = 1, v do
-			used_points = used_points + h.hero.skills[k].hr_cost[j]
-		end
-	end
-
-	h.hero.fn_level_up(h, {}, true)
-
-	local info = h.info.fn(h)
-
-	out.index = index
-	out.name = hero_name
-	out.name_i18n = h.info.i18n_key or hero_name
-	out.icon = data.icon
-	out.thumb = data.thumb
-	out.portrait = data.portrait
-	out.level = h.hero.level
-	out.xp = h.hero.xp
-	out.level_progress = level_progress
-	out.taunt = h.sound_events.change_rally_point .. "Select"
-	out.hero_class = _(string.upper(out.name_i18n) .. "_CLASS")
-	out.health = info.hp_max
-	out.damage = info.damage_min .. " - " .. info.damage_max
-	out.armor = GU5.armor_value_desc(info.armor)
-	out.attack_rate = _(string.upper(out.name_i18n) .. "_ATTACKRATE")
-	out.damage_icon = h.info.damage_icon or 1
-	out.skills = h.hero.skills
-	out.remaining_points = GS.skill_points_for_hero_level[h.hero.level] - used_points
-
-	return out, h
 end
 
 local function load_UH()
@@ -247,28 +168,93 @@ function hook.hero_room.init(init, self, sw, sh)
 	cheat_up.pos = v(75, 36 + kr3_y_offset + 50)
 	cheat_up.anchor = v(cheat_up.size.x / 2, cheat_up.size.y / 2)
 
+	local function get_hero_stats(p)
+		local out = {}
+		local index, hero_name
+
+		if type(p) == "number" then
+			index = p
+		else
+			index = get_hero_index(p)
+		end
+
+		local data = screen_map.hero_data[index]
+
+		hero_name = data.name
+
+		local user_data = storage:load_slot()
+
+		local status = user_data.heroes.status[hero_name]
+
+		if not status then
+			log.debug("hero status for %s not found in slot. overwritting from template", hero_name)
+
+			local template = require("data.slot_template")
+
+			user_data.heroes.status[hero_name] = template.heroes.status[hero_name]
+			status = template.heroes.status[hero_name]
+		end
+
+		local h = E:create_entity(hero_name)
+
+		h.hero.xp = status.xp
+
+		local level, level_progress = U.get_hero_level(h.hero.xp, GS.hero_xp_thresholds)
+
+		h.hero.level = level
+		if h.hero.level < data.starting_level then
+			h.hero.level = data.starting_level
+			h.hero.xp = GS.hero_xp_thresholds[h.hero.level]
+		end
+
+		out.skill_names = {}
+		out.skill_names_i18n = {}
+
+		local used_points = 0
+
+		for k, v in pairs(status.skills) do
+			h.hero.skills[k].level = v
+
+			local i = h.hero.skills[k].hr_order
+
+			out.skill_names[i] = k
+			out.skill_names_i18n[i] = h.hero.skills[k].key
+
+			for j = 1, v do
+				used_points = used_points + h.hero.skills[k].hr_cost[j]
+			end
+		end
+
+		h.hero.fn_level_up(h, {}, true)
+
+		local info = h.info.fn(h)
+
+		out.index = index
+		out.name = hero_name
+		out.name_i18n = h.info.i18n_key or hero_name
+		out.icon = data.icon
+		out.thumb = data.thumb
+		out.portrait = data.portrait
+		out.level = h.hero.level
+		out.xp = h.hero.xp
+		out.level_progress = level_progress
+		out.taunt = h.sound_events.change_rally_point .. "Select"
+		out.hero_class = _(string.upper(out.name_i18n) .. "_CLASS")
+		out.health = info.hp_max
+		out.damage = info.damage_min .. " - " .. info.damage_max
+		out.armor = GU5.armor_value_desc(info.armor)
+		out.attack_rate = _(string.upper(out.name_i18n) .. "_ATTACKRATE")
+		out.damage_icon = h.info.damage_icon or 1
+		out.skills = h.hero.skills
+		out.remaining_points = GS.skill_points_for_hero_level[h.hero.level] - used_points
+
+		return out, h
+	end
+
 	function cheat_up.on_click()
 		local user_data = storage:load_slot()
 		local hero = get_hero_stats(self.selected_index)
 		local status = user_data.heroes.status[hero.name]
-
-		if hero_game_ver(hero.name) == 1 and hero.level < 10 then
-			local function creat_status_1(slot, hero)
-				if not slot.heroes.status_1 then
-					slot.heroes.status_1 = {}
-				end
-
-				if not slot.heroes.status_1[hero.name] then
-					slot.heroes.status_1[hero.name] = {
-						xp = 0
-					}
-				end
-
-				return slot.heroes.status_1[hero.name]
-			end
-			local status_1 = creat_status_1(user_data, hero)
-			status_1.xp = GS.hero_xp_thresholds[hero.level]
-		end
 
 		if hero.level < 10 then
 			status.xp = GS.hero_xp_thresholds[hero.level]

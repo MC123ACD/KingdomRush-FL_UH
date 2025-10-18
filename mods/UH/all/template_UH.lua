@@ -2838,25 +2838,40 @@ function template_UH:enhance5()
 
 	T("hero_venom").melee.attacks[1].xp_gain_factor = 2.5
 
+	T("bullet_hero_venom_ranged_tentacle").bullet.mods[3] = "mod_teleport_hero_venom"
+	tt = RT("mod_teleport_hero_venom", "mod_teleport_mage")
+	tt.nodes_offset = -30
+
 	T("hero_venom").melee.attacks[3].xp_gain_factor = 1.5
 	T("hero_venom").hero.skills.inner_beast.trigger_hp = 0.6
 
+	T("hero_venom").hero.skills.floor_spikes.cooldown = {
+		20,
+		20,
+		20
+	}
 	T("hero_venom").timed_attacks.list[3].min_targets = 2
+
+	T("hero_venom").hero.skills.eat_enemy.cooldown = {
+		20,
+		20,
+		20
+	}
 
 	T("aura_hero_venom_ultimate").aura.mod = nil
 	T("aura_hero_venom_ultimate").render.sprites[1].alpha = 0
 	T("controller_hero_venom_ultimate").main_script.update = scripts5.hero_venom_ultimate.update
 	T("hero_venom").hero.skills.ultimate.cooldown = {
-		[0] = 20,
-		20,
-		20,
-		20
+		[0] = 30,
+		30,
+		30,
+		30
 	}
 	T("hero_venom").hero.skills.ultimate.duration = {
-		[0] = 5,
-		6,
-		8,
-		10
+		[0] = 30,
+		40,
+		50,
+		60
 	}
 	T("hero_venom").hero.skills.ultimate.damage_min = {
 		[0] = 5,
@@ -2874,6 +2889,7 @@ function template_UH:enhance5()
 		"venom_teleport_start_aura",
 		"venom_teleport_end_aura"
 	}
+	T("controller_hero_venom_ultimate").compensate_cooldown = 10
 
 	tt = RT("venom_teleport_start_aura", "aura")
 	AC(tt, "render")
@@ -2882,19 +2898,21 @@ function template_UH:enhance5()
 	tt.aura.damage_type = DAMAGE_TRUE
 	tt.aura.damage_min = nil
 	tt.aura.damage_max = nil
+	tt.aura.hit_time = fts(12)
 	tt.aura.cycle_time = 3
 	tt.aura.radius = 70
-	tt.aura.vis_bans = bor(F_FLYING, F_BOSS)
+	tt.aura.vis_bans = bor(F_FLYING, F_BOSS, F_MINIBOSS)
 	tt.aura.vis_flags = bor(F_MOD)
+	tt.main_script.insert = scripts5.venom_teleport_start_aura.insert
 	tt.main_script.update = scripts5.venom_teleport_start_aura.update
 	tt.main_script.remove = scripts5.venom_teleport_start_aura.remove
 	tt.render.sprites[1].prefix = "hero_venom_ultimate"
-	tt.render.sprites[1].name = "in"
 	tt.render.sprites[1].animated = true
 	tt.render.sprites[1].z = Z_DECALS
 	tt.render.sprites[1].loop = false
 
 	tt = RT("venom_teleport_end_aura", "venom_teleport_start_aura")
+	tt.main_script.insert = scripts5.venom_teleport_end_aura.insert
 	tt.main_script.update = scripts5.venom_teleport_end_aura.update
 	tt.main_script.remove = scripts5.venom_teleport_end_aura.remove
 
@@ -3425,6 +3443,58 @@ function template_UH:enhance5()
 	if T("tower_hero_buy_c") then
 		hero_buy_template_set("hero_spider_2")
 	end
+
+	-- 18. 悟空
+	T("hero_wukong").hero.level_stats.armor = {
+		0.2,
+		0.2,
+		0.25,
+		0.3,
+		0.35,
+		0.4,
+		0.45,
+		0.5,
+		0.55,
+		0.6
+	}
+
+	T("hero_wukong").hero.skills.hair_clones.cooldown = {
+		21,
+		19,
+		17
+	}
+	T("soldier_hero_wukong_clone").health.armor = 0.4
+	T("soldier_hero_wukong_clone_b").health.armor = 0.4
+
+	T("hero_wukong").hero.skills.zhu_apprentice.hp_max = {
+		140,
+		200,
+		300
+	}
+
+	T("hero_wukong").hero.skills.pole_ranged.pole_amounts = {
+		6,
+		10,
+		14
+	}
+	T("hero_wukong").hero.skills.pole_ranged.damage_max = {
+		10,
+		15,
+		20
+	}
+	T("hero_wukong").hero.skills.pole_ranged.damage_min = {
+		6,
+		8,
+		11
+	}
+	T("hero_wukong").timed_attacks.list[3].max_range = 300
+
+	T("hero_wukong").hero.skills.ultimate.slow_duration = {
+		[0] = 6,
+		7,
+		8,
+		10
+	}
 end
 
 return template_UH

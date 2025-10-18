@@ -191,6 +191,12 @@ function animations_UH.a5()
 			to = 78,
 			from = 40
 		},
+		hero_venom_hero_spikes_in = {
+			fps = 35
+		},
+		hero_venom_hero_spikes_out = {
+			fps = 35
+		},
 
 		-- 狮鹫
 		gryph_character_stun = {
