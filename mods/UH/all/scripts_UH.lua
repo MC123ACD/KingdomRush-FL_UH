@@ -6,11 +6,12 @@ local S = require("sound_db")
 local UP = require("upgrades")
 local LU = require("level_utils")
 local W = require("wave_db")
-require("gg_views_custom")
 local game_gui = require("game_gui")
 local game = require("game")
 local scripts = require("scripts")
 local scripts5 = require("scripts_5")
+local SU5 = require("script_utils_5")
+local utils_UH = require("utils_UH")
 local function v(v1, v2)
 	return {
 		x = v1,
@@ -7888,6 +7889,779 @@ function scripts_UH:enhance5()
 	
 			coroutine.yield()
 		end
+	end
+
+	-- 毒液
+	function scripts5.hero_venom.level_up(this, store, initial)
+		local hl = this.hero.level
+		local ls = this.hero.level_stats
+
+		this.health.hp_max = ls.hp_max[hl]
+		this.regen.health = ls.regen_health[hl]
+		this.health.armor = ls.armor[hl]
+		this.melee.attacks[1].damage_min = ls.melee_damage_min[hl]
+		this.melee.attacks[1].damage_max = ls.melee_damage_max[hl]
+		this.melee.attacks[2].damage_min = ls.melee_damage_min[hl]
+		this.melee.attacks[2].damage_max = ls.melee_damage_max[hl]
+
+		local s, sl
+
+		s = this.hero.skills.ranged_tentacle
+		sl = s.level
+
+		if sl > 0 and initial then
+			log.info("LEVELUP - %s - %i - HEARTSEEKER - %i", this.template_name, hl, sl)
+
+			local a = this.timed_attacks.list[1]
+
+			a.disabled = nil
+			a.cooldown = s.cooldown[sl]
+
+			local b = E:get_template(a.bullet)
+
+			b.bullet.damage_min = s.damage_min[sl]
+			b.bullet.damage_max = s.damage_max[sl]
+			b.bleed_chance = s.bleed_chance[sl]
+
+			local m = E:get_template(b.bullet.mods[1])
+
+			m.dps.damage_min = s.bleed_damage_min[sl]
+			m.dps.damage_max = s.bleed_damage_max[sl]
+			m.dps.damage_every = s.bleed_every[sl]
+			m.modifier.duration = s.bleed_duration[sl]
+		end
+
+		s = this.hero.skills.inner_beast
+		sl = s.level
+
+		if sl > 0 and initial then
+			log.info("LEVELUP - %s - %i - INNER BEAST - %i", this.template_name, hl, sl)
+
+			local a = this.timed_attacks.list[2]
+
+			a.disabled = nil
+			a.cooldown = s.cooldown[sl]
+		end
+
+		if sl > 0 then
+			local damage_min = ls.melee_damage_min[hl] * s.damage_factor[sl]
+			local damage_max = ls.melee_damage_max[hl] * s.damage_factor[sl]
+
+			this.melee.attacks[3].damage_min = damage_min
+			this.melee.attacks[3].damage_max = damage_max
+			this.melee.attacks[4].damage_min = damage_min
+			this.melee.attacks[4].damage_max = damage_max
+			this.melee.attacks[5].damage_min = damage_min
+			this.melee.attacks[5].damage_max = damage_max
+		end
+
+		s = this.hero.skills.floor_spikes
+		sl = s.level
+
+		if sl > 0 and initial then
+			log.info("LEVELUP - %s - %i - FLOOR SPIKES - %i", this.template_name, hl, sl)
+
+			local a = this.timed_attacks.list[3]
+
+			a.disabled = nil
+			a.cooldown = s.cooldown[sl]
+			a.spikes = s.spikes[sl]
+
+			local sp = E:get_template(a.spike_template[1])
+
+			sp.damage_min = s.damage_min[sl]
+			sp.damage_max = s.damage_max[sl]
+
+			local sp = E:get_template(a.spike_template[2])
+
+			sp.damage_min = s.damage_min[sl]
+			sp.damage_max = s.damage_max[sl]
+		end
+
+		s = this.hero.skills.eat_enemy
+		sl = s.level
+
+		if sl > 0 and initial then
+			log.info("LEVELUP - %s - %i - EAT ENEMY - %i", this.template_name, hl, sl)
+
+			local a = this.melee.attacks[6]
+
+			a.disabled = nil
+			a.cooldown = s.cooldown[sl]
+			a.regen = s.regen[sl]
+		end
+
+		s = this.hero.skills.ultimate
+		sl = s.level
+
+		if sl >= 0 then
+			log.info("LEVELUP - %s - %i - ULTIMATE - %i", this.template_name, hl, sl)
+
+			local uc = E:get_template(s.controller_name)
+
+			uc.cooldown = s.cooldown[sl]
+
+			local aura = E:get_template(uc.aura)
+
+			aura.end_damage_min = s.damage_min[sl]
+			aura.end_damage_max = s.damage_max[sl]
+			aura.aura.duration = s.duration[sl]
+
+			for _, tp_aura in ipairs(uc.auras) do
+				local teleport_aura = T(tp_aura)
+
+				teleport_aura.aura.damage_min = s.damage_min[sl]
+				teleport_aura.aura.damage_max = s.damage_max[sl]
+				teleport_aura.aura.duration = s.duration[sl]
+			end
+		end
+
+		this.health.hp = this.health.hp_max
+		this.hero.melee_active_status = {}
+
+		for index, attack in ipairs(this.melee.attacks) do
+			this.hero.melee_active_status[index] = attack.disabled
+		end
+	end
+
+	function scripts5.hero_venom.update(this, store)
+		local h = this.health
+		local a, skill, brk, sta
+		local ranged_tentacle_attack = this.timed_attacks.list[1]
+		local inner_beast_attack = this.timed_attacks.list[2]
+		local floor_spikes_attack = this.timed_attacks.list[3]
+		local eat_enemy_attack = this.melee.attacks[6]
+		local last_ts = store.tick_ts
+		local last_target
+		local last_target_ts = store.tick_ts
+		local base_speed = this.motion.max_speed
+
+		this.is_transformed = false
+
+		if not ranged_tentacle_attack.disabled then
+			ranged_tentacle_attack.ts = store.tick_ts - ranged_tentacle_attack.cooldown
+		end
+
+		if not inner_beast_attack.disabled then
+			inner_beast_attack.ts = store.tick_ts - inner_beast_attack.cooldown
+		end
+
+		if not floor_spikes_attack.disabled then
+			floor_spikes_attack.ts = store.tick_ts - floor_spikes_attack.cooldown
+		end
+
+		if not eat_enemy_attack.disabled then
+			eat_enemy_attack.ts = store.tick_ts - eat_enemy_attack.cooldown
+		end
+
+		local function y_transform_in()
+			local a = inner_beast_attack
+			local start_ts = store.tick_ts
+
+			S:queue(a.sound_in, {
+				delay = fts(10)
+			})
+
+			this.health.ignore_damage = true
+
+			U.y_animation_play(this, a.animation_in, nil, store.tick_ts)
+
+			this.health.ignore_damage = false
+			a.ts = start_ts
+			last_ts = start_ts
+
+			SU.hero_gain_xp_from_skill(this, skill)
+
+			this.melee.attacks[1].disabled = true
+			this.melee.attacks[2].disabled = true
+			this.melee.attacks[3].disabled = false
+			this.melee.attacks[4].disabled = false
+			this.melee.attacks[5].disabled = false
+			this._bar_offset = V.vclone(this.health_bar.offset)
+			this._bar_type = this.health_bar.type
+			this._click_rect = table.deepclone(this.ui.click_rect)
+			this._hit_mod_offset = V.vclone(this.unit.hit_offset)
+			this.health_bar.offset = V.vclone(this.beast.health_bar_offset)
+			this.health_bar.type = this.beast.health_bar_type
+			this.ui.click_rect = table.deepclone(this.beast.click_rect)
+			this.unit.hit_offset = V.vclone(this.beast.hit_mod_offset)
+			this.unit.mod_offset = V.vclone(this.beast.hit_mod_offset)
+			this.render.sprites[1].prefix = "hero_venom_hero_beast"
+			this.unit.size = UNIT_SIZE_MEDIUM
+			this.is_transformed = true
+		end
+
+		local function y_transform_out()
+			local a = inner_beast_attack
+
+			S:queue(a.sound_out, {
+				delay = fts(10)
+			})
+			U.y_animation_play(this, a.animation_out, nil, store.tick_ts)
+
+			this.melee.attacks[1].disabled = false
+			this.melee.attacks[2].disabled = false
+			this.melee.attacks[3].disabled = true
+			this.melee.attacks[4].disabled = true
+			this.melee.attacks[5].disabled = true
+			this.health_bar.offset = V.vclone(this._bar_offset)
+			this.health_bar.type = this._bar_type
+			this.ui.click_rect = table.deepclone(this._click_rect)
+			this.unit.hit_offset = V.vclone(this._hit_mod_offset)
+			this.unit.mod_offset = V.vclone(this._hit_mod_offset)
+			this.render.sprites[1].prefix = "hero_venom_hero"
+			this.unit.size = UNIT_SIZE_SMALL
+			this.is_transformed = false
+		end
+
+		this.health_bar.hidden = false
+
+		while true do
+			if h.dead then
+				if this.is_transformed then
+					y_transform_out()
+				end
+
+				local d = E:create_entity(this.death_decal)
+
+				d.pos.x, d.pos.y = this.pos.x, this.pos.y
+				d.hero_venom = this
+
+				queue_insert(store, d)
+				SU5.y_hero_death_and_respawn_kr5(store, this)
+
+				this.motion.max_speed = base_speed
+			end
+
+			if this.unit.is_stunned then
+				SU.soldier_idle(store, this)
+			else
+				while this.nav_rally.new do
+					local r = this.nav_rally
+					local tw = this.slimewalk
+					local force_slimewalk = false
+
+					for _, p in pairs(this.nav_grid.waypoints) do
+						if GR:cell_is(p.x, p.y, bor(TERRAIN_WATER, TERRAIN_SHALLOW, TERRAIN_NOWALK)) then
+							force_slimewalk = true
+
+							break
+						end
+					end
+
+					if not this.is_transformed and (force_slimewalk or V.dist(this.pos.x, this.pos.y, r.pos.x, r.pos.y) > tw.min_distance) then
+						r.new = false
+
+						U.unblock_target(store, this)
+
+						local vis_bans = this.vis.bans
+
+						this.vis.bans = F_ALL
+						this.health.immune_to = F_ALL
+
+						local original_speed = this.motion.max_speed
+
+						this.motion.max_speed = this.motion.max_speed + tw.extra_speed
+						this.unit.marker_hidden = true
+						this.health_bar.hidden = true
+
+						S:queue(this.sound_events.change_rally_point)
+						S:queue(this.slimewalk.sound)
+
+						::label_416_0::
+
+						local dest = r.pos
+						local n = this.nav_grid
+						local an, af = U.animation_name_facing_point(this, tw.animations[1], this.motion.dest)
+
+						U.y_animation_play(this, an, not af, store.tick_ts)
+
+						while not V.veq(this.pos, dest) do
+							local w = table.remove(n.waypoints, 1) or dest
+
+							U.set_destination(this, w)
+
+							local an, af = U.animation_name_facing_point(this, tw.animations[2], this.motion.dest)
+
+							U.animation_start(this, an, af, store.tick_ts, true, 1, true)
+
+							local runs = this.render.sprites[1].runs - 1
+
+							while not this.motion.arrived do
+								if r.new then
+									r.new = false
+
+									goto label_416_0
+								end
+
+								U.walk(this, store.tick_length)
+								coroutine.yield()
+
+								this.motion.speed.x, this.motion.speed.y = 0, 0
+
+								if this.render.sprites[1].runs ~= runs then
+									local slimewalk_decal = E:create_entity(this.slimewalk.decal)
+
+									slimewalk_decal.ts = store.tick_ts
+									slimewalk_decal.pos = V.vclone(this.pos)
+
+									U.animation_start(slimewalk_decal, "idle", false, store.tick_ts)
+									queue_insert(store, slimewalk_decal)
+
+									runs = this.render.sprites[1].runs
+								end
+							end
+						end
+
+						S:stop(this.slimewalk.sound)
+						SU.hide_modifiers(store, this, true)
+						U.y_animation_play(this, tw.animations[3], nil, store.tick_ts)
+						SU.show_modifiers(store, this, true)
+
+						this.motion.max_speed = original_speed
+						this.vis.bans = vis_bans
+						this.health.immune_to = 0
+						this.unit.marker_hidden = nil
+						this.health_bar.hidden = nil
+					elseif SU.y_hero_new_rally(store, this) then
+						goto label_416_2
+					end
+				end
+
+				SU5.heroes_visual_learning_upgrade(store, this)
+				SU5.heroes_lone_wolves_upgrade(store, this)
+				SU5.alliance_merciless_upgrade(store, this)
+				SU5.alliance_corageous_upgrade(store, this)
+
+				if SU.hero_level_up(store, this) then
+					if this.is_transformed then
+						local fx = E:create_entity(this.beast.lvl_up_fx)
+
+						fx.pos = V.vclone(this.pos)
+
+						for i = 1, #fx.render.sprites do
+							fx.render.sprites[i].ts = store.tick_ts
+						end
+
+						queue_insert(store, fx)
+					else
+						U.y_animation_play(this, "levelup", nil, store.tick_ts, 1)
+					end
+				end
+
+				skill = this.hero.skills.ranged_tentacle
+				a = ranged_tentacle_attack
+
+				if not this.is_transformed and not a.disabled and store.tick_ts - a.ts > a.cooldown and store.tick_ts - last_ts > a.min_cooldown then
+					local target, _, pred_pos = U.find_foremost_enemy(store.entities, tpos(this), a.min_range,
+						a.max_range, a.node_prediction, a.vis_flags, a.vis_bans)
+
+					if not target then
+						SU.delay_attack(store, a, fts(10))
+					else
+						local enemy_id = target.id
+						local enemy_pos = target.pos
+
+						last_ts = store.tick_ts
+
+						local an, af, ai = U.animation_name_facing_point(this, a.animation, enemy_pos)
+
+						U.animation_start(this, an, af, store.tick_ts, false)
+						S:queue(a.sound)
+
+						local start_offset = V.vclone(a.bullet_start_offset)
+
+						if af then
+							start_offset.x = start_offset.x * -1
+						end
+
+						U.y_wait(store, a.shoot_time)
+
+						if SU.soldier_interrupted(this) then
+							-- block empty
+						else
+							local target, _, pred_pos = U.find_foremost_enemy(store.entities, tpos(this), a.min_range,
+								a.max_range, a.shoot_time, a.vis_flags, a.vis_bans)
+
+							if target then
+								enemy_id = target.id
+								enemy_pos = target.pos
+							end
+
+							if not target then
+								-- block empty
+							else
+								a.ts = last_ts
+
+								local b = E:create_entity(a.bullet)
+
+								b.pos.x, b.pos.y = this.pos.x + start_offset.x, this.pos.y + start_offset.y
+								b.bullet.from = V.vclone(b.pos)
+								b.bullet.to = V.vclone(pred_pos)
+								b.bullet.to.x = b.bullet.to.x + target.unit.hit_offset.x
+								b.bullet.to.y = b.bullet.to.y + target.unit.hit_offset.y
+								b.bullet.target_id = enemy_id
+								b.bullet.source_id = this.id
+								b.bullet.level = this.hero.level
+
+								queue_insert(store, b)
+								SU.hero_gain_xp_from_skill(this, skill)
+								U.y_animation_wait(this)
+
+								goto label_416_2
+							end
+						end
+					end
+				end
+
+				a = inner_beast_attack
+				skill = this.hero.skills.inner_beast
+
+				if not this.is_transformed and not a.disabled and this.health.hp <= this.health.hp_max * skill.trigger_hp and store.tick_ts - a.ts > a.cooldown and store.tick_ts - last_ts > a.min_cooldown then
+					y_transform_in()
+				end
+
+				if this.is_transformed and store.tick_ts - a.ts > skill.duration then
+					y_transform_out()
+				end
+
+				skill = this.hero.skills.floor_spikes
+				a = floor_spikes_attack
+
+				if not this.is_transformed and not a.disabled and store.tick_ts - a.ts > a.cooldown and store.tick_ts - last_ts > a.min_cooldown then
+					local enemies = U.find_enemies_in_range(store.entities, this.pos, a.range_trigger_min,
+						a.range_trigger_max, a.vis_flags, a.vis_bans)
+
+					if not enemies or #enemies < a.min_targets then
+						SU.delay_attack(store, a, fts(10))
+
+						goto label_416_1
+					end
+
+					local targets = table.filter(enemies, function(k, v)
+						local vpi = v.nav_path.pi
+						local nearest = P:nearest_nodes(this.pos.x, this.pos.y, {
+							vpi
+						})
+						local pi, spi, ni = unpack(nearest[1])
+
+						return ni > v.nav_path.ni
+					end)
+
+					if not targets or #targets < a.min_targets then
+						SU.delay_attack(store, a, fts(10))
+
+						goto label_416_1
+					end
+
+					local path = targets[1].nav_path.pi
+					local start_ts = store.tick_ts
+
+					S:queue(a.sound_in, {
+						delay = fts(10)
+					})
+
+					local flip = targets[1].pos.x < this.pos.x
+
+					U.animation_start(this, a.animation_in, flip, store.tick_ts, false)
+
+					if SU.y_hero_wait(store, this, a.cast_time) then
+						goto label_416_2
+					end
+
+					a.ts = start_ts
+					last_ts = start_ts
+
+					SU.hero_gain_xp_from_skill(this, skill)
+
+					local nodes_between_spikes = 2
+					local spikes = {}
+
+					local function spawn_spike(pi, spi, ni, spike_id)
+						local pos = P:node_pos(pi, spi, ni)
+
+						pos.x = pos.x + math.random(-4, 4)
+						pos.y = pos.y + math.random(-5, 5)
+
+						local s = E:create_entity(a.spike_template[math.random(1, #a.spike_template)])
+
+						s.pos = V.vclone(pos)
+
+						queue_insert(store, s)
+
+						spikes[spike_id] = s
+					end
+
+					local nearest = P:nearest_nodes(this.pos.x, this.pos.y, {
+						path
+					})
+
+					if #nearest > 0 then
+						local pi, spi, ni = unpack(nearest[1])
+						local initial_offset = 1
+
+						ni = ni - initial_offset
+
+						local count = a.spikes / 3
+						local ni_aux
+						local spike_id = 1
+
+						for i = 1, count do
+							ni_aux = ni - i * nodes_between_spikes
+
+							if P:is_node_valid(pi, ni_aux) then
+								spawn_spike(pi, 1, ni_aux, spike_id)
+
+								spike_id = spike_id + 1
+
+								U.y_wait(store, fts(1))
+							end
+
+							ni_aux = ni - i * (nodes_between_spikes + 1)
+
+							if P:is_node_valid(pi, ni_aux) then
+								spawn_spike(pi, 2, ni_aux, spike_id)
+
+								spike_id = spike_id + 1
+
+								U.y_wait(store, fts(1))
+								spawn_spike(pi, 3, ni_aux, spike_id)
+
+								spike_id = spike_id + 1
+
+								U.y_wait(store, fts(1))
+							end
+						end
+					end
+
+					U.animation_start(this, a.animation_idle, nil, store.tick_ts, true)
+					U.y_wait(store, fts(20))
+					S:queue(a.sound_out)
+
+					for i = #spikes, 1, -1 do
+						spikes[i].hide = true
+
+						U.y_wait(store, fts(1))
+					end
+
+					U.animation_start(this, a.animation_out, nil, store.tick_ts, false)
+					SU.y_hero_animation_wait(this)
+
+					goto label_416_2
+				end
+
+				::label_416_1::
+
+				brk, sta = y_hero_melee_block_and_attacks(store, this)
+
+				if sta == A_DONE then
+					if this.is_transformed then
+						this.health.hp = this.health.hp + this.health.hp_max * this.beast.regen_health
+
+						if this.health.hp > this.health.hp_max then
+							this.health.hp = this.health.hp_max
+						end
+					elseif this.melee.last_attack.attack == eat_enemy_attack then
+						this.health.hp = this.health.hp + this.health.hp_max * eat_enemy_attack.regen
+
+						if this.health.hp > this.health.hp_max then
+							this.health.hp = this.health.hp_max
+						end
+
+						local mod = E:create_entity(eat_enemy_attack.mod_regen)
+
+						mod.modifier.target_id = this.id
+
+						queue_insert(store, mod)
+					end
+				end
+
+				if brk or sta ~= A_NO_TARGET then
+					-- block empty
+				elseif SU.soldier_go_back_step(store, this) then
+					-- block empty
+				else
+					SU.soldier_idle(store, this)
+					SU.soldier_regen(store, this)
+				end
+			end
+
+			::label_416_2::
+
+			coroutine.yield()
+		end
+	end
+
+	function scripts5.hero_venom_ultimate.update(this, store)
+		local owner = store.entities[this.owner.id]
+
+		local nearest = P:nearest_nodes(this.pos.x, this.pos.y, nil, nil, true)
+
+		if #nearest > 0 then
+			local pi, spi, ni = unpack(nearest[1])
+
+			if P:is_node_valid(pi, ni) then
+				S:queue(this.sound)
+
+				local aura = E:create_entity(this.aura)
+
+				aura.aura.source_id = this.id
+				aura.aura.ts = store.tick_ts
+
+				local nodes = P:nearest_nodes(this.pos.x, this.pos.y, nil, nil, true)
+
+				if #nodes < 1 then
+					log.debug("cannot insert venom ulti, no valid nodes nearby %s,%s", x, y)
+
+					return nil
+				end
+
+				local pi, spi, ni = unpack(nodes[1])
+				local npos = P:node_pos(pi, 1, ni)
+
+				aura.pos = npos
+				aura.pos_pi = pi
+				aura.pos_ni = ni
+
+				S:queue(this.sound)
+				queue_insert(store, aura)
+
+				local function create_teleport_aura(aura)
+					local teleport_aura = E:create_entity(aura)
+
+					teleport_aura.aura.source_id = owner.id
+					teleport_aura.aura.ts = store.tick_ts
+					teleport_aura.ts = store.tick_ts
+
+					teleport_aura.pos = npos
+					teleport_aura.pos_pi = pi
+					teleport_aura.pos_ni = ni
+
+					queue_insert(store, teleport_aura)
+
+					return teleport_aura
+				end
+
+				if not owner.teleport_start_aura then
+					owner.teleport_start_aura = create_teleport_aura(this.auras[1])
+				elseif not owner.teleport_end_aura then
+					owner.teleport_end_aura = create_teleport_aura(this.auras[2])
+				end
+			end
+		end
+
+		queue_remove(store, this)
+	end
+
+	scripts5.venom_teleport_start_aura = {}
+
+	function scripts5.venom_teleport_start_aura.update(this, store)
+		local aura = this.aura
+		local owner = store.entities[aura.source_id]
+
+		while true do
+			if this.render.sprites[1].name == "in" and U.animation_finished(this) then
+				U.animation_start(this, "idle", false, store.tick_ts, true)
+			end
+
+			local targets = U.find_targets_in_range(store.entities, this.pos, 0, aura.radius, aura.vis_flags,
+				aura.vis_bans)
+
+			if targets and store.tick_ts - this.ts > aura.cycle_time then
+				U.y_animation_play(this, "attack", false, store.tick_ts)
+
+				this.ts = store.tick_ts
+
+				for _, t in pairs(targets) do
+					local d = create_entity("damage")
+					d.target_id = t.id
+					d.source_id = aura.source_id
+					d.damage_type = aura.damage_type
+					d.value = math.random(aura.damage_min, aura.damage_max)
+
+					queue_damage(store, d)
+				end
+
+				if not this.disabled and owner.teleport_end_aura then					
+					owner.teleport_end_aura.disabled = true
+
+					utils_UH.set_entity_pos(store, targets[1], owner.teleport_end_aura.pos)
+				end
+			end
+
+			if store.tick_ts - aura.ts > aura.duration then
+				queue_remove(store, this)
+			end
+
+			this.disabled = false
+			coroutine.yield()
+		end
+
+		queue_remove(store, this)
+	end
+
+	function scripts5.venom_teleport_start_aura.remove(this, store)
+		local aura = this.aura
+		local owner = store.entities[aura.source_id]
+
+		owner.teleport_start_aura = nil
+
+		return true
+	end
+
+	scripts5.venom_teleport_end_aura = {}
+
+	function scripts5.venom_teleport_end_aura.update(this, store)
+		local aura = this.aura
+		local owner = store.entities[aura.source_id]
+
+		while true do
+			if this.render.sprites[1].name == "in" and U.animation_finished(this) then
+				U.animation_start(this, "idle", false, store.tick_ts, true)
+			end
+
+			local targets = U.find_targets_in_range(store.entities, this.pos, 0, aura.radius, aura.vis_flags,
+				aura.vis_bans)
+
+			if targets and store.tick_ts - this.ts > aura.cycle_time then
+				U.y_animation_play(this, "attack", false, store.tick_ts)
+
+				this.ts = store.tick_ts
+
+				for _, t in pairs(targets) do
+					local d = create_entity("damage")
+					d.target_id = t.id
+					d.source_id = aura.source_id
+					d.damage_type = aura.damage_type
+					d.value = math.random(aura.damage_min, aura.damage_max)
+
+					queue_damage(store, d)
+				end
+
+				if not this.disabled and owner.teleport_start_aura then
+					owner.teleport_start_aura.disabled = true
+
+					utils_UH.set_entity_pos(store, targets[1], owner.teleport_start_aura.pos)
+				end
+			end
+
+			if store.tick_ts - aura.ts > aura.duration then
+				queue_remove(store, this)
+			end
+
+			this.disabled = false
+			coroutine.yield()
+		end
+
+		queue_remove(store, this)
+	end
+
+	function scripts5.venom_teleport_end_aura.remove(this, store)
+		local aura = this.aura
+		local owner = store.entities[aura.source_id]
+		owner.teleport_end_aura = nil
+
+		return true
 	end
 
 	-- 土木人

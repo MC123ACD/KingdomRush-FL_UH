@@ -52,7 +52,7 @@ function hook.screen_map.init(init, self, w, h, done_callback)
 	self.window:add_child(self.option_dif_panel)
 
 	-- 设置按钮
-	self.o_dif_button = KImageButton:new("map_configBtn_0001", "map_configBtn_0002", "map_configBtn_0003")
+	self.o_dif_button = GGButton:new("map_configBtn_0001", "map_configBtn_0002", "map_configBtn_0003")
 
 	self.o_dif_button.anchor = v(self.o_dif_button.size.x / 2, self.o_dif_button.size.y / 2)
 	self.o_dif_button.pos = v(80, 840)

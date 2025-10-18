@@ -684,6 +684,10 @@ function love.errhand(msg)
 		love.graphics.present()
 	end
 
+	if LLDEBUGGER then
+		LLDEBUGGER.start()
+	end
+
 	while true do
 		love.event.pump()
 

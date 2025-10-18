@@ -186,6 +186,12 @@ function animations_UH.a5()
 			fts = 40
 		},
 
+		-- 毒液
+		hero_venom_ultimate_attack = {
+			to = 78,
+			from = 40
+		},
+
 		-- 狮鹫
 		gryph_character_stun = {
 			fps = 45

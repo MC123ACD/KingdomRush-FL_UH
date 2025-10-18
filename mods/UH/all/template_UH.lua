@@ -2830,6 +2830,12 @@ function template_UH:enhance5()
 	end
 
 	-- 4. 毒液
+	T("hero_venom").hero.fn_level_up = scripts5.hero_venom.level_up
+	T("hero_venom").main_script.insert = scripts5.hero_venom.insert
+	T("hero_venom").main_script.update = scripts5.hero_venom.update
+
+	T("hero_venom").health.dead_lifetime = 5
+
 	T("hero_venom").melee.attacks[1].xp_gain_factor = 2.5
 
 	T("hero_venom").melee.attacks[3].xp_gain_factor = 1.5
@@ -2837,22 +2843,60 @@ function template_UH:enhance5()
 
 	T("hero_venom").timed_attacks.list[3].min_targets = 2
 
-	tt = RT("venom_reshape_flesh_aura", "aura")
-	tt.need_hp = 1250
-	tt.damage_hp = 1
-	tt.aura.damage_type = 0
-	-- lava.aura.duration = 3
-	-- lava.aura.cycle_time = 0.3
-	-- lava.aura.radius = 70.4
-	-- lava.aura.vis_bans = bor(F_FRIEND, F_FLYING)
-	-- lava.aura.vis_flags = bor(F_MOD)
-
-	T("mod_hero_venom_ultimate_slow").slow.factor = 0.2
-	T("hero_venom").hero.skills.ultimate.duration = {
-		3,
-		4,
-		5
+	T("aura_hero_venom_ultimate").aura.mod = nil
+	T("aura_hero_venom_ultimate").render.sprites[1].alpha = 0
+	T("controller_hero_venom_ultimate").main_script.update = scripts5.hero_venom_ultimate.update
+	T("hero_venom").hero.skills.ultimate.cooldown = {
+		[0] = 20,
+		20,
+		20,
+		20
 	}
+	T("hero_venom").hero.skills.ultimate.duration = {
+		[0] = 5,
+		6,
+		8,
+		10
+	}
+	T("hero_venom").hero.skills.ultimate.damage_min = {
+		[0] = 5,
+		10,
+		15,
+		20
+	}
+	T("hero_venom").hero.skills.ultimate.damage_max = {
+		[0] = 10,
+		15,
+		20,
+		25
+	}
+	T("controller_hero_venom_ultimate").auras = {
+		"venom_teleport_start_aura",
+		"venom_teleport_end_aura"
+	}
+
+	tt = RT("venom_teleport_start_aura", "aura")
+	AC(tt, "render")
+	tt.ts = 0
+	tt.aura.duration = 30
+	tt.aura.damage_type = DAMAGE_TRUE
+	tt.aura.damage_min = nil
+	tt.aura.damage_max = nil
+	tt.aura.cycle_time = 3
+	tt.aura.radius = 70
+	tt.aura.vis_bans = bor(F_FLYING, F_BOSS)
+	tt.aura.vis_flags = bor(F_MOD)
+	tt.main_script.update = scripts5.venom_teleport_start_aura.update
+	tt.main_script.remove = scripts5.venom_teleport_start_aura.remove
+	tt.render.sprites[1].prefix = "hero_venom_ultimate"
+	tt.render.sprites[1].name = "in"
+	tt.render.sprites[1].animated = true
+	tt.render.sprites[1].z = Z_DECALS
+	tt.render.sprites[1].loop = false
+
+	tt = RT("venom_teleport_end_aura", "venom_teleport_start_aura")
+	tt.main_script.update = scripts5.venom_teleport_end_aura.update
+	tt.main_script.remove = scripts5.venom_teleport_end_aura.remove
 
 	if T("tower_hero_buy_c") then
 		hero_buy_template_set("hero_venom_2")
