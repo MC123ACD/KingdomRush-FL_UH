@@ -76,7 +76,7 @@ function utils_UH.set_entity_pos(store, id, pos)
         U.unblock_target(store, e)
     end
 
-    return true, {pi, spi, ni}, npos
+    return true, { pi, spi, ni }, npos
 end
 
 ---设定能力时间戳

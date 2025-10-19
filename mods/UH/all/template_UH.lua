@@ -211,7 +211,7 @@ function template_UH:enhance1()
 		hero_buy_template_set("hero_malik_2")
 	end
 
--- 4. 波林
+	-- 4. 波林
 	T("hero_bolin").hero.fn_level_up = scripts.hero_bolin.level_up
 	T("hero_bolin").main_script.update = scripts.hero_bolin.update
 
@@ -311,12 +311,12 @@ function template_UH:enhance1()
 	tt.bullet.hit_fx = "fx_explosion_small"
 	tt.bullet.hit_decal = "decal_bomb_crater"
 	tt.bullet.hit_fx_water = "fx_explosion_water"
-	
+
 	if T("tower_hero_buy_b") then
 		hero_buy_template_set("hero_bolin_2")
 	end
 
--- 5. 小马哥
+	-- 5. 小马哥
 	T("hero_magnus").hero.fn_level_up = scripts.hero_magnus.level_up
 	T("hero_magnus").main_script.update = scripts.hero_magnus.update
 
@@ -431,7 +431,7 @@ function template_UH:enhance1()
 		hero_buy_template_set("hero_magnus_2")
 	end
 
--- 6. 火男
+	-- 6. 火男
 	T("hero_ignus").main_script.update = scripts.hero_ignus.update
 
 	T("hero_ignus").hero.level_stats.regen_health = {
@@ -478,7 +478,7 @@ function template_UH:enhance1()
 		hero_buy_template_set("hero_ignus_2")
 	end
 
--- 7. 迪纳斯
+	-- 7. 迪纳斯
 	T("hero_denas").hero.level_stats.regen_health = {
 		30,
 		32,
@@ -529,7 +529,7 @@ function template_UH:enhance1()
 		hero_buy_template_set("hero_denas_2")
 	end
 
--- 8. 冰女
+	-- 8. 冰女
 	T("hero_elora").hero.level_stats.armor = {
 		0,
 		0,
@@ -568,7 +568,7 @@ function template_UH:enhance1()
 		hero_buy_template_set("hero_elora_2")
 	end
 
--- 9. 熊人
+	-- 9. 熊人
 	T("hero_ingvar").hero.level_stats.regen_health = {
 		43,
 		46,
@@ -623,7 +623,7 @@ function template_UH:enhance1()
 		hero_buy_template_set("hero_ingvar_2")
 	end
 
--- 10. 钢锯
+	-- 10. 钢锯
 	T("hero_hacksaw").hero.level_stats.armor = {
 		0.4,
 		0.4,
@@ -671,7 +671,7 @@ function template_UH:enhance1()
 		hero_buy_template_set("hero_hacksaw_2")
 	end
 
--- 11. 鬼侍
+	-- 11. 鬼侍
 	T("hero_oni").hero.level_stats.regen_health = {
 		42,
 		45,
@@ -731,7 +731,7 @@ function template_UH:enhance1()
 		hero_buy_template_set("hero_oni_2")
 	end
 
--- 12. 雷神
+	-- 12. 雷神
 	T("hero_thor").hero.level_stats.regen_health = {
 		38,
 		41,
@@ -761,7 +761,7 @@ function template_UH:enhance1()
 		hero_buy_template_set("hero_thor_2")
 	end
 
--- 13. 天十
+	-- 13. 天十
 	T("hero_10yr").hero.level_stats.armor = {
 		0,
 		0.1,
@@ -797,7 +797,7 @@ function template_UH:enhance1()
 		hero_buy_template_set("hero_10yr_2")
 	end
 
--- 14. 毒蛇
+	-- 14. 毒蛇
 	T("hero_viper").melee.attacks[1].xp_gain_factor = 0.7
 
 	T("hero_viper").ranged.attacks[1].cooldown = 3
@@ -816,7 +816,7 @@ function template_UH:enhance1()
 		hero_buy_template_set("hero_viper_2")
 	end
 
--- 15. 电击手
+	-- 15. 电击手
 	T("hero_voltaire").hero.fn_level_up = scripts.hero_voltaire.level_up
 	T("hero_voltaire").health.armor = 0.3
 	T("hero_voltaire").hero.level_stats.regen_health = {
@@ -832,7 +832,7 @@ function template_UH:enhance1()
 		50
 	}
 	T("hero_voltaire").motion.max_speed = FPS * 2.5
-	
+
 	T("hero_voltaire").ranged.attacks[1].shoot_time = fts(19)
 	T("hero_voltaire").ranged.attacks[2] = copy(T("hero_voltaire").ranged.attacks[1])
 	T("hero_voltaire").ranged.attacks[2].bullet = "b_volt_2"
@@ -875,19 +875,19 @@ function template_UH:enhance1()
 end
 
 function template_UH:enhance2()
--- 1. 沙王
+	-- 1. 沙王
 	T("hero_alric").main_script.insert = scripts.hero_alric.insert
 	T("hero_alric").hero.fn_level_up = scripts.hero_alric.level_up
 
 	T("hero_alric").motion.max_speed = 2.5 * FPS
-	
+
 	T("hero_alric").timed_attacks.list[1].range_nodes = 999
 	T("hero_alric").hero.skills.sandwarriors.lifespan = {
 		11,
 		13,
 		15
 	}
-	
+
 	tt = RT("death_rider_aura_alric", "death_rider_aura")
 	tt.aura.use_mod_offset = nil
 
@@ -895,7 +895,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_alric_2")
 	end
 
--- 2. 幻影
+	-- 2. 幻影
 	T("hero_mirage").melee.range = 100
 
 	T("hero_mirage").melee.attacks[1].mod = "mod_mirage_poison"
@@ -919,7 +919,7 @@ function template_UH:enhance2()
 		1.8,
 		2
 	}
-	
+
 	T("hero_mirage").timed_attacks.list[1].cooldown = 4
 
 	T("hero_mirage").hero.skills.lethalstrike.instakill_chance = {
@@ -932,7 +932,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_mirage_2")
 	end
 
--- 3. 船长
+	-- 3. 船长
 	T("hero_pirate").hero.fn_level_up = scripts.hero_pirate.level_up
 
 	T("hero_pirate").motion.max_speed = 3 * FPS
@@ -996,7 +996,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_pirate_2")
 	end
 
--- 4. 兽王
+	-- 4. 兽王
 	T("hero_beastmaster").hero.level_stats.armor = {
 		0,
 		0.1,
@@ -1056,7 +1056,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_beastmaster_2")
 	end
 
--- 5. 女巫
+	-- 5. 女巫
 	T("hero_voodoo_witch").hero.skills.bonedance.skull_count = {
 		4,
 		5,
@@ -1070,7 +1070,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_voodoo_witch_2")
 	end
 
--- 6. 大法师
+	-- 6. 大法师
 	T("hero_wizard").hero.fn_level_up = scripts.hero_wizard.level_up
 	T("hero_wizard").main_script.update = scripts.hero_wizard.update
 
@@ -1134,7 +1134,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_wizard_2")
 	end
 
--- 7. 女祭司
+	-- 7. 女祭司
 	T("hero_priest").melee.attacks[1].xp_gain_factor = 1.7
 
 	T("bolt_priest").bullet.xp_gain_factor = 1.5
@@ -1151,7 +1151,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_priest_2")
 	end
 
--- 8. 石头人
+	-- 8. 石头人
 	T("hero_giant").render.sprites[1].scale = vv(1.15)
 
 	T("hero_giant").hero.level_stats.regen_health = {
@@ -1221,7 +1221,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_giant_2")
 	end
 
--- 9. 沙塔
+	-- 9. 沙塔
 	T("hero_alien").hero.fn_level_up = scripts.hero_alien.level_up
 	T("hero_alien").main_script.insert = scripts.hero_alien.insert
 	T("hero_alien").main_script.update = scripts.hero_alien.update
@@ -1305,7 +1305,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_alien_2")
 	end
 
--- 10. 火龙
+	-- 10. 火龙
 	T("hero_dragon").hero.fn_level_up = scripts.hero_dragon.level_up
 	T("hero_dragon").main_script.update = scripts.hero_dragon.update
 
@@ -1319,7 +1319,7 @@ function template_UH:enhance2()
 	T("aura_fierymist_dragon").aura.mods = {
 		"mod_slow_fierymist",
 		"mod_dragon_reign"
-		}
+	}
 
 	T("hero_dragon").timed_attacks.list[1].cooldown = 35
 	T("hero_dragon").hero.skills.feast.devour_chance = {
@@ -1346,7 +1346,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_dragon_2")
 	end
 
--- 11. 螃蟹
+	-- 11. 螃蟹
 	T("hero_crab").hero.fn_level_up = scripts.hero_crab.level_up
 	T("hero_crab").main_script.update = scripts.hero_crab.update
 
@@ -1416,7 +1416,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_crab_2")
 	end
 
--- 12. 库绍
+	-- 12. 库绍
 	T("hero_monk").main_script.update = scripts.hero_monk.update
 
 	T("hero_monk").hero.level_stats.hp_max = {
@@ -1492,7 +1492,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_monk_2")
 	end
 
--- 13. 但丁
+	-- 13. 但丁
 	T("hero_van_helsing").hero.level_stats.armor = {
 		0.05,
 		0.05,
@@ -1522,7 +1522,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_van_helsing_2")
 	end
 
--- 14. 骨龙
+	-- 14. 骨龙
 	T("hero_dracolich").main_script.update = scripts.hero_dracolich.update
 
 	T("hero_dracolich").motion.max_speed = 3.3 * FPS
@@ -1540,7 +1540,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_dracolich_2")
 	end
 
--- 15. 米偌陶
+	-- 15. 米偌陶
 	T("hero_minotaur").hero.level_stats.armor = {
 		0.20,
 		0.22,
@@ -1583,7 +1583,7 @@ function template_UH:enhance2()
 		hero_buy_template_set("hero_minotaur_2")
 	end
 
--- 16. 猴神
+	-- 16. 猴神
 	T("hero_monkey_god").info.fn = scripts.hero_monkey_god.get_info
 	T("hero_monkey_god").hero.fn_level_up = scripts.hero_monkey_god.level_up
 	T("hero_monkey_god").main_script.update = scripts.hero_monkey_god.update
@@ -2114,7 +2114,7 @@ function template_UH:enhance3()
 	}
 	T("hero_veznan").timed_attacks.list[1].trigger_min_total_hp = 0.4
 	T("mod_veznan_shackles_dps").dps.damage_inc = 3
-	
+
 	T("hero_veznan").timed_attacks.list[3].cooldown = 14
 	T("mod_veznan_arcanenova").modifier.duration = 4
 
@@ -2347,7 +2347,7 @@ function template_UH:enhance3()
 	-- 12. 莉恩
 	T("hero_lynn").hero.fn_level_up = scripts.hero_lynn.level_up
 	T("hero_lynn").main_script.update = scripts.hero_lynn.update
-	
+
 	AC(T("hero_lynn"), "teleport")
 	T("hero_lynn").teleport.min_distance = 125
 	T("hero_lynn").teleport.delay = 0
@@ -2703,7 +2703,7 @@ function template_UH:enhance5()
 		74
 	}
 	T("hero_vesper").ranged.attacks[2].max_range = 240
-	
+
 	T("hero_vesper").hero.skills.arrow_to_the_knee.stun_duration = {
 		1,
 		2,
@@ -3171,7 +3171,7 @@ function template_UH:enhance5()
 	T("hero_hunter").timed_attacks.list[3].min_targets = 2
 	T("aura_hero_hunter_shoot_around").aura.cycle_time = 0.04
 	T("aura_hero_hunter_shoot_around").aura.radius = 100
-	
+
 	T("hero_hunter").hero.skills.beasts.duration = {
 		8,
 		13,
@@ -3187,7 +3187,7 @@ function template_UH:enhance5()
 		8,
 		12
 	}
-	T("hero_hunter").hero.skills.beasts.gold_to_steal =  {
+	T("hero_hunter").hero.skills.beasts.gold_to_steal = {
 		1,
 		2,
 		2,

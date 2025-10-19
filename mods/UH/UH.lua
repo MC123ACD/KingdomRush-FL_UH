@@ -12,6 +12,7 @@ local A_db = require("animation_db")
 local A_UH = require("animations_UH")
 local template_UH = require("template_UH")
 local scripts_UH = require("scripts_UH")
+--local strings_UH = require("strings_UH")
 local screen_map = require("screen_map")
 local LU = require("level_utils")
 local GS = require("game_settings")
@@ -39,16 +40,11 @@ local function load_UH()
 	scripts_UH:utils()
 	scripts_UH:script_utils()
 	scripts_UH:scripts()
-    scripts_UH:enhance1()
-    scripts_UH:enhance2()
-    scripts_UH:enhance3()
-    scripts_UH:enhance4()
-    scripts_UH:enhance5()
-    template_UH:enhance1()
-    template_UH:enhance2()
-    template_UH:enhance3()
-    template_UH:enhance4()
-    template_UH:enhance5()
+
+	for i = 1, 5 do
+		scripts_UH["enhance" .. i](self)
+		template_UH["enhance" .. i](self)
+	end
 end
 
 local hook = {}
@@ -56,16 +52,18 @@ local hook = {}
 setmetatable(hook, mod_utils.auto_table_mt)
 
 function hook:init()
-    require("game_scripts")
-    require("game_scripts-1")
-    require("game_scripts-2")
-    require("game_scripts-4")
-    require("game_scripts-5")
+	require("game_scripts")
+	require("game_scripts-1")
+	require("game_scripts-2")
+	require("game_scripts-4")
+	require("game_scripts-5")
 
-    HOOK(E, "load", self.E.load)
-    HOOK(E, "register_t", self.E.RT)
-    HOOK(HeroRoomView, "initialize", self.hero_room.init)
-    HOOK(HeroRoomView, "show", self.hero_room.show)
+	--strings_UH:init()
+
+	HOOK(E, "load", self.E.load)
+	HOOK(E, "register_t", self.E.RT)
+	HOOK(HeroRoomView, "initialize", self.hero_room.init)
+	HOOK(HeroRoomView, "show", self.hero_room.show)
 	HOOK(game_gui, "init", self.game_gui.init)
 	HOOK(sys.level, "init", self.sys.level.init)
 	HOOK(game, "mousepressed", self.game.mousepressed)
@@ -74,17 +72,17 @@ end
 -- 将模板已存在时报错，改为返回已存在的模板
 function hook.E.RT(register_t, self, name, base)
 	if self.entities[name] then
-        return self.entities[name]
+		return self.entities[name]
 	end
 
 	return register_t(self, name, base)
 end
 
 function hook.E.load(load, self)
-    package.loaded["game_scripts-1"] = nil
-    package.loaded["game_scripts-2"] = nil
-    package.loaded["game_scripts-4"] = nil
-    package.loaded["game_scripts-5"] = nil
+	package.loaded["game_scripts-1"] = nil
+	package.loaded["game_scripts-2"] = nil
+	package.loaded["game_scripts-4"] = nil
+	package.loaded["game_scripts-5"] = nil
 
 	load(self)
 
@@ -95,10 +93,10 @@ function hook.E.load(load, self)
 	end
 
 	-- 检测补强是否开启，开启则应用补强
-    local user_data = storage:load_slot()
-    if user_data.liuhui and user_data.liuhui.balance_hero then
-        load_UH()
-    end
+	local user_data = storage:load_slot()
+	if user_data.liuhui and user_data.liuhui.balance_hero then
+		load_UH()
+	end
 end
 
 function hook.sys.level.init(init, ...)
@@ -119,49 +117,50 @@ end
 function hook.hero_room.init(init, self, sw, sh)
 	init(self, sw, sh)
 
-    if screen_map.user_data.liuhui == nil then
-        screen_map.user_data.liuhui = {}
-        screen_map.user_data.liuhui.balance_hero = false
-        -- screen_map.user_data.liuhui.balance_hero_level = false
-    end
+	if screen_map.user_data.liuhui == nil then
+		screen_map.user_data.liuhui = {}
+		screen_map.user_data.liuhui.balance_hero = false
+		-- screen_map.user_data.liuhui.balance_hero_level = false
+	end
 
 	local kr3_y_offset = IS_KR3 and 4 or 0
-    -- 是否开启补强按钮
-    local balance_hero_button = GGButton:new("heroroom_btnDone_large_0001", "heroroom_btnDone_large_0002")
-    local done_button = self.done_button
+	-- 是否开启补强按钮
+	local balance_hero_button = GGButton:new("heroroom_btnDone_large_0001", "heroroom_btnDone_large_0002")
+	local done_button = self.done_button
 
-    balance_hero_button.anchor = v(math.floor(done_button.size.x / 2), done_button.size.y / 2)
-    balance_hero_button.pos = v(self.back.size.x - 770 - done_button.size.x - 20, self.back.size.y - 32)
-    balance_hero_button.label.size = v(100, 34)
-    balance_hero_button.label.text_size = done_button.label.size
-    balance_hero_button.label.pos = v(20, 19)
-    balance_hero_button.label.font_size = 24
-    balance_hero_button.label.vertical_align = CJK("middle-caps", "middle", "middle", "middle")
-    balance_hero_button.label.text = screen_map.user_data.liuhui.balance_hero and _("FLBALANCE") or _("FLSTANDARD")
-    balance_hero_button.label.fit_lines = 1
-    function balance_hero_button.on_click()
-        screen_map.user_data.liuhui.balance_hero = not screen_map.user_data.liuhui.balance_hero
-        storage:save_slot(screen_map.user_data)
+	balance_hero_button.anchor = v(math.floor(done_button.size.x / 2), done_button.size.y / 2)
+	balance_hero_button.pos = v(self.back.size.x - 770 - done_button.size.x - 20, self.back.size.y - 32)
+	balance_hero_button.label.size = v(100, 34)
+	balance_hero_button.label.text_size = done_button.label.size
+	balance_hero_button.label.pos = v(20, 19)
+	balance_hero_button.label.font_size = 24
+	balance_hero_button.label.vertical_align = CJK("middle-caps", "middle", "middle", "middle")
+	balance_hero_button.label.text = screen_map.user_data.liuhui.balance_hero and _("FLBALANCE") or _("FLSTANDARD")
+	balance_hero_button.label.fit_lines = 1
+	function balance_hero_button.on_click()
+		screen_map.user_data.liuhui.balance_hero = not screen_map.user_data.liuhui.balance_hero
+		storage:save_slot(screen_map.user_data)
 
-        E.entities = copy(template_UH.old.templates)
-        scripts = copy(scripts_UH.old.scripts)
-        scripts5 = copy(scripts_UH.old.scripts5)
+		E.entities = copy(template_UH.old.templates)
+		scripts = copy(scripts_UH.old.scripts)
+		scripts5 = copy(scripts_UH.old.scripts5)
 		-- U = copy(scripts_UH.old.utils)
 
-        if screen_map.user_data.liuhui and screen_map.user_data.liuhui.balance_hero then
-            load_UH()
-        end
-        -- load_UF()
-        UPGR:patch_templates(5)
-        self:construct_hero(self.selected_index)
+		if screen_map.user_data.liuhui and screen_map.user_data.liuhui.balance_hero then
+			load_UH()
+		end
+		-- load_UF()
+		UPGR:patch_templates(5)
+		self:construct_hero(self.selected_index)
 
-        self.balance_hero_button.label.text = screen_map.user_data.liuhui.balance_hero and _("FLBALANCE") or _("FLSTANDARD")
+		self.balance_hero_button.label.text = screen_map.user_data.liuhui.balance_hero and _("FLBALANCE") or
+		_("FLSTANDARD")
 
-        S:queue("GUIButtonCommon")
-    end
+		S:queue("GUIButtonCommon")
+	end
 
-    self.back:add_child(balance_hero_button)
-    self.balance_hero_button = balance_hero_button
+	self.back:add_child(balance_hero_button)
+	self.balance_hero_button = balance_hero_button
 
 	local cheat_up = KImageView:new("heroroom_012")
 
@@ -259,7 +258,7 @@ function hook.hero_room.init(init, self, sw, sh)
 		if hero.level < 10 then
 			status.xp = GS.hero_xp_thresholds[hero.level]
 		end
-		
+
 		storage:save_slot(user_data)
 		self:construct_hero(self.selected_index)
 	end
@@ -272,7 +271,7 @@ end
 function hook.hero_room.show(show, self)
 	show(self)
 
-    self:construct_hero(self.selected_index)
+	self:construct_hero(self.selected_index)
 end
 
 -- game_gui 初始化
