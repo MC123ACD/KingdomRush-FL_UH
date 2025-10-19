@@ -1,6 +1,6 @@
 return {
     name = "UH",
-    version = "0.6.8",
+    version = "0.7.0",
     game_version = "kr3",
     desc = "FL版英雄补强",
     url = "https://tieba.baidu.com/p/9714939688",
