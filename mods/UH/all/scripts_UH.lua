@@ -8728,6 +8728,21 @@ function scripts_UH:enhance5()
 	end
 
 	-- 土木人
+	function scripts5.hero_builder.insert(this, store)
+		this.hero.fn_level_up(this, store, true)
+
+		this.melee.order = U.attack_order(this.melee.attacks)
+
+		if this.hero.skills.lunch_break.level > 0 then
+			local aura = create_entity(this.auras.list[1].aura)
+			aura.aura.source_id = this.id
+
+			queue_insert(store, aura)
+		end
+		
+		return true
+	end
+
 	function scripts5.hero_builder.update(this, store)
 		local h = this.health
 		local a, skill, brk, sta
@@ -8944,89 +8959,82 @@ function scripts_UH:enhance5()
 				a = defensive_turret_attack
 
 				if not a.disabled and store.tick_ts - a.ts > a.cooldown and store.tick_ts - last_ts > a.min_cooldown then
-					local enemies = U.find_enemies_in_range(store.entities, this.pos, 0, a.max_range, a.vis_flags,
-						a.vis_bans)
+					local nearest = P:nearest_nodes(this.pos.x, this.pos.y, nil, nil, true)
+					local pi, spi, ni = unpack(nearest[1])
+					local turret_pos = P:node_pos(pi, spi, ni)
+					local new_pos = {}
 
-					if not enemies or #enemies < a.min_targets then
-						SU.delay_attack(store, a, fts(10))
+					new_pos.x, new_pos.y = turret_pos.x - a.spawn_offset.x, turret_pos.y
+
+					if this.pos.x > turret_pos.x then
+						new_pos.x = turret_pos.x + a.spawn_offset.x
+					end
+
+					local node_limit = math.floor(a.min_distance_from_border / P.average_node_dist)
+					local nodes_to_goal = P:nodes_to_goal(pi, spi, ni)
+					local nodes_from_start = P:nodes_from_start(pi, spi, ni)
+
+					if nodes_to_goal < node_limit or nodes_from_start < node_limit then
+						SU.delay_attack(store, a, 0.13333333333333333)
 					else
-						local nearest = P:nearest_nodes(this.pos.x, this.pos.y, nil, nil, true)
-						local pi, spi, ni = unpack(nearest[1])
-						local turret_pos = P:node_pos(pi, spi, ni)
-						local new_pos = {}
+						local start_ts = store.tick_ts
 
-						new_pos.x, new_pos.y = turret_pos.x - a.spawn_offset.x, turret_pos.y
+						this.motion.max_speed = a.build_speed
 
-						if this.pos.x > turret_pos.x then
-							new_pos.x = turret_pos.x + a.spawn_offset.x
-						end
+						local se = this.sound_events
 
-						local node_limit = math.floor(a.min_distance_from_border / P.average_node_dist)
-						local nodes_to_goal = P:nodes_to_goal(pi, spi, ni)
-						local nodes_from_start = P:nodes_from_start(pi, spi, ni)
+						this.sound_events = nil
 
-						if nodes_to_goal < node_limit or nodes_from_start < node_limit then
-							SU.delay_attack(store, a, 0.13333333333333333)
-						else
-							local start_ts = store.tick_ts
+						this.sound_events = se
+						this.motion.max_speed = base_speed
 
-							this.motion.max_speed = a.build_speed
+						local an, af, ai = U.animation_name_facing_point(this, a.animation, new_pos)
 
-							local se = this.sound_events
+						U.animation_start(this, an, af, store.tick_ts, 1)
 
-							this.sound_events = nil
+						this.health_bar.hidden = true
 
-							this.sound_events = se
-							this.motion.max_speed = base_speed
+						local _vis = {}
 
-							local an, af, ai = U.animation_name_facing_point(this, a.animation, { x = 0, y = 0 })
+						_vis.bans, _vis.flags = this.vis.bans, this.vis.flags
+						this.vis.bans = F_ALL
+						this.vis.flags = F_NONE
+						this.ui.can_select = false
 
-							U.animation_start(this, an, af, store.tick_ts, 1)
+						SU.remove_modifiers(store, this)
 
-							this.health_bar.hidden = true
-
-							local _vis = {}
-
-							_vis.bans, _vis.flags = this.vis.bans, this.vis.flags
-							this.vis.bans = F_ALL
-							this.vis.flags = F_NONE
-							this.ui.can_select = false
-
-							SU.remove_modifiers(store, this)
-
-							if SU.y_hero_wait(store, this, a.cast_time) then
-								goto label_353_1
-							end
-
-							a.ts = start_ts
-							last_ts = start_ts
-
-							SU.hero_gain_xp_from_skill(this, skill)
-
-							local e = create_entity(a.entity)
-							local epos = new_pos
-
-							e.flip_x = this.render.sprites[1].flip_x
-							e.pos = V.vclone(epos)
-
-							queue_insert(store, e)
-							S:queue(a.sound_cast, {
-								delay = fts(10)
-							})
-
-							e.sound_destroy = a.sound_destroy
-
-							while not U.animation_finished(this) do
-								coroutine.yield()
-							end
-
-							this.health_bar.hidden = false
-							this.vis.bans = _vis.bans
-							this.vis.flags = _vis.flags
-							this.ui.can_select = true
-
+						if SU.y_hero_wait(store, this, a.cast_time) then
 							goto label_353_1
 						end
+
+						a.ts = start_ts
+						last_ts = start_ts
+
+						SU.hero_gain_xp_from_skill(this, skill)
+
+						local e = create_entity(a.entity)
+						local epos = new_pos
+
+						e.flip_x = this.render.sprites[1].flip_x
+						e.pos = V.vclone(epos)
+
+						queue_insert(store, e)
+						S:queue(a.sound_cast, {
+							delay = fts(10)
+						})
+
+						e.sound_destroy = a.sound_destroy
+
+						while not U.animation_finished(this) do
+							coroutine.yield()
+						end
+
+						this.health_bar.hidden = false
+						this.vis.bans = _vis.bans
+						this.vis.flags = _vis.flags
+						this.ui.can_select = true
+
+						goto label_353_1
 					end
 				end
 
@@ -9048,6 +9056,48 @@ function scripts_UH:enhance5()
 
 			coroutine.yield()
 		end
+	end
+
+	function scripts5.mod_hero_builder_lunch_break.insert(this, store)
+		local m = this.modifier
+		local target = store.entities[m.target_id]
+
+		if not target or not target.health or target.health.dead then
+			return false
+		end
+
+		target.health.hp = km.clamp(0, target.health.hp_max, target.health.hp + target.health.hp * this.heal_hp)
+
+		return true
+	end
+
+	scripts5.hero_builder_extra_hp_max_aura = {}
+
+	function scripts5.hero_builder_extra_hp_max_aura.update(this, store)
+		local aura = this.aura
+		local source = store.entities[aura.source_id]
+		local origin_hp_max = source.health.hp_max
+
+		while true do
+			this.pos = V.vclone(source.pos)
+
+			local turrets = utils_UH.find_entities_in_range(store.entities, this.pos, 0, aura.radius, aura.vis_flags,
+			aura.vis_bans, function(v)
+				return v.template_name == "decal_hero_builder_defensive_turret"
+			end)
+
+			if turrets then
+				local hp_max_factor = 1 + #turrets * aura.extra_hp_max
+
+				source.health.hp_max = origin_hp_max * hp_max_factor
+			else
+				source.health.hp_max = origin_hp_max
+			end
+
+			coroutine.yield()
+		end
+
+		queue_remove(store, this)
 	end
 
 	scripts5.aura_hero_builder_ultimate = {}

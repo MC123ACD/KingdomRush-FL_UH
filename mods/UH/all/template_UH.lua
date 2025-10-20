@@ -560,8 +560,9 @@ function template_UH:enhance1()
 	T("hero_elora").melee.attacks[1].mod = "mod_elora_melee_freeze"
 	tt = RT("mod_elora_melee_freeze", "mod_elora_bolt_freeze")
 	tt.modifier.duration = 0.75
-	tt.modifier.vis_bans = F_BOSS
+	tt.modifier.vis_bans = bor(F_BOSS, F_MINIBOSS)
 
+	T("hero_elora").ranged.attacks[1].cooldown = 1.65
 	T("bolt_elora_freeze").bullet.xp_gain_factor = 0.4
 
 	if T("tower_hero_buy_b") then
@@ -2921,35 +2922,42 @@ function template_UH:enhance5()
 	end
 
 	-- 5. 土木人
+	T("hero_builder").hero.fn_level_up = scripts5.hero_builder.level_up
+	T("hero_builder").main_script.insert = scripts5.hero_builder.insert
 	T("hero_builder").main_script.update = scripts5.hero_builder.update
 
 	T("hero_builder").motion.max_speed = 2.3 * FPS
 
-	T("hero_builder").hero.level_stats.hp_max = {
-		550,
-		570,
-		590,
-		610,
-		620,
-		635,
-		645,
-		660,
-		680,
-		700
-	}
-
 	T("hero_builder").melee.attacks[1].xp_gain_factor = 4
 
 	T("hero_builder").hero.skills.lunch_break.heal_hp = {
-		250,
-		300,
-		375
+		0.25,
+		0.3,
+		0.4
 	}
+	T("mod_hero_builder_lunch_break").main_script.insert = scripts5.mod_hero_builder_lunch_break.insert
+	AC(T("hero_builder"), "auras")
+	T("hero_builder").auras.list[1] = CC("aura_attack")
+	T("hero_builder").auras.list[1].aura = "hero_builder_extra_hp_max_aura"
+	tt = RT("hero_builder_extra_hp_max_aura", "aura")
+	AC(tt, "render")
+	tt.render.sprites[1].name = "soldier_death_rider_aura"
+	tt.render.sprites[1].loop = true
+	tt.render.sprites[1].z = Z_DECALS
+	tt.aura.use_mod_offset = nil
+	tt.aura.radius = 200
+	tt.aura.extra_hp_max = 0.15
+	tt.aura.duration = 0
+	tt.main_script.update = scripts5.hero_builder_extra_hp_max_aura.update
+
+	T("aura_hero_builder_demolition_man").aura.mods[2] = "hero_builder_mod_stun"
+	tt = RT("hero_builder_mod_stun", "mod_stun")
+	tt.modifier.duration = 1.5
 
 	T("hero_builder").hero.skills.defensive_turret.duration = {
-		80,
-		90,
-		100
+		75,
+		100,
+		125
 	}
 	T("hero_builder").hero.skills.defensive_turret.damage_max = {
 		6,
@@ -2961,7 +2969,6 @@ function template_UH:enhance5()
 		10,
 		14
 	}
-	T("hero_builder").timed_attacks.list[4].max_range = 9999
 
 	T("hero_builder").hero.skills.ultimate.stun_duration = {
 		[0] = 2,
@@ -3034,6 +3041,7 @@ function template_UH:enhance5()
 		4,
 		6
 	}
+	--T("aura_hero_robot_ultimate_train").aura.duration = 8
 
 	if T("tower_hero_buy_c") then
 		hero_buy_template_set("hero_robot_2")
@@ -3495,6 +3503,10 @@ function template_UH:enhance5()
 		8,
 		10
 	}
+
+	if T("tower_hero_buy_c") then
+		hero_buy_template_set("hero_wukong_2")
+	end
 end
 
 return template_UH
