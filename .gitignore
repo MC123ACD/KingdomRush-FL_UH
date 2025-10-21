@@ -1,8 +1,5 @@
 *
 !.gitignore
 !/mods/
-!/mods/**
 !/mods/UH/
 !/mods/UH/**
-!README.md
-!main.lua

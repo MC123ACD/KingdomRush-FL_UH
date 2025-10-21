@@ -119,8 +119,7 @@ local function load_director()
 	local aw, ah = love.graphics.getDimensions()
 
 	if aw and ah and (aw ~= main.params.width or ah ~= main.params.height) then
-		log.debug("patching width/height from %s,%s, to %s,%s dpi scale:%s", main.params.width, main.params.height, aw,
-		ah, love.window.getPixelScale())
+		log.debug("patching width/height from %s,%s, to %s,%s dpi scale:%s", main.params.width, main.params.height, aw, ah, love.window.getPixelScale())
 
 		main.params.width, main.params.height = aw, ah
 	end
