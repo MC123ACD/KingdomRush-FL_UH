@@ -2955,9 +2955,9 @@ function template_UH:enhance5()
 	tt.modifier.duration = 1.5
 
 	T("hero_builder").hero.skills.defensive_turret.duration = {
+		50,
 		75,
-		100,
-		125
+		100
 	}
 	T("hero_builder").hero.skills.defensive_turret.damage_max = {
 		6,
