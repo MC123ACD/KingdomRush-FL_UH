@@ -43,13 +43,6 @@ local function tcopy(name, t)
 	return ST(name, copy(T(t)))
 end
 
-GS.hero_xp_gain_per_difficulty_mode = {
-	[DIFFICULTY_EASY] = 0.75,
-	[DIFFICULTY_NORMAL] = 1,
-	[DIFFICULTY_HARD] = 1.25,
-	[DIFFICULTY_IMPOSSIBLE] = 1
-}
-
 local template_UH = {}
 
 template_UH.old = {}
@@ -926,7 +919,7 @@ function template_UH:enhance2()
 	T("hero_mirage").hero.skills.lethalstrike.instakill_chance = {
 		0.4,
 		0.7,
-		1
+		0.9
 	}
 
 	if T("tower_hero_buy_a") then
@@ -1532,9 +1525,9 @@ function template_UH:enhance2()
 	T("hero_dracolich").ranged.attacks[1].min_range = 25
 
 	T("hero_dracolich").hero.skills.unstabledisease.spread_damage = {
-		15,
-		45,
-		75
+		20,
+		50,
+		80
 	}
 
 	if T("tower_hero_buy_a") then
@@ -2046,6 +2039,8 @@ function template_UH:enhance3()
 	end
 
 	-- 7. 树人
+	T("hero_bravebark").hero.fn_level_up = scripts.hero_bravebark.level_up
+
 	T("hero_bravebark").hero.skills.rootspikes.damage_max = {
 		70,
 		90,
@@ -2077,7 +2072,11 @@ function template_UH:enhance3()
 	T("soldier_bravebark").main_script.update = scripts.soldier_bravebark.update
 	T("soldier_bravebark").gold = 1
 
-	T("hero_bravebark").melee.attacks[2].trigger_min_hp = 300
+	T("hero_bravebark").hero.skills.branchball.trigger_min_hp = {
+		300,
+		350,
+		400
+	}
 	T("hero_bravebark").melee.attacks[2].fn_can = scripts.hero_bravebark.fn_can_branchball
 
 	T("hero_bravebark").springsap.cooldown = 20
@@ -2114,6 +2113,7 @@ function template_UH:enhance3()
 		1000
 	}
 	T("hero_veznan").timed_attacks.list[1].trigger_min_total_hp = 0.4
+	
 	T("mod_veznan_shackles_dps").dps.damage_inc = 3
 
 	T("hero_veznan").timed_attacks.list[3].cooldown = 14
@@ -2182,10 +2182,10 @@ function template_UH:enhance3()
 		13
 	}
 
-	T("hero_xin").hero.skills.mind_over_body.heal_hp = {
-		9,
+	T("hero_xin").hero.skills.mind_over_body.duration = {
 		8,
-		8
+		12,
+		18
 	}
 
 	T("hero_xin").melee.attacks[3].cooldown = 17
@@ -2484,6 +2484,11 @@ function template_UH:enhance3()
 		0.1,
 		0.2,
 		0.3
+	}
+	T("hero_bruce").hero.skills.kings_roar.stun_duration = {
+		1,
+		2,
+		2
 	}
 	T("hero_bruce").timed_attacks.list[1].min_count = 1
 	AC(T("hero_bruce"), "auras")

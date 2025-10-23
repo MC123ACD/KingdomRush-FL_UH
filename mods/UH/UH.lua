@@ -12,7 +12,7 @@ local A_db = require("animation_db")
 local A_UH = require("animations_UH")
 local template_UH = require("template_UH")
 local scripts_UH = require("scripts_UH")
---local strings_UH = require("strings_UH")
+local strings_UH = require("strings_UH")
 local screen_map = require("screen_map")
 local LU = require("level_utils")
 local GS = require("game_settings")
@@ -23,6 +23,7 @@ local game_gui = require("game_gui")
 local i18n = require("i18n")
 local S = require("sound_db")
 local map_data = require("data.map_data")
+local zh_Hans = require("assets.strings.zh-Hans")
 
 balance = require("balance.balance")
 local function v(v1, v2)
@@ -40,6 +41,7 @@ local function load_UH()
 	scripts_UH:utils()
 	scripts_UH:script_utils()
 	scripts_UH:scripts()
+	strings_UH:init()
 
 	for i = 1, 5 do
 		scripts_UH["enhance" .. i](self)
@@ -57,8 +59,6 @@ function hook:init()
 	require("game_scripts-2")
 	require("game_scripts-4")
 	require("game_scripts-5")
-
-	--strings_UH:init()
 
 	HOOK(E, "load", self.E.load)
 	HOOK(E, "register_t", self.E.RT)
@@ -89,6 +89,7 @@ function hook.E.load(load, self)
 	if not self.save_o then
 		template_UH:save_o()
 		scripts_UH:save_o()
+		strings_UH:save_o()
 		self.save_o = true
 	end
 
@@ -99,8 +100,8 @@ function hook.E.load(load, self)
 	end
 end
 
-function hook.sys.level.init(init, ...)
-	init(...)
+function hook.sys.level.init(init, self, store)
+	init(self, store)
 
 	local user_data = storage:load_slot()
 
@@ -141,13 +142,14 @@ function hook.hero_room.init(init, self, sw, sh)
 		screen_map.user_data.liuhui.balance_hero = not screen_map.user_data.liuhui.balance_hero
 		storage:save_slot(screen_map.user_data)
 
-		E.entities = copy(template_UH.old.templates)
-		scripts = copy(scripts_UH.old.scripts)
-		scripts5 = copy(scripts_UH.old.scripts5)
-		-- U = copy(scripts_UH.old.utils)
-
 		if screen_map.user_data.liuhui and screen_map.user_data.liuhui.balance_hero then
 			load_UH()
+		else
+			E.entities = copy(template_UH.old.templates)
+			scripts = copy(scripts_UH.old.scripts)
+			scripts5 = copy(scripts_UH.old.scripts5)
+			-- U = copy(scripts_UH.old.utils)
+			i18n.msgs["zh-Hans"] = copy(strings_UH.old.strings)
 		end
 		-- load_UF()
 		UPGR:patch_templates(5)

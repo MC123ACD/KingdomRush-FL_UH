@@ -5763,6 +5763,84 @@ function scripts_UH:enhance3()
 	end
 
 	-- 树人
+	function scripts.hero_bravebark.level_up(this, store, initial)
+		local hl = this.hero.level
+		local ls = this.hero.level_stats
+
+		this.health.hp_max = ls.hp_max[hl]
+		this.regen.health = ls.regen_health[hl]
+		this.health.armor = ls.armor[hl]
+		this.melee.attacks[1].damage_min = ls.melee_damage_min[hl]
+		this.melee.attacks[1].damage_max = ls.melee_damage_max[hl]
+
+		local s
+
+		s = this.hero.skills.rootspikes
+
+		if initial and s.level > 0 then
+			local a = this.timed_attacks.list[1]
+
+			a.disabled = nil
+			a.ts = store.tick_ts
+			a.damage_max = s.damage_max[s.level]
+			a.damage_min = s.damage_min[s.level]
+		end
+
+		s = this.hero.skills.oakseeds
+
+		if initial and s.level > 0 then
+			local a = this.timed_attacks.list[2]
+
+			a.disabled = nil
+			a.ts = store.tick_ts
+
+			local st = E:get_template(a.entity)
+
+			st.health.hp_max = s.soldier_hp_max[s.level]
+			st.melee.attacks[1].damage_max = s.soldier_damage_max[s.level]
+			st.melee.attacks[1].damage_min = s.soldier_damage_min[s.level]
+		end
+
+		s = this.hero.skills.branchball
+
+		if initial and s.level > 0 then
+			local a = this.melee.attacks[2]
+
+			a.trigger_min_hp = s.trigger_min_hp[s.level]
+			a.disabled = nil
+			a.ts = store.tick_ts
+		end
+
+		s = this.hero.skills.springsap
+
+		if initial and s.level > 0 then
+			local a = this.springsap
+
+			a.disabled = nil
+			a.ts = store.tick_ts
+
+			local aura = E:get_template(a.aura)
+
+			aura.aura.duration = s.duration[s.level]
+
+			local mod = E:get_template(aura.aura.mod)
+
+			mod.hps.heal_min = s.hp_per_cycle[s.level]
+			mod.hps.heal_max = s.hp_per_cycle[s.level]
+		end
+
+		s = this.hero.skills.ultimate
+
+		if initial then
+			local u = E:get_template("hero_bravebark_ultimate")
+
+			u.count = s.count[s.level]
+			u.damage = s.damage[s.level]
+		end
+
+		this.health.hp = this.health.hp_max
+	end
+
 	scripts.soldier_bravebark = {}
 	function scripts.soldier_bravebark.update(this, store, script)
 		local brk, stam, star

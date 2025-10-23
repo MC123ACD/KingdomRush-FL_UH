@@ -66,8 +66,8 @@ function utils_UH.set_entity_pos(store, id, pos)
         e.nav_path.ni = ni
     elseif e.nav_rally then
         e.nav_rally.new = true
-        e.nav_rally.pos = v(npos.x, npos.y - 5)
-        e.nav_rally.center = v(npos.x, npos.y - 5)
+        e.nav_rally.pos = v(npos.x, npos.y - 1)
+        e.nav_rally.center = v(npos.x, npos.y - 1)
     end
 
     if e.enemy then
