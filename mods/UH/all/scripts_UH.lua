@@ -27,14 +27,6 @@ end
 
 local scripts_UH = {}
 
-scripts_UH.old = {}
-
-function scripts_UH:save_o(m)
-	self.old.scripts = copy(scripts)
-	self.old.scripts5 = copy(scripts5)
-	self.old.utils = copy(U)
-end
-
 function scripts_UH:init()
 	SU = require("script_utils")
 end

@@ -45,11 +45,6 @@ end
 
 local template_UH = {}
 
-template_UH.old = {}
-function template_UH:save_o(m)
-	self.old.templates = copy(E.entities)
-end
-
 function template_UH:enhance1()
 	-- 1. 爵士
 	T("hero_gerald").hero.level_stats.regen_health = {

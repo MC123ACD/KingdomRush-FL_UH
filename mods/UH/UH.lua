@@ -36,38 +36,65 @@ local function CJK(default, zh, ja, kr)
 	return i18n:cjk(default, zh, ja, kr)
 end
 
-local function load_UH()
-	scripts_UH:init()
-	scripts_UH:utils()
-	scripts_UH:script_utils()
-	scripts_UH:scripts()
-	strings_UH:init()
+local function save_to_table(t)
+	t.templates = copy(E.entities)
+	t.zh_Hans = copy(zh_Hans)
+	t.scripts = copy(scripts)
+	t.scripts5 = copy(scripts5)
+end
 
-	for i = 1, 5 do
-		scripts_UH["enhance" .. i](self)
-		template_UH["enhance" .. i](self)
+local function set_to_table(t)
+	E.entities = t.templates
+	scripts = t.scripts
+	scripts5 = t.scripts5
+	i18n.msgs["zh-Hans"] = t.zh_Hans
+end
+
+local UH = {}
+
+function UH:load_UH()
+	if not UH.new then
+		scripts_UH:init()
+		scripts_UH:utils()
+		scripts_UH:script_utils()
+		scripts_UH:scripts()
+		strings_UH:init()
+
+		for i = 1, 5 do
+			scripts_UH["enhance" .. i](self)
+			template_UH["enhance" .. i](self)
+		end
+
+		UH.new = {}
+
+		save_to_table(UH.new)
+	else
+		set_to_table(UH.new)
 	end
 end
 
-local hook = {}
+function UH:init()
+	local hook = self.hook
 
-setmetatable(hook, mod_utils.auto_table_mt)
-
-function hook:init()
 	require("game_scripts")
 	require("game_scripts-1")
 	require("game_scripts-2")
 	require("game_scripts-4")
 	require("game_scripts-5")
 
-	HOOK(E, "load", self.E.load)
-	HOOK(E, "register_t", self.E.RT)
-	HOOK(HeroRoomView, "initialize", self.hero_room.init)
-	HOOK(HeroRoomView, "show", self.hero_room.show)
-	HOOK(game_gui, "init", self.game_gui.init)
-	HOOK(sys.level, "init", self.sys.level.init)
-	HOOK(game, "mousepressed", self.game.mousepressed)
+	HOOK(E, "load", hook.E.load)
+	HOOK(E, "register_t", hook.E.RT)
+	HOOK(HeroRoomView, "initialize", hook.hero_room.init)
+	HOOK(HeroRoomView, "show", hook.hero_room.show)
+	HOOK(game_gui, "init", hook.game_gui.init)
+	HOOK(sys.level, "init", hook.sys.level.init)
+	HOOK(game, "mousepressed", hook.game.mousepressed)
 end
+
+UH.hook = {}
+setmetatable(UH.hook, mod_utils.auto_table_mt)
+
+local hook = UH.hook
 
 -- 将模板已存在时报错，改为返回已存在的模板
 function hook.E.RT(register_t, self, name, base)
@@ -86,17 +113,16 @@ function hook.E.load(load, self)
 
 	load(self)
 
-	if not self.save_o then
-		template_UH:save_o()
-		scripts_UH:save_o()
-		strings_UH:save_o()
-		self.save_o = true
+	if not UH.origin then
+		UH.origin = {}
+
+		save_to_table(UH.origin)
 	end
 
 	-- 检测补强是否开启，开启则应用补强
 	local user_data = storage:load_slot()
 	if user_data.liuhui and user_data.liuhui.balance_hero then
-		load_UH()
+		UH:load_UH()
 	end
 end
 
@@ -143,15 +169,11 @@ function hook.hero_room.init(init, self, sw, sh)
 		storage:save_slot(screen_map.user_data)
 
 		if screen_map.user_data.liuhui and screen_map.user_data.liuhui.balance_hero then
-			load_UH()
+			UH:load_UH()
 		else
-			E.entities = copy(template_UH.old.templates)
-			scripts = copy(scripts_UH.old.scripts)
-			scripts5 = copy(scripts_UH.old.scripts5)
-			-- U = copy(scripts_UH.old.utils)
-			i18n.msgs["zh-Hans"] = copy(strings_UH.old.strings)
+			set_to_table(UH.origin)
 		end
-		-- load_UF()
+
 		UPGR:patch_templates(5)
 		self:construct_hero(self.selected_index)
 
@@ -307,4 +329,4 @@ function hook.game.mousepressed(mousepressed, self, x, y, button, istouch)
 	end
 end
 
-return hook
+return UH
