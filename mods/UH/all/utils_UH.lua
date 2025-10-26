@@ -130,14 +130,11 @@ end
 
 function utils_UH.find_entities_in_range(entities, origin, min_range, max_range, flags, bans, filter_func)
     local entities = table.filter(entities, function(k, v)
-        if v.template_name == "decal_hero_builder_defensive_turret" then
-            print()
-        end
-        return 
-        not v.pending_removal and 
-        (not v.vis or (band(v.vis.flags, bans) == 0 and band(v.vis.bans, flags) == 0)) and 
-        (v.pos and (U.is_inside_ellipse(v.pos, origin, max_range) and (min_range == 0 or not U.is_inside_ellipse(v.pos, origin, min_range)))) and
-        (not filter_func or filter_func(v, origin))
+        return
+            not v.pending_removal and
+            (not v.vis or (band(v.vis.flags, bans) == 0 and band(v.vis.bans, flags) == 0)) and
+            (v.pos and (U.is_inside_ellipse(v.pos, origin, max_range) and (min_range == 0 or not U.is_inside_ellipse(v.pos, origin, min_range)))) and
+            (not filter_func or filter_func(v, origin))
     end)
 
     if not entities or #entities == 0 then

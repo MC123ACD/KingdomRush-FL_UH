@@ -3295,6 +3295,8 @@ function template_UH:enhance5()
 	end
 
 	-- 13. 骨龙
+	T("hero_dragon_bone").main_script.insert = scripts5.hero_dragon_bone.insert
+
 	T("hero_dragon_bone").spread_radius = 75
 	T("hero_dragon_bone").spread_damage_min = 25
 	T("hero_dragon_bone").spread_damage_max = 25
@@ -3302,19 +3304,38 @@ function template_UH:enhance5()
 	T("hero_dragon_bone").ranged.attacks[3].vis_bans_target = 0
 
 	T("hero_dragon_bone").hero.skills.burst.proj_count = {
-		9,
-		12,
-		15
+		10,
+		13,
+		14
 	}
 	T("hero_dragon_bone").ranged.attacks[5].vis_bans = 0
 
-	T("soldier_dragon_bone_ultimate_dog").melee.attacks[1].cooldown = 0.7
-	T("hero_dragon_bone").hero.skills.ultimate.hp = {
-		[0] = 200,
-		240,
-		300,
-		360
+	tt = RT("death_rider_aura_dragon_bone", "death_rider_aura")
+	tt.main_script.update = scripts5.death_rider_aura_dragon_bone.update
+	tt.aura.mod = "mod_death_rider_dragon_bone"
+	tt.aura.use_mod_offset = nil
+	tt.aura.allowed_templates = {
+		"soldier_skeleton",
+		"soldier_skeleton_knight",
+		"soldier_sand_warrior",
+		"soldier_dracolich_golem",
+		"soldier_dragon_bone_ultimate_dog",
+		"soldier_death_rider",
+		"soldier_sand_warrior",
+		"tower_necromancer",
+		"hero_dracolich"
 	}
+	for i = 1, 4 do
+		table.insert(tt.aura.allowed_templates, "soldier_tower_necromancer_skeleton_golem_lvl" .. i)
+		table.insert(tt.aura.allowed_templates, "soldier_tower_necromancer_skeleton_lvl" .. i)
+		table.insert(tt.aura.allowed_templates, "tower_necromancer_lvl" .. i)
+		table.insert(tt.aura.allowed_templates, "tower_bone_flingers_lvl" .. i)
+	end
+	tt = RT("mod_death_rider_dragon_bone", "mod_death_rider")
+	tt.tower_inflicted_damage_factor = 1.25
+	tt.main_script.insert = scripts5.mod_death_rider_dragon_bone.insert
+	tt.main_script.remove = scripts5.mod_death_rider_dragon_bone.remove
+	tt.main_script.update = scripts5.mod_death_rider_dragon_bone.update
 
 	if T("tower_hero_buy_c") then
 		hero_buy_template_set("hero_dragon_bone_2")

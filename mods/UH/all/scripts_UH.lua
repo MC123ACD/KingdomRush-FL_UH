@@ -1548,11 +1548,11 @@ function scripts_UH:enhance2()
 		this.melee.order = U.attack_order(this.melee.attacks)
 
 		if this.hero.skills.toughness.level > 0 then
-			local e = create_entity("death_rider_aura_alric")
+			local aura = create_entity("death_rider_aura_alric")
 
-			e.aura.source_id = this.id
+			aura.aura.source_id = this.id
 
-			queue_insert(store, e)
+			queue_insert(store, aura)
 		end
 
 		return true
@@ -2732,49 +2732,49 @@ function scripts_UH:enhance2()
 					local flight_time = bullet_t.bullet.flight_time
 					local target = U.find_foremost_enemy(store.entities, this.pos, a.min_range, a.max_range, false,
 						a.vis_flags, a.vis_bans, function(v)
-						local v_pos = v.pos
+							local v_pos = v.pos
 
-						if not v.nav_path then
-							return false
-						end
-
-						local n_pos = P:node_pos(v.nav_path)
-
-						if V.dist(n_pos.x, n_pos.y, v_pos.x, v_pos.y) > 5 then
-							return false
-						end
-
-						if a.nodes_limit and (P:get_start_node(v.nav_path.pi) + a.nodes_limit > v.nav_path.ni or P:get_end_node(v.nav_path.pi) - a.nodes_limit < v.nav_path.ni) then
-							return false
-						end
-
-						if v.motion and v.motion.speed then
-							local node_offset
-
-							if flight_time then
-								node_offset = P:predict_enemy_node_advance(v, flight_time + a.shoot_time)
-							else
-								local dist = V.dist(origin.x, origin.y, v.pos.x, v.pos.y)
-
-								node_offset = P:predict_enemy_node_advance(v, dist / bullet_speed)
+							if not v.nav_path then
+								return false
 							end
+
+							local n_pos = P:node_pos(v.nav_path)
+
+							if V.dist(n_pos.x, n_pos.y, v_pos.x, v_pos.y) > 5 then
+								return false
+							end
+
+							if a.nodes_limit and (P:get_start_node(v.nav_path.pi) + a.nodes_limit > v.nav_path.ni or P:get_end_node(v.nav_path.pi) - a.nodes_limit < v.nav_path.ni) then
+								return false
+							end
+
+							if v.motion and v.motion.speed then
+								local node_offset
+
+								if flight_time then
+									node_offset = P:predict_enemy_node_advance(v, flight_time + a.shoot_time)
+								else
+									local dist = V.dist(origin.x, origin.y, v.pos.x, v.pos.y)
+
+									node_offset = P:predict_enemy_node_advance(v, dist / bullet_speed)
+								end
+
+								if a.name == "fierymist" or a.name == "blazingbreath" then
+									v_pos = P:node_pos(v.nav_path.pi, 1, v.nav_path.ni + node_offset)
+								else
+									v_pos = P:node_pos(v.nav_path.pi, v.nav_path.spi, v.nav_path.ni + node_offset)
+								end
+							end
+
+							local dist_x = math.abs(v_pos.x - this.pos.x)
+							local dist_y = math.abs(v_pos.y - this.pos.y)
 
 							if a.name == "fierymist" or a.name == "blazingbreath" then
-								v_pos = P:node_pos(v.nav_path.pi, 1, v.nav_path.ni + node_offset)
+								return dist_x > a.min_range and dist_y < 80
 							else
-								v_pos = P:node_pos(v.nav_path.pi, v.nav_path.spi, v.nav_path.ni + node_offset)
+								return dist_x > 65
 							end
-						end
-
-						local dist_x = math.abs(v_pos.x - this.pos.x)
-						local dist_y = math.abs(v_pos.y - this.pos.y)
-
-						if a.name == "fierymist" or a.name == "blazingbreath" then
-							return dist_x > a.min_range and dist_y < 80
-						else
-							return dist_x > 65
-						end
-					end)
+						end)
 
 					if target then
 						local start_ts = store.tick_ts
@@ -2838,7 +2838,7 @@ function scripts_UH:enhance2()
 
 							local ps = create_entity(a.emit_ps)
 							local mspeed = V.dist(dest.x, dest.y, b.bullet.from.x, b.bullet.from.y) /
-							b.bullet.flight_time
+								b.bullet.flight_time
 
 							ps.particle_system.emit_direction = V.angleTo(dest.x - b.bullet.from.x,
 								dest.y - b.bullet.from.y)
@@ -3708,7 +3708,7 @@ function scripts_UH:enhance2()
 
 				if not a.disabled and store.tick_ts - a.ts > a.cooldown then
 					local targets = U.find_enemies_in_range(store.entities, this.pos, 0, a.range, a.vis_flags, a
-					.vis_bans)
+						.vis_bans)
 
 					if not targets then
 						SU.delay_attack(store, a, 0.13333333333333333)
@@ -3915,12 +3915,12 @@ function scripts_UH:enhance2()
 			if not a.disabled and store.tick_ts - a.ts > a.cooldown then
 				local target = U.find_random_enemy(store.entities, this.pos, a.min_range, a.max_range * 1.5, a.vis_flags,
 					a.vis_bans, function(v)
-					local offset = P:predict_enemy_node_advance(v, a.spawn_time)
-					local ppos = P:node_pos(v.nav_path.pi, v.nav_path.spi, v.nav_path.ni + offset)
+						local offset = P:predict_enemy_node_advance(v, a.spawn_time)
+						local ppos = P:node_pos(v.nav_path.pi, v.nav_path.spi, v.nav_path.ni + offset)
 
-					return P:is_node_valid(v.nav_path.pi, v.nav_path.ni + offset, NF_RALLY) and
-					GR:cell_is_only(ppos.x, ppos.y, TERRAIN_LAND)
-				end)
+						return P:is_node_valid(v.nav_path.pi, v.nav_path.ni + offset, NF_RALLY) and
+							GR:cell_is_only(ppos.x, ppos.y, TERRAIN_LAND)
+					end)
 				local spawn_pos
 
 				if target then
@@ -4212,41 +4212,41 @@ function scripts_UH:enhance2()
 					local flight_time = bullet_t.bullet.flight_time
 					local target = U.find_random_enemy(store.entities, this.pos, a.min_range, a.max_range, a.vis_flags,
 						a.vis_bans, function(v)
-						local v_pos = v.pos
+							local v_pos = v.pos
 
-						if not v.nav_path then
-							return false
-						end
-
-						local n_pos = P:node_pos(v.nav_path)
-
-						if V.dist(n_pos.x, n_pos.y, v_pos.x, v_pos.y) > 5 then
-							return false
-						end
-
-						if a.nodes_limit and (P:get_start_node(v.nav_path.pi) + a.nodes_limit > v.nav_path.ni or P:get_end_node(v.nav_path.pi) - a.nodes_limit < v.nav_path.ni) then
-							return false
-						end
-
-						if v.motion and v.motion.speed then
-							local node_offset
-
-							if flight_time then
-								node_offset = P:predict_enemy_node_advance(v, flight_time + a.shoot_time)
-							else
-								local dist = V.dist(origin.x, origin.y, v.pos.x, v.pos.y)
-
-								node_offset = P:predict_enemy_node_advance(v, dist / bullet_speed)
+							if not v.nav_path then
+								return false
 							end
 
-							v_pos = P:node_pos(v.nav_path.pi, v.nav_path.spi, v.nav_path.ni + node_offset)
-						end
+							local n_pos = P:node_pos(v.nav_path)
 
-						local dist_x = math.abs(v_pos.x - this.pos.x)
-						local dist_y = math.abs(v_pos.y - this.pos.y)
+							if V.dist(n_pos.x, n_pos.y, v_pos.x, v_pos.y) > 5 then
+								return false
+							end
 
-						return dist_x > a.min_range
-					end)
+							if a.nodes_limit and (P:get_start_node(v.nav_path.pi) + a.nodes_limit > v.nav_path.ni or P:get_end_node(v.nav_path.pi) - a.nodes_limit < v.nav_path.ni) then
+								return false
+							end
+
+							if v.motion and v.motion.speed then
+								local node_offset
+
+								if flight_time then
+									node_offset = P:predict_enemy_node_advance(v, flight_time + a.shoot_time)
+								else
+									local dist = V.dist(origin.x, origin.y, v.pos.x, v.pos.y)
+
+									node_offset = P:predict_enemy_node_advance(v, dist / bullet_speed)
+								end
+
+								v_pos = P:node_pos(v.nav_path.pi, v.nav_path.spi, v.nav_path.ni + node_offset)
+							end
+
+							local dist_x = math.abs(v_pos.x - this.pos.x)
+							local dist_y = math.abs(v_pos.y - this.pos.y)
+
+							return dist_x > a.min_range
+						end)
 
 					if target then
 						local start_ts = store.tick_ts
@@ -6532,7 +6532,7 @@ function scripts_UH:enhance3()
 
 				if not a.disabled and store.tick_ts - a.ts > a.cooldown then
 					local targets = U.find_enemies_in_range(store.entities, this.pos, 0, a.range, a.vis_flags, a
-					.vis_bans)
+						.vis_bans)
 
 					if not targets or #targets < a.min_count then
 						SU.delay_attack(store, a, 0.13333333333333333)
@@ -6817,7 +6817,7 @@ function scripts_UH:enhance3()
 
 				if not a.disabled and store.tick_ts - a.ts > a.cooldown then
 					local targets = U.find_enemies_in_range(store.entities, this.pos, 0, a.range, a.vis_flags, a
-					.vis_bans)
+						.vis_bans)
 
 					if not targets or #targets < a.min_count then
 						SU.delay_attack(store, a, 0.13333333333333333)
@@ -7753,7 +7753,7 @@ function scripts_UH:enhance5()
 
 				if not a.disabled and store.tick_ts - a.ts > a.cooldown then
 					local enemies = U.find_enemies_in_range(store.entities, this.pos, 0, a.max_range_trigger, a
-					.vis_flags, a.vis_bans)
+						.vis_flags, a.vis_bans)
 
 					if not enemies or #enemies < a.min_targets then
 						SU.delay_attack(store, a, fts(10))
@@ -7792,7 +7792,7 @@ function scripts_UH:enhance5()
 
 				if not a.disabled and store.tick_ts - a.ts > a.cooldown then
 					local enemies = U.find_enemies_in_range(store.entities, this.pos, 0, a.max_range_trigger, a
-					.vis_flags, a.vis_bans)
+						.vis_flags, a.vis_bans)
 
 					if not enemies or #enemies < a.min_targets then
 						SU.delay_attack(store, a, fts(10))
@@ -7910,7 +7910,7 @@ function scripts_UH:enhance5()
 						end
 
 						enemies = U.find_enemies_in_range(store.entities, this.pos, a.min_range, a.max_range, a
-						.vis_flags, a.vis_bans)
+							.vis_flags, a.vis_bans)
 
 						if enemies and #enemies > 0 then
 							enemy = enemies[1]
@@ -8809,7 +8809,7 @@ function scripts_UH:enhance5()
 
 			queue_insert(store, aura)
 		end
-		
+
 		return true
 	end
 
@@ -9152,9 +9152,9 @@ function scripts_UH:enhance5()
 			this.pos = V.vclone(source.pos)
 
 			local turrets = utils_UH.find_entities_in_range(store.entities, this.pos, 0, aura.radius, aura.vis_flags,
-			aura.vis_bans, function(v)
-				return v.template_name == "decal_hero_builder_defensive_turret"
-			end)
+				aura.vis_bans, function(v)
+					return v.template_name == "decal_hero_builder_defensive_turret"
+				end)
 
 			if turrets then
 				local hp_max_factor = 1 + #turrets * aura.extra_hp_max
@@ -9211,11 +9211,11 @@ function scripts_UH:enhance5()
 
 				local targets = table.filter(store.entities, function(k, v)
 					return v.unit and v.vis and v.health and not v.health.dead and
-					band(v.vis.flags, this.aura.vis_bans) == 0 and band(v.vis.bans, this.aura.vis_flags) == 0 and
-					U.is_inside_ellipse(v.pos, this.pos, this.aura.radius) and
-					(not this.aura.allowed_templates or table.contains(this.aura.allowed_templates, v.template_name)) and
-					(not this.aura.excluded_templates or not table.contains(this.aura.excluded_templates, v.template_name)) and
-					(not this.aura.excluded_entities or not table.contains(this.aura.excluded_entities, v.id))
+						band(v.vis.flags, this.aura.vis_bans) == 0 and band(v.vis.bans, this.aura.vis_flags) == 0 and
+						U.is_inside_ellipse(v.pos, this.pos, this.aura.radius) and
+						(not this.aura.allowed_templates or table.contains(this.aura.allowed_templates, v.template_name)) and
+						(not this.aura.excluded_templates or not table.contains(this.aura.excluded_templates, v.template_name)) and
+						(not this.aura.excluded_entities or not table.contains(this.aura.excluded_entities, v.id))
 				end)
 
 				for _, target in pairs(targets) do
@@ -9254,11 +9254,11 @@ function scripts_UH:enhance5()
 
 				local targets_m = table.filter(store.entities, function(k, v)
 					return v.unit and v.vis and v.health and not v.health.dead and
-					band(v.vis.flags, this.aura.vis_bans) == 0 and band(v.vis.bans, this.aura.vis_flags) == 0 and
-					U.is_inside_ellipse(v.pos, this.pos, this.aura.radius * this.aura.radius_long_inc) and
-					(not this.aura.allowed_templates or table.contains(this.aura.allowed_templates, v.template_name)) and
-					(not this.aura.excluded_templates or not table.contains(this.aura.excluded_templates, v.template_name)) and
-					(not this.aura.excluded_entities or not table.contains(this.aura.excluded_entities, v.id))
+						band(v.vis.flags, this.aura.vis_bans) == 0 and band(v.vis.bans, this.aura.vis_flags) == 0 and
+						U.is_inside_ellipse(v.pos, this.pos, this.aura.radius * this.aura.radius_long_inc) and
+						(not this.aura.allowed_templates or table.contains(this.aura.allowed_templates, v.template_name)) and
+						(not this.aura.excluded_templates or not table.contains(this.aura.excluded_templates, v.template_name)) and
+						(not this.aura.excluded_entities or not table.contains(this.aura.excluded_entities, v.id))
 				end)
 
 				for _, target in pairs(targets_m) do
@@ -9328,7 +9328,7 @@ function scripts_UH:enhance5()
 				end
 
 				local targets = U.find_enemies_in_range(store.entities, this.pos, 0, this.stun_range, this
-				.stun_vis_flags, this.stun_bans)
+					.stun_vis_flags, this.stun_bans)
 
 				if targets then
 					for _, target in pairs(targets) do
@@ -9479,13 +9479,13 @@ function scripts_UH:enhance5()
 			if bounce_count < this.bounces then
 				local targets = U.find_enemies_in_range(store.entities, search_pos, 0, this.bounce_range, b.vis_flags,
 					b.vis_bans, function(v)
-					return not table.contains(already_hit, v.id)
-				end)
+						return not table.contains(already_hit, v.id)
+					end)
 
 				if targets then
 					table.sort(targets, function(e1, e2)
 						return V.dist(this.pos.x, this.pos.y, e1.pos.x, e1.pos.y) <
-						V.dist(this.pos.x, this.pos.y, e2.pos.x, e2.pos.y)
+							V.dist(this.pos.x, this.pos.y, e2.pos.x, e2.pos.y)
 					end)
 
 					target = targets[1]
@@ -9536,11 +9536,11 @@ function scripts_UH:enhance5()
 
 		local function attack_is_tower_valid(v, a)
 			local is_tower = v.tower and not v.pending_removal and not v.tower.blocked and
-			(not a.excluded_templates or not table.contains(a.excluded_templates, v.template_name)) and v.vis and
-			band(v.vis.flags, a.vis_bans) == 0 and band(v.vis.bans, a.vis_flags) == 0 and
-			not table.contains(a.exclude_tower_kind, v.tower.kind) and v.tower.can_be_mod and
-			U.is_inside_ellipse(v.pos, this.pos, a.max_range) and
-			(a.min_range == 0 or not U.is_inside_ellipse(v.pos, this.pos, a.min_range))
+				(not a.excluded_templates or not table.contains(a.excluded_templates, v.template_name)) and v.vis and
+				band(v.vis.flags, a.vis_bans) == 0 and band(v.vis.bans, a.vis_flags) == 0 and
+				not table.contains(a.exclude_tower_kind, v.tower.kind) and v.tower.can_be_mod and
+				U.is_inside_ellipse(v.pos, this.pos, a.max_range) and
+				(a.min_range == 0 or not U.is_inside_ellipse(v.pos, this.pos, a.min_range))
 
 			return is_tower
 		end
@@ -9654,7 +9654,7 @@ function scripts_UH:enhance5()
 					this.old_rally_ease_step = ease_step
 
 					local desired_rotation = math.rad(13 * this.motion.max_speed / stored_max_speed) *
-					rotation_multiplier
+						rotation_multiplier
 
 					update_dragon_rotation(desired_rotation)
 					U.walk(this, store.tick_length, nil, unsnap)
@@ -9763,55 +9763,55 @@ function scripts_UH:enhance5()
 						local flight_time = bullet_t.bullet.flight_time
 						local target = U.find_foremost_enemy(store.entities, this.pos, a.min_range, a.max_range, false,
 							a.vis_flags, a.vis_bans, function(v)
-							local v_pos = v.pos
+								local v_pos = v.pos
 
-							if not v.nav_path then
-								return false
-							end
+								if not v.nav_path then
+									return false
+								end
 
-							local n_pos = P:node_pos(v.nav_path)
+								local n_pos = P:node_pos(v.nav_path)
 
-							if V.dist(n_pos.x, n_pos.y, v_pos.x, v_pos.y) > 5 then
-								return false
-							end
+								if V.dist(n_pos.x, n_pos.y, v_pos.x, v_pos.y) > 5 then
+									return false
+								end
 
-							if a.nodes_limit and (P:get_start_node(v.nav_path.pi) + a.nodes_limit > v.nav_path.ni or P:get_end_node(v.nav_path.pi) - a.nodes_limit < v.nav_path.ni) then
-								return false
-							end
+								if a.nodes_limit and (P:get_start_node(v.nav_path.pi) + a.nodes_limit > v.nav_path.ni or P:get_end_node(v.nav_path.pi) - a.nodes_limit < v.nav_path.ni) then
+									return false
+								end
 
-							if v.motion and v.motion.speed then
-								local node_offset = P:predict_enemy_node_advance(v, flight_time + a.shoot_time)
+								if v.motion and v.motion.speed then
+									local node_offset = P:predict_enemy_node_advance(v, flight_time + a.shoot_time)
 
-								v_pos = P:node_pos(v.nav_path.pi, 1, v.nav_path.ni + node_offset)
-							end
+									v_pos = P:node_pos(v.nav_path.pi, 1, v.nav_path.ni + node_offset)
+								end
 
-							local b_pos = V.vclone(this.pos)
-							local bullet_start_offset = V.v(0, 0)
-							local flip = this.pos.x > v_pos.x
+								local b_pos = V.vclone(this.pos)
+								local bullet_start_offset = V.v(0, 0)
+								local flip = this.pos.x > v_pos.x
 
-							if a.bullet_start_offset and #a.bullet_start_offset == 2 then
-								local offset_index = flip and 2 or 1
+								if a.bullet_start_offset and #a.bullet_start_offset == 2 then
+									local offset_index = flip and 2 or 1
 
-								bullet_start_offset = a.bullet_start_offset[offset_index]
-							end
+									bullet_start_offset = a.bullet_start_offset[offset_index]
+								end
 
-							b_pos.x = b_pos.x + (flip and -1 or 1) * bullet_start_offset.x
-							b_pos.y = b_pos.y + bullet_start_offset.y
+								b_pos.x = b_pos.x + (flip and -1 or 1) * bullet_start_offset.x
+								b_pos.y = b_pos.y + bullet_start_offset.y
 
-							local angle_d = math.deg(V.angleTo(v_pos.x - b_pos.x, v_pos.y - b_pos.y))
+								local angle_d = math.deg(V.angleTo(v_pos.x - b_pos.x, v_pos.y - b_pos.y))
 
-							angle_d = angle_d + 90
-							angle_d = math.abs(angle_d)
+								angle_d = angle_d + 90
+								angle_d = math.abs(angle_d)
 
-							if angle_d > a.max_angle then
-								return false
-							end
+								if angle_d > a.max_angle then
+									return false
+								end
 
-							local dist_x = math.abs(v_pos.x - this.pos.x)
-							local diff_y = math.abs(v_pos.y - this.pos.y)
+								local dist_x = math.abs(v_pos.x - this.pos.x)
+								local diff_y = math.abs(v_pos.y - this.pos.y)
 
-							return dist_x > a.min_range / 2 and diff_y < a.min_range_dy
-						end)
+								return dist_x > a.min_range / 2 and diff_y < a.min_range_dy
+							end)
 
 						if target then
 							local start_ts = store.tick_ts
@@ -10085,7 +10085,7 @@ function scripts_UH:enhance5()
 						b.bullet.to = V.v(zone_target.x, zone_target.y)
 						b.bullet.level = skill.level
 						b.bullet.payload = (this.ultimate_active and a.spawn_evolved or a.spawn) .. "_lvl" .. skill
-						.level
+							.level
 						b.cached_controller_dragon_arb_passive_id = passive_controller.id
 						b.zone_target_id = zone_target.zone_id
 
@@ -10258,6 +10258,240 @@ function scripts_UH:enhance5()
 			SU.soldier_regen(store, this)
 
 			::label_575_2::
+
+			coroutine.yield()
+		end
+	end
+
+	-- 骨龙
+	function scripts5.hero_dragon_bone.insert(this, store)
+		this.hero.fn_level_up(this, store, true)
+
+		this.ranged.order = U.attack_order(this.ranged.attacks)
+
+		if this.hero.skills.ultimate.level > 0 then
+			local aura = E:create_entity("death_rider_aura_dragon_bone")
+			aura.aura.source_id = this.id
+
+			queue_insert(store, aura)
+		end
+
+		return true
+	end
+
+	scripts5.death_rider_aura_dragon_bone = {}
+
+	function scripts5.death_rider_aura_dragon_bone.update(this, store, script)
+		local first_hit_ts
+		local last_hit_ts = 0
+		local cycles_count = 0
+		local victims_count = 0
+
+		if this.aura.track_source and this.aura.source_id then
+			local te = store.entities[this.aura.source_id]
+
+			if te and te.pos then
+				this.pos = te.pos
+			end
+		end
+
+		last_hit_ts = store.tick_ts - this.aura.cycle_time
+
+		if this.aura.apply_delay then
+			last_hit_ts = last_hit_ts + this.aura.apply_delay
+		end
+
+		while true do
+			if this.interrupt then
+				last_hit_ts = 1e+99
+			end
+
+			if this.aura.cycles and cycles_count >= this.aura.cycles or this.aura.duration >= 0 and store.tick_ts - this.aura.ts > this.actual_duration then
+				break
+			end
+
+			if this.aura.track_source and this.aura.source_id then
+				local te = store.entities[this.aura.source_id]
+
+				if not te or te.health and te.health.dead and not this.aura.track_dead then
+					break
+				end
+			end
+
+			if this.aura.requires_magic then
+				local te = store.entities[this.aura.source_id]
+
+				if not te or not te.enemy then
+					goto label_88_0
+				end
+
+				if this.render then
+					this.render.sprites[1].hidden = not te.enemy.can_do_magic
+				end
+
+				if not te.enemy.can_do_magic then
+					goto label_88_0
+				end
+			end
+
+			if this.aura.source_vis_flags and this.aura.source_id then
+				local te = store.entities[this.aura.source_id]
+
+				if te and te.vis and band(te.vis.bans, this.aura.source_vis_flags) ~= 0 then
+					goto label_88_0
+				end
+			end
+
+			if this.aura.requires_alive_source and this.aura.source_id then
+				local te = store.entities[this.aura.source_id]
+
+				if te and te.health and te.health.dead then
+					goto label_88_0
+				end
+			end
+
+			if not (store.tick_ts - last_hit_ts >= this.aura.cycle_time) or this.aura.apply_duration and first_hit_ts and store.tick_ts - first_hit_ts > this.aura.apply_duration then
+				-- block empty
+			else
+				if this.render and this.aura.cast_resets_sprite_id then
+					this.render.sprites[this.aura.cast_resets_sprite_id].ts = store.tick_ts
+				end
+
+				first_hit_ts = first_hit_ts or store.tick_ts
+				last_hit_ts = store.tick_ts
+				cycles_count = cycles_count + 1
+
+				local targets = utils_UH.find_entities_in_range(store.entities, this.pos, 0, this.aura.radius,
+					this.aura.vis_flags, this.aura.vis_bans, function(v, origin)
+						if v then
+							print()
+						end
+						return (v.unit or v.tower) and
+							(not this.aura.allowed_templates or table.contains(this.aura.allowed_templates, v.template_name)) and
+							(not this.aura.excluded_templates or not table.contains(this.aura.excluded_templates, v.template_name)) and
+							(not this.aura.filter_source or this.aura.source_id ~= v.id) and
+							(not this.aura.filter_func or this.aura.filter_func(v, origin))
+					end)
+
+				if targets then
+					for i, target in ipairs(targets) do
+						if this.aura.targets_per_cycle and i > this.aura.targets_per_cycle then
+							break
+						end
+
+						if this.aura.max_count and victims_count >= this.aura.max_count then
+							break
+						end
+
+						local mods = this.aura.mods or {
+							this.aura.mod
+						}
+
+						for _, mod_name in pairs(mods) do
+							local new_mod = E:create_entity(mod_name)
+
+							new_mod.modifier.level = this.aura.level
+							new_mod.modifier.target_id = target.id
+							new_mod.modifier.source_id = this.id
+
+							if this.aura.hide_source_fx and target.id == this.aura.source_id then
+								new_mod.render = nil
+							end
+
+							queue_insert(store, new_mod)
+
+							victims_count = victims_count + 1
+						end
+					end
+				end
+			end
+
+			::label_88_0::
+
+			coroutine.yield()
+		end
+
+		signal.emit("aura-apply-mod-victims", this, victims_count)
+		queue_remove(store, this)
+	end
+
+	scripts5.mod_death_rider_dragon_bone = {}
+
+	function scripts5.mod_death_rider_dragon_bone.insert(this, store, script)
+		local m = this.modifier
+		local target = store.entities[m.target_id]
+
+		if not target then
+			return false
+		end
+
+		if target.tower then
+			target.tower.damage_factor = target.tower.damage_factor * this.tower_inflicted_damage_factor
+		else
+			target.health.armor = target.health.armor + this.extra_armor
+			target.unit.damage_factor = target.unit.damage_factor * this.inflicted_damage_factor
+		end
+
+		return true
+	end
+
+	function scripts5.mod_death_rider_dragon_bone.remove(this, store, script)
+		local m = this.modifier
+		local target = store.entities[m.target_id]
+
+		if target then
+			if target.tower then
+				target.tower.damage_factor = target.tower.damage_factor / this.tower_inflicted_damage_factor
+			else
+				target.health.armor = target.health.armor - this.extra_armor
+				target.unit.damage_factor = target.unit.damage_factor / this.inflicted_damage_factor
+			end
+		end
+
+		return true
+	end
+
+	function scripts5.mod_death_rider_dragon_bone.update(this, store, script)
+		local m = this.modifier
+
+		this.modifier.ts = store.tick_ts
+
+		local target = store.entities[m.target_id]
+
+		if not target or not target.pos then
+			queue_remove(store, this)
+
+			return
+		end
+
+		this.pos = target.pos
+
+		while true do
+			target = store.entities[m.target_id]
+
+			if not target or m.duration >= 0 and store.tick_ts - m.ts > m.duration then
+				queue_remove(store, this)
+
+				return
+			end
+
+			if this.render then
+				local s = this.render.sprites[1]
+				local flip_sign = 1
+
+				if target.render then
+					flip_sign = target.render.sprites[1].flip_x and -1 or 1
+				end
+
+				if m.health_bar_offset and target.health_bar then
+					local hb = target.health_bar.offset
+					local hbo = m.health_bar_offset
+
+					s.offset.x, s.offset.y = hb.x + hbo.x * flip_sign, hb.y + hbo.y
+				elseif m.use_mod_offset and target.unit and target.unit.mod_offset then
+					s.offset.x, s.offset.y = target.unit.mod_offset.x * flip_sign, target.unit.mod_offset.y
+				end
+			end
 
 			coroutine.yield()
 		end

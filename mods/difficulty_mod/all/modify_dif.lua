@@ -94,10 +94,10 @@ function modify_dif:waves()
             for _, spawn in ipairs(spawns) do
                 spawn.interval = spawn.interval * config.spawn_interval_factor
                 spawn.interval_next = spawn.interval_next * config.spawn_interval_factor
-                spawn.max = spawn.max * config.spawn_count_factor
+                spawn.max = math.ceil(spawn.max * config.spawn_count_factor)
 
                 if spawn.max_same then
-                    spawn.max_same = spawn.max_same * config.spawn_count_factor
+                    spawn.max_same = math.ceil(spawn.max_same * config.spawn_count_factor)
                 end
             end
         end
