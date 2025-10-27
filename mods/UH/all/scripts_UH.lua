@@ -23,8 +23,6 @@ local function tpos(e)
 		e.pos
 end
 
--- 这里是修改函数的模块
-
 local scripts_UH = {}
 
 function scripts_UH:init()

@@ -590,11 +590,6 @@ local strings_UH = {
     }
 }
 
-strings_UH.old = {}
-function strings_UH:save_o(m)
-    self.old.strings = copy(z)
-end
-
 function strings_UH:init()
     for i = 2, 5 do
         table.merge(i18n.msgs["zh-Hans"], self.new_zs[i])
