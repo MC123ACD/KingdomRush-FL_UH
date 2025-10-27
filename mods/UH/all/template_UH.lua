@@ -2729,7 +2729,7 @@ function template_UH:enhance5()
 	T("hero_vesper").hero.skills.martial_flourish.damage_max = {
 		60,
 		90,
-		125
+		113
 	}
 
 	T("hero_vesper").dodge.hp_to_trigger = 1
@@ -3039,7 +3039,7 @@ function template_UH:enhance5()
 		[0] = 2,
 		3,
 		4,
-		6
+		5
 	}
 	--T("aura_hero_robot_ultimate_train").aura.duration = 8
 
@@ -3201,13 +3201,6 @@ function template_UH:enhance5()
 		2,
 	}
 	T("soldier_hero_hunter_beast").chance_to_steal = 100
-
-	T("soldier_hero_hunter_ultimate").ranged.attacks[1].shoot_times = {
-		fts(2),
-		fts(9),
-		fts(16),
-		fts(2)
-	}
 
 	if T("tower_hero_buy_c") then
 		hero_buy_template_set("hero_hunter_2")

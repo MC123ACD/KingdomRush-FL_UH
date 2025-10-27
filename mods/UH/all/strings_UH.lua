@@ -303,11 +303,11 @@ local strings_UH = {
         [5] = {
             -- 狮鹫
             HERO_BIRD_BIRDS_OF_PREY_DESCRIPTION_1 =
-            "召唤狮鹫飞到区域上空攻击敌人，持续17秒，每次攻击造成%$heroes.hero_bird.ultimate.bird.melee_attack.damage_max[2]%$点伤害。",
+            "召唤狮鹫飞到区域上空攻击敌人，持续17秒，每次攻击造成%$heroes.hero_bird.ultimate.bird.melee_attack.damage_max[1]%$点伤害。",
             HERO_BIRD_BIRDS_OF_PREY_DESCRIPTION_2 =
-            "召唤狮鹫飞到区域上空攻击敌人，持续19秒，每次攻击造成%$heroes.hero_bird.ultimate.bird.melee_attack.damage_max[3]%$点伤害。",
+            "召唤狮鹫飞到区域上空攻击敌人，持续19秒，每次攻击造成%$heroes.hero_bird.ultimate.bird.melee_attack.damage_max[2]%$点伤害。",
             HERO_BIRD_BIRDS_OF_PREY_DESCRIPTION_3 =
-            "召唤狮鹫飞到区域上空攻击敌人，持续22秒，每次攻击造成%$heroes.hero_bird.ultimate.bird.melee_attack.damage_max[4]%$点伤害。",
+            "召唤狮鹫飞到区域上空攻击敌人，持续22秒，每次攻击造成%$heroes.hero_bird.ultimate.bird.melee_attack.damage_max[3]%$点伤害。",
             HERO_BIRD_CLUSTER_BOMB_DESCRIPTION_1 =
             "投掷一枚分裂炸药，对敌人造成%$heroes.hero_bird.cluster_bomb.explosion_damage_min[1]%$点伤害，并使地面燃烧16秒，使敌人在16秒内受到64点燃烧伤害。",
             HERO_BIRD_CLUSTER_BOMB_DESCRIPTION_2 =
@@ -344,655 +344,248 @@ local strings_UH = {
             HERO_BUILDER_LUNCH_BREAK_DESCRIPTION_3 =
             "托雷斯停下战斗，享用小吃，为自己恢复40%生命， 周围每有一个塔楼使托雷斯血量增加 15 %。",
             HERO_BUILDER_WRECKING_BALL_DESCRIPTION_1 =
-            "朝路径上扔出一个巨大钢球，造成%$heroes.hero_builder.ultimate.damage[2]%$点物理伤害，使敌人眩晕3秒， 并使大范围敌人眩晕2秒。",
+            "朝路径上扔出一个巨大钢球，造成%$heroes.hero_builder.ultimate.damage[1]%$点物理伤害，使敌人眩晕3秒， 并使大范围敌人眩晕2秒。",
             HERO_BUILDER_WRECKING_BALL_DESCRIPTION_2 =
-            "朝路径上扔出一个巨大钢球，造成%$heroes.hero_builder.ultimate.damage[3]%$点物理伤害，使敌人眩晕4秒， 并使大范围敌人眩晕2秒。",
+            "朝路径上扔出一个巨大钢球，造成%$heroes.hero_builder.ultimate.damage[2]%$点物理伤害，使敌人眩晕4秒， 并使大范围敌人眩晕2秒。",
             HERO_BUILDER_WRECKING_BALL_DESCRIPTION_3 =
-            "朝路径上扔出一个巨大钢球，造成%$heroes.hero_builder.ultimate.damage[4]%$点物理伤害，使敌人眩晕5秒， 并使大范围敌人眩晕2秒。",
+            "朝路径上扔出一个巨大钢球，造成%$heroes.hero_builder.ultimate.damage[3]%$点物理伤害，使敌人眩晕5秒， 并使大范围敌人眩晕2秒。",
 
             -- 木龙
-            ["HERO_DRAGON_ARB_ARBOREAN EVOLVE_DESCRIPTION_1"] =
-            "希尔瓦拉释放她的真实形态，持续%$heroes.hero_dragon_arb.ultimate.duration[2]%$秒，在此期间她获得%$heroes.hero_dragon_arb.ultimate.s_bonuses[2]%$%伤害、速度、抗性提升，并强化一部分技能。",
-            ["HERO_DRAGON_ARB_ARBOREAN EVOLVE_DESCRIPTION_2"] =
-            "希尔瓦拉释放她的真实形态，持续%$heroes.hero_dragon_arb.ultimate.duration[3]%$秒，在此期间她获得%$heroes.hero_dragon_arb.ultimate.s_bonuses[3]%$%伤害、速度、抗性提升，并强化一部分技能。",
-            ["HERO_DRAGON_ARB_ARBOREAN EVOLVE_DESCRIPTION_3"] =
-            "希尔瓦拉释放她的真实形态，持续%$heroes.hero_dragon_arb.ultimate.duration[4]%$秒，在此期间她获得%$heroes.hero_dragon_arb.ultimate.s_bonuses[4]%$%伤害、速度、抗性提升，并强化一部分技能。",
-            ["HERO_DRAGON_ARB_ARBOREAN EVOLVE_MENUBOTTOM_DESCRIPTION"] = "释放希尔瓦拉的真正姿态。",
-            ["HERO_DRAGON_ARB_ARBOREAN EVOLVE_MENUBOTTOM_NAME"] = "自然本性",
-            ["HERO_DRAGON_ARB_ARBOREAN EVOLVE_TITLE"] = "自然本性",
-            ["HERO_DRAGON_ARB_ARBOREAN SPAWN_DESCRIPTION_1"] =
-            "将敌人死亡留下的绿地变为树灵族人，持续战斗%$heroes.hero_dragon_arb.arborean_spawn.arborean.duration[1]%$秒。释放自然本性期间，会召唤更强大的树灵。",
-            ["HERO_DRAGON_ARB_ARBOREAN SPAWN_DESCRIPTION_2"] =
-            "将敌人死亡留下的绿地变为树灵族人，持续战斗%$heroes.hero_dragon_arb.arborean_spawn.arborean.duration[2]%$秒。释放自然本性期间，会召唤更强大的树灵。",
-            ["HERO_DRAGON_ARB_ARBOREAN SPAWN_DESCRIPTION_3"] =
-            "将敌人死亡留下的绿地变为树灵族人，持续战斗%$heroes.hero_dragon_arb.arborean_spawn.arborean.duration[3]%$秒。释放自然本性期间，会召唤更强大的树灵。",
-            ["HERO_DRAGON_ARB_ARBOREAN SPAWN_TITLE"] = "森林呼唤",
-            HERO_DRAGON_ARB_CLASS = "自然之力",
-            HERO_DRAGON_ARB_DESC = "她是自然之龙，亦是树灵族的守护者。她用气息编织森林，扇动双翼与风共舞。就像大自然一样，她一面关怀众生，一面严惩罪人。不要在她眼前乱扔垃圾！",
-            HERO_DRAGON_ARB_NAME = "希尔瓦拉",
-            ["HERO_DRAGON_ARB_THORN BLEED_DESCRIPTION_1"] =
-            "每隔%$heroes.hero_dragon_arb.thorn_bleed.cooldown[1]%$秒，希尔瓦拉强化她的下一次攻击，根据敌人的速度提高伤害。释放自然本性期间，有%$heroes.hero_dragon_arb.thorn_bleed.instakill_chance[1]%$%的几率秒杀敌人。",
-            ["HERO_DRAGON_ARB_THORN BLEED_DESCRIPTION_2"] =
-            "每隔%$heroes.hero_dragon_arb.thorn_bleed.cooldown[2]%$秒，希尔瓦拉强化她的下一次攻击，根据敌人的速度提高伤害。释放自然本性期间，有%$heroes.hero_dragon_arb.thorn_bleed.instakill_chance[2]%$%的几率秒杀敌人。",
-            ["HERO_DRAGON_ARB_THORN BLEED_DESCRIPTION_3"] =
-            "每隔%$heroes.hero_dragon_arb.thorn_bleed.cooldown[3]%$秒，希尔瓦拉强化她的下一次攻击，根据敌人的速度提高伤害。释放自然本性期间，有%$heroes.hero_dragon_arb.thorn_bleed.instakill_chance[3]%$%的几率秒杀敌人。",
-            ["HERO_DRAGON_ARB_THORN BLEED_TITLE"] = "荆棘吐息",
-            ["HERO_DRAGON_ARB_TOWER RUNES_DESCRIPTION_1"] =
-            "使附近防御塔的伤害增加%$heroes.hero_dragon_arb.tower_runes.s_damage_factor[1]%$%，持续%$heroes.hero_dragon_arb.tower_runes.duration[1]%$秒。",
-            ["HERO_DRAGON_ARB_TOWER RUNES_DESCRIPTION_2"] =
-            "使附近防御塔的伤害增加%$heroes.hero_dragon_arb.tower_runes.s_damage_factor[2]%$%，持续%$heroes.hero_dragon_arb.tower_runes.duration[2]%$秒。",
-            ["HERO_DRAGON_ARB_TOWER RUNES_DESCRIPTION_3"] =
-            "使附近防御塔的伤害增加%$heroes.hero_dragon_arb.tower_runes.s_damage_factor[3]%$%，持续%$heroes.hero_dragon_arb.tower_runes.duration[3]%$秒。",
-            ["HERO_DRAGON_ARB_TOWER RUNES_TITLE"] = "根深蒂固",
-            HERO_DRAGON_ARB_TOWER_PLANTS_DESCRIPTION_1 =
-            "在防御塔周围召唤出植物，持续%$heroes.hero_dragon_arb.tower_plants.duration[1]%$秒。若防御塔属于黑暗大军将召唤造成伤害并减速的剧毒植物，若防御塔属于利尼维亚将召唤治疗盟友的治愈植物。",
-            HERO_DRAGON_ARB_TOWER_PLANTS_DESCRIPTION_2 =
-            "在防御塔周围召唤出植物，持续%$heroes.hero_dragon_arb.tower_plants.duration[2]%$秒。若防御塔属于黑暗大军将召唤造成伤害并减速的剧毒植物，若防御塔属于利尼维亚将召唤治疗盟友的治愈植物。",
-            HERO_DRAGON_ARB_TOWER_PLANTS_DESCRIPTION_3 =
-            "在防御塔周围召唤出植物，持续%$heroes.hero_dragon_arb.tower_plants.duration[3]%$秒。若防御塔属于黑暗大军将召唤造成伤害并减速的剧毒植物，若防御塔属于利尼维亚将召唤治疗盟友的治愈植物。",
-            HERO_DRAGON_ARB_TOWER_PLANTS_TITLE = "创生之种",
+
+            -- 骨龙
             HERO_DRAGON_BONE_BURST_DESCRIPTION_1 =
-            "发射%$heroes.hero_dragon_bone.burst.proj_count[1]%$颗魔法弹幕, 每颗造成%$heroes.hero_dragon_bone.burst.damage_min[1]%$-%$heroes.hero_dragon_bone.burst.damage_max[1]%$点真实伤害并施加瘟疫效果。",
+            "发射10颗魔法弹幕, 每颗造成%$heroes.hero_dragon_bone.burst.damage_min[1]%$-%$heroes.hero_dragon_bone.burst.damage_max[1]%$点真实伤害并施加瘟疫效果。",
             HERO_DRAGON_BONE_BURST_DESCRIPTION_2 =
-            "发射%$heroes.hero_dragon_bone.burst.proj_count[2]%$颗魔法弹幕, 每颗造成%$heroes.hero_dragon_bone.burst.damage_min[2]%$-%$heroes.hero_dragon_bone.burst.damage_max[2]%$点真实伤害并施加瘟疫效果。",
+            "发射13颗魔法弹幕, 每颗造成%$heroes.hero_dragon_bone.burst.damage_min[2]%$-%$heroes.hero_dragon_bone.burst.damage_max[2]%$点真实伤害并施加瘟疫效果。",
             HERO_DRAGON_BONE_BURST_DESCRIPTION_3 =
-            "发射%$heroes.hero_dragon_bone.burst.proj_count[3]%$颗魔法弹幕, 每颗造成%$heroes.hero_dragon_bone.burst.damage_min[3]%$-%$heroes.hero_dragon_bone.burst.damage_max[3]%$点真实伤害并施加瘟疫效果。",
-            HERO_DRAGON_BONE_BURST_TITLE = "爆发感染",
-            HERO_DRAGON_BONE_CLASS = "巫妖骨龙",
-            HERO_DRAGON_BONE_CLOUD_DESCRIPTION_1 =
-            "朝一片区域喷吐毒雾，对敌人施加瘟疫效果，并使其减速%$heroes.hero_dragon_bone.cloud.duration[1]%$秒。",
-            HERO_DRAGON_BONE_CLOUD_DESCRIPTION_2 =
-            "朝一片区域喷吐毒雾，对敌人施加瘟疫效果，并使其减速%$heroes.hero_dragon_bone.cloud.duration[2]%$秒。",
-            HERO_DRAGON_BONE_CLOUD_DESCRIPTION_3 =
-            "朝一片区域喷吐毒雾，对敌人施加瘟疫效果，并使其减速%$heroes.hero_dragon_bone.cloud.duration[3]%$秒。",
-            HERO_DRAGON_BONE_CLOUD_TITLE = "瘟神毒雾",
-            HERO_DRAGON_BONE_DESC = "卫兹南在征战途中解救了波恩哈特，为了偿还人情，波恩哈特心甘情愿献出自己的力量，飞遍大陆，搜寻可能威胁到黑巫师大计的魔法师。",
-            HERO_DRAGON_BONE_NAME = "波恩哈特",
-            HERO_DRAGON_BONE_NOVA_DESCRIPTION_1 =
-            "朝路径猛冲，对敌人造成%$heroes.hero_dragon_bone.nova.damage_min[1]%$-%$heroes.hero_dragon_bone.nova.damage_max[1]%$点爆炸伤害，并施加瘟疫效果。",
-            HERO_DRAGON_BONE_NOVA_DESCRIPTION_2 =
-            "朝路径猛冲，对敌人造成%$heroes.hero_dragon_bone.nova.damage_min[2]%$-%$heroes.hero_dragon_bone.nova.damage_max[2]%$点爆炸伤害，并施加瘟疫效果。",
-            HERO_DRAGON_BONE_NOVA_DESCRIPTION_3 =
-            "朝路径猛冲，对敌人造成%$heroes.hero_dragon_bone.nova.damage_min[3]%$-%$heroes.hero_dragon_bone.nova.damage_max[3]%$点爆炸伤害，并施加瘟疫效果。",
-            HERO_DRAGON_BONE_NOVA_TITLE = "疫病灾星",
-            HERO_DRAGON_BONE_RAIN_DESCRIPTION_1 =
-            "朝敌人射出%$heroes.hero_dragon_bone.rain.bones_count[1]%$根脊骨，造成%$heroes.hero_dragon_bone.rain.damage_min[1]%$-%$heroes.hero_dragon_bone.rain.damage_max[1]%$点真实伤害，并使其短暂眩晕。",
-            HERO_DRAGON_BONE_RAIN_DESCRIPTION_2 =
-            "朝敌人射出%$heroes.hero_dragon_bone.rain.bones_count[2]%$根脊骨，造成%$heroes.hero_dragon_bone.rain.damage_min[2]%$-%$heroes.hero_dragon_bone.rain.damage_max[2]%$点真实伤害，并使其短暂眩晕。",
-            HERO_DRAGON_BONE_RAIN_DESCRIPTION_3 =
-            "朝敌人射出%$heroes.hero_dragon_bone.rain.bones_count[3]%$根脊骨，造成%$heroes.hero_dragon_bone.rain.damage_min[3]%$-%$heroes.hero_dragon_bone.rain.damage_max[3]%$点真实伤害，并使其短暂眩晕。",
-            HERO_DRAGON_BONE_RAIN_TITLE = "脊骨骤雨",
+            "发射14颗魔法弹幕, 每颗造成%$heroes.hero_dragon_bone.burst.damage_min[3]%$-%$heroes.hero_dragon_bone.burst.damage_max[3]%$点真实伤害并施加瘟疫效果。",
             HERO_DRAGON_BONE_RAISE_DRAKES_DESCRIPTION_1 =
-            "召唤两只小骨龙，每只拥有%$heroes.hero_dragon_bone.ultimate.dog.hp[2]%$点生命值，攻击造成%$heroes.hero_dragon_bone.ultimate.dog.melee_attack.damage_min[2]%$-%$heroes.hero_dragon_bone.ultimate.dog.melee_attack.damage_max[2]%$点物理伤害。",
+            "召唤两只小骨龙，每只拥有%$heroes.hero_dragon_bone.ultimate.dog.hp[1]%$点生命值，攻击造成%$heroes.hero_dragon_bone.ultimate.dog.melee_attack.damage_min[2]%$-%$heroes.hero_dragon_bone.ultimate.dog.melee_attack.damage_max[1]%$点物理伤害， 使伯恩哈特获得高级死亡骑士光环， 增强附近亡灵防御塔与亡灵生物。",
             HERO_DRAGON_BONE_RAISE_DRAKES_DESCRIPTION_2 =
-            "召唤两只小骨龙，每只拥有%$heroes.hero_dragon_bone.ultimate.dog.hp[3]%$点生命值，攻击造成%$heroes.hero_dragon_bone.ultimate.dog.melee_attack.damage_min[3]%$-%$heroes.hero_dragon_bone.ultimate.dog.melee_attack.damage_max[3]%$点物理伤害。",
+            "召唤两只小骨龙，每只拥有%$heroes.hero_dragon_bone.ultimate.dog.hp[2]%$点生命值，攻击造成%$heroes.hero_dragon_bone.ultimate.dog.melee_attack.damage_min[3]%$-%$heroes.hero_dragon_bone.ultimate.dog.melee_attack.damage_max[2]%$点物理伤害， 使伯恩哈特获得高级死亡骑士光环， 增强附近亡灵防御塔与亡灵生物。。",
             HERO_DRAGON_BONE_RAISE_DRAKES_DESCRIPTION_3 =
-            "召唤两只小骨龙，每只拥有%$heroes.hero_dragon_bone.ultimate.dog.hp[4]%$点生命值，攻击造成%$heroes.hero_dragon_bone.ultimate.dog.melee_attack.damage_min[4]%$-%$heroes.hero_dragon_bone.ultimate.dog.melee_attack.damage_max[4]%$点物理伤害。",
-            HERO_DRAGON_BONE_RAISE_DRAKES_MENUBOTTOM_DESCRIPTION = "召唤两只小骨龙。",
-            HERO_DRAGON_BONE_RAISE_DRAKES_MENUBOTTOM_NAME = "化骨为龙",
-            HERO_DRAGON_BONE_RAISE_DRAKES_TITLE = "化骨为龙",
-            HERO_DRAGON_GEM_CLASS = "不灭晶龙",
-            HERO_DRAGON_GEM_CRYSTAL_INSTAKILL_DESCRIPTION_1 =
-            "将一名敌人困在水晶中数秒后爆炸，立即杀死目标并对其周围造成%$heroes.hero_dragon_gem.crystal_instakill.s_damage[1]%$点真实伤害。",
-            HERO_DRAGON_GEM_CRYSTAL_INSTAKILL_DESCRIPTION_2 =
-            "将一名敌人困在水晶中数秒后爆炸，立即杀死目标并对其周围造成%$heroes.hero_dragon_gem.crystal_instakill.s_damage[2]%$点真实伤害。",
-            HERO_DRAGON_GEM_CRYSTAL_INSTAKILL_DESCRIPTION_3 =
-            "将一名敌人困在水晶中数秒后爆炸，立即杀死目标并对其周围造成%$heroes.hero_dragon_gem.crystal_instakill.s_damage[3]%$点真实伤害。",
-            HERO_DRAGON_GEM_CRYSTAL_INSTAKILL_TITLE = "红晶石冢",
+            "召唤两只小骨龙，每只拥有%$heroes.hero_dragon_bone.ultimate.dog.hp[3]%$点生命值，攻击造成%$heroes.hero_dragon_bone.ultimate.dog.melee_attack.damage_min[4]%$-%$heroes.hero_dragon_bone.ultimate.dog.melee_attack.damage_max[3]%$点物理伤害， 使伯恩哈特获得高级死亡骑士光环， 增强附近亡灵防御塔与亡灵生物。。",
+
+            -- 晶龙
             HERO_DRAGON_GEM_CRYSTAL_TOTEM_DESCRIPTION_1 =
-            "朝路上投掷一颗水晶，使敌人减速%$heroes.hero_dragon_gem.crystal_totem.s_slow_factor%$%，并且在周围每1秒造成%$heroes.hero_dragon_gem.crystal_totem.s_damage[1]%$点魔法伤害。持续%$heroes.hero_dragon_gem.crystal_totem.duration[1]%$秒。",
+            "朝路上投掷一颗水晶，使敌人减速%$heroes.hero_dragon_gem.crystal_totem.s_slow_factor%$%，并且在周围每1秒造成6-8点魔法伤害。持续%$heroes.hero_dragon_gem.crystal_totem.duration[1]%$秒。",
             HERO_DRAGON_GEM_CRYSTAL_TOTEM_DESCRIPTION_2 =
-            "朝路上投掷一颗水晶，使敌人减速%$heroes.hero_dragon_gem.crystal_totem.s_slow_factor%$%，并且在周围每1秒造成%$heroes.hero_dragon_gem.crystal_totem.s_damage[2]%$点魔法伤害。持续%$heroes.hero_dragon_gem.crystal_totem.duration[2]%$秒。",
+            "朝路上投掷一颗水晶，使敌人减速%$heroes.hero_dragon_gem.crystal_totem.s_slow_factor%$%，并且在周围每1秒造成8-10点魔法伤害。持续%$heroes.hero_dragon_gem.crystal_totem.duration[2]%$秒。",
             HERO_DRAGON_GEM_CRYSTAL_TOTEM_DESCRIPTION_3 =
-            "朝路上投掷一颗水晶，使敌人减速%$heroes.hero_dragon_gem.crystal_totem.s_slow_factor%$%，并且在周围每1秒造成%$heroes.hero_dragon_gem.crystal_totem.s_damage[3]%$点魔法伤害。持续%$heroes.hero_dragon_gem.crystal_totem.duration[3]%$秒。",
-            HERO_DRAGON_GEM_CRYSTAL_TOTEM_TITLE = "能量输导",
-            HERO_DRAGON_GEM_DESC = "邪教在遗忘峡谷的活动打断了科斯米尔与世隔绝的生活。为了驱逐入侵者，这条晶龙与卫兹南达成协议，加入联盟对抗共同的敌人。",
+            "朝路上投掷一颗水晶，使敌人减速%$heroes.hero_dragon_gem.crystal_totem.s_slow_factor%$%，并且在周围每1秒造成10-12点魔法伤害。持续%$heroes.hero_dragon_gem.crystal_totem.duration[3]%$秒。",
             HERO_DRAGON_GEM_FALLING_CRYSTALS_DESCRIPTION_1 =
-            "召唤%$heroes.hero_dragon_gem.ultimate.max_shards[2]%$根水晶锥，对范围内的敌人造成%$heroes.hero_dragon_gem.ultimate.damage_min[2]%$-%$heroes.hero_dragon_gem.ultimate.damage_max[2]%$点真实伤害。",
+            "召唤7根水晶锥，对范围内的敌人造成%$heroes.hero_dragon_gem.ultimate.damage_min[1]%$-%$heroes.hero_dragon_gem.ultimate.damage_max[1]%$点真实伤害。",
             HERO_DRAGON_GEM_FALLING_CRYSTALS_DESCRIPTION_2 =
-            "召唤%$heroes.hero_dragon_gem.ultimate.max_shards[3]%$根水晶锥，对范围内的敌人造成%$heroes.hero_dragon_gem.ultimate.damage_min[3]%$-%$heroes.hero_dragon_gem.ultimate.damage_max[3]%$点真实伤害。",
+            "召唤9根水晶锥，对范围内的敌人造成%$heroes.hero_dragon_gem.ultimate.damage_min[2]%$-%$heroes.hero_dragon_gem.ultimate.damage_max[2]%$点真实伤害。",
             HERO_DRAGON_GEM_FALLING_CRYSTALS_DESCRIPTION_3 =
-            "召唤%$heroes.hero_dragon_gem.ultimate.max_shards[4]%$根水晶锥，对范围内的敌人造成%$heroes.hero_dragon_gem.ultimate.damage_min[4]%$-%$heroes.hero_dragon_gem.ultimate.damage_max[4]%$点真实伤害。",
-            HERO_DRAGON_GEM_FALLING_CRYSTALS_MENUBOTTOM_DESCRIPTION = "对敌人投掷各种晶锥弹幕。",
-            HERO_DRAGON_GEM_FALLING_CRYSTALS_MENUBOTTOM_NAME = "水晶崩落",
-            HERO_DRAGON_GEM_FALLING_CRYSTALS_TITLE = "水晶崩落",
-            HERO_DRAGON_GEM_FLOOR_IMPACT_DESCRIPTION_1 =
-            "使他周围的路径上长出水晶尖刺，对每一个被击中的敌人造成%$heroes.hero_dragon_gem.floor_impact.damage_min[1]%$-%$heroes.hero_dragon_gem.floor_impact.damage_max[1]%$点物理伤害。",
-            HERO_DRAGON_GEM_FLOOR_IMPACT_DESCRIPTION_2 =
-            "使他周围的路径上长出水晶尖刺，对每一个被击中的敌人造成%$heroes.hero_dragon_gem.floor_impact.damage_min[2]%$-%$heroes.hero_dragon_gem.floor_impact.damage_max[2]%$点物理伤害。",
-            HERO_DRAGON_GEM_FLOOR_IMPACT_DESCRIPTION_3 =
-            "使他周围的路径上长出水晶尖刺，对每一个被击中的敌人造成%$heroes.hero_dragon_gem.floor_impact.damage_min[3]%$-%$heroes.hero_dragon_gem.floor_impact.damage_max[3]%$点物理伤害。",
-            HERO_DRAGON_GEM_FLOOR_IMPACT_TITLE = "棱晶碎片",
-            HERO_DRAGON_GEM_NAME = "科斯米尔",
-            HERO_DRAGON_GEM_STUN_DESCRIPTION_1 = "结晶困住一群敌人，使其眩晕%$heroes.hero_dragon_gem.stun.duration[1]%$秒。",
-            HERO_DRAGON_GEM_STUN_DESCRIPTION_2 = "结晶困住一群敌人，使其眩晕%$heroes.hero_dragon_gem.stun.duration[2]%$秒。",
-            HERO_DRAGON_GEM_STUN_DESCRIPTION_3 = "结晶困住一群敌人，使其眩晕%$heroes.hero_dragon_gem.stun.duration[3]%$秒。",
-            HERO_DRAGON_GEM_STUN_TITLE = "结晶吐息",
+            "召唤11根水晶锥，对范围内的敌人造成%$heroes.hero_dragon_gem.ultimate.damage_min[3]%$-%$heroes.hero_dragon_gem.ultimate.damage_max[3]%$点真实伤害。",
+
+            -- 安雅
             HERO_HUNTER_BEASTS_DESCRIPTION_1 =
-            "召唤2只蝙蝠攻击附近的敌人，持续%$heroes.hero_hunter.beasts.duration[1]%$秒，造成%$heroes.hero_hunter.beasts.damage_min[1]%$-%$heroes.hero_hunter.beasts.damage_max[1]%$点物理伤害。每只蝙蝠有一定几率从目标处偷取%$heroes.hero_hunter.beasts.gold_to_steal[1]%$金币。",
+            "召唤2只蝙蝠攻击附近的敌人，持续8秒，造成3-6点物理伤害， 每只蝙蝠有一定几率从目标处偷取1金币。",
             HERO_HUNTER_BEASTS_DESCRIPTION_2 =
-            "召唤2只蝙蝠攻击附近的敌人，持续%$heroes.hero_hunter.beasts.duration[2]%$秒，造成%$heroes.hero_hunter.beasts.damage_min[2]%$-%$heroes.hero_hunter.beasts.damage_max[2]%$点物理伤害。每只蝙蝠有一定几率从目标处偷取%$heroes.hero_hunter.beasts.gold_to_steal[2]%$金币。",
+            "召唤2只蝙蝠攻击附近的敌人，持续13秒，造成4-8点物理伤害， 每只蝙蝠有一定几率从目标处偷取2金币。",
             HERO_HUNTER_BEASTS_DESCRIPTION_3 =
-            "召唤2只蝙蝠攻击附近的敌人，持续%$heroes.hero_hunter.beasts.duration[3]%$秒，造成%$heroes.hero_hunter.beasts.damage_min[3]%$-%$heroes.hero_hunter.beasts.damage_max[3]%$点物理伤害。每只蝙蝠有一定几率从目标处偷取%$heroes.hero_hunter.beasts.gold_to_steal[3]%$金币。",
-            HERO_HUNTER_BEASTS_TITLE = "黄昏血妖",
-            HERO_HUNTER_CLASS = "银月猎手",
-            HERO_HUNTER_DESC = "安雅是吸血鬼与知名猎人的后代，她循着父亲的足迹，对抗黑暗中的生物。对邪教徒不懈的追猎使她来到了南方大地，并加入到联盟当中。",
-            HERO_HUNTER_HEAL_STRIKE_DESCRIPTION_1 =
-            "每7次近战攻击造成一次%$heroes.hero_hunter.heal_strike.damage_min[1]%$-%$heroes.hero_hunter.heal_strike.damage_max[1]%$点的真实伤害，并为安雅恢复此次攻击目标最大生命值%$heroes.hero_hunter.heal_strike.heal_factor[1]%$%的血量。",
-            HERO_HUNTER_HEAL_STRIKE_DESCRIPTION_2 =
-            "每7次近战攻击造成一次%$heroes.hero_hunter.heal_strike.damage_min[2]%$-%$heroes.hero_hunter.heal_strike.damage_max[2]%$点的真实伤害，并为安雅恢复此次攻击目标最大生命值%$heroes.hero_hunter.heal_strike.heal_factor[2]%$%的血量。",
-            HERO_HUNTER_HEAL_STRIKE_DESCRIPTION_3 =
-            "每7次近战攻击造成一次%$heroes.hero_hunter.heal_strike.damage_min[3]%$-%$heroes.hero_hunter.heal_strike.damage_max[3]%$点的真实伤害，并为安雅恢复此次攻击目标最大生命值%$heroes.hero_hunter.heal_strike.heal_factor[3]%$%的血量。",
-            HERO_HUNTER_HEAL_STRIKE_TITLE = "吸血爪击",
-            HERO_HUNTER_NAME = "安雅",
+            "召唤2只蝙蝠攻击附近的敌人，持续18秒，造成7-12点物理伤害， 每只蝙蝠有一定几率从目标处偷取2金币。",
             HERO_HUNTER_RICOCHET_DESCRIPTION_1 =
-            "安雅变作迷雾，在%$heroes.hero_hunter.ricochet.s_bounces[1]%$个敌人之间跳跃，对每个敌人造成%$heroes.hero_hunter.ricochet.damage_min[1]%$-%$heroes.hero_hunter.ricochet.damage_max[1]%$点物理伤害。",
+            "安雅变作迷雾，在3个敌人之间跳跃，对每个敌人造成55-75点物理伤害， 每次跳跃后召唤一只蝙蝠。",
             HERO_HUNTER_RICOCHET_DESCRIPTION_2 =
-            "安雅变作迷雾，在%$heroes.hero_hunter.ricochet.s_bounces[2]%$个敌人之间跳跃，对每个敌人造成%$heroes.hero_hunter.ricochet.damage_min[2]%$-%$heroes.hero_hunter.ricochet.damage_max[2]%$点物理伤害。",
+            "安雅变作迷雾，在4个敌人之间跳跃，对每个敌人造成75-100点物理伤害， 每次跳跃后召唤一只蝙蝠。",
             HERO_HUNTER_RICOCHET_DESCRIPTION_3 =
-            "安雅变作迷雾，在%$heroes.hero_hunter.ricochet.s_bounces[3]%$个敌人之间跳跃，对每个敌人造成%$heroes.hero_hunter.ricochet.damage_min[3]%$-%$heroes.hero_hunter.ricochet.damage_max[3]%$点物理伤害。",
-            HERO_HUNTER_RICOCHET_TITLE = "迷雾步伐",
+            "安雅变作迷雾，在4个敌人之间跳跃，对每个敌人造成105-130点物理伤害， 每次跳跃后召唤一只蝙蝠。",
             HERO_HUNTER_SHOOT_AROUND_DESCRIPTION_1 =
-            "对周围所有敌人射击，对每个敌人造成%$heroes.hero_hunter.shoot_around.s_damage_min[1]%$-%$heroes.hero_hunter.shoot_around.s_damage_max[1]%$的真实伤害。",
+            "对周围所有敌人射击，每0.07秒对每个敌人造成%$heroes.hero_hunter.shoot_around.s_damage_min[1]%$-%$heroes.hero_hunter.shoot_around.s_damage_max[1]%$的真实伤害。",
             HERO_HUNTER_SHOOT_AROUND_DESCRIPTION_2 =
-            "对周围所有敌人射击，每秒对每个敌人造成%$heroes.hero_hunter.shoot_around.s_damage_min[2]%$-%$heroes.hero_hunter.shoot_around.s_damage_max[2]%$的真实伤害。",
+            "对周围所有敌人射击，每0.07秒对每个敌人造成%$heroes.hero_hunter.shoot_around.s_damage_min[2]%$-%$heroes.hero_hunter.shoot_around.s_damage_max[2]%$的真实伤害。",
             HERO_HUNTER_SHOOT_AROUND_DESCRIPTION_3 =
-            "对周围所有敌人射击，每秒对每个敌人造成%$heroes.hero_hunter.shoot_around.s_damage_min[3]%$-%$heroes.hero_hunter.shoot_around.s_damage_max[3]%$的真实伤害。",
-            HERO_HUNTER_SHOOT_AROUND_TITLE = "银白风暴",
-            HERO_HUNTER_SPIRIT_DESCRIPTION_1 =
-            "召唤但丁的幻影，每秒造成%$heroes.hero_hunter.ultimate.entity.basic_ranged.damage_min[2]%$-%$heroes.hero_hunter.ultimate.entity.basic_ranged.damage_max[2]%$点真实伤害，持续%$heroes.hero_hunter.ultimate.duration%$秒。若安雅的遗体在其附近，将会被复活。",
-            HERO_HUNTER_SPIRIT_DESCRIPTION_2 =
-            "召唤但丁的幻影，每秒造成%$heroes.hero_hunter.ultimate.entity.basic_ranged.damage_min[3]%$-%$heroes.hero_hunter.ultimate.entity.basic_ranged.damage_max[3]%$点真实伤害，持续%$heroes.hero_hunter.ultimate.duration%$秒。若安雅的遗体在其附近，将会被复活。",
-            HERO_HUNTER_SPIRIT_DESCRIPTION_3 =
-            "召唤但丁的幻影，每秒造成%$heroes.hero_hunter.ultimate.entity.basic_ranged.damage_min[4]%$-%$heroes.hero_hunter.ultimate.entity.basic_ranged.damage_max[4]%$点真实伤害，持续%$heroes.hero_hunter.ultimate.duration%$秒。若安雅的遗体在其附近，将会被复活。",
-            HERO_HUNTER_SPIRIT_MENUBOTTOM_DESCRIPTION = "召唤但丁的幻影，减速并攻击敌人。",
-            HERO_HUNTER_SPIRIT_MENUBOTTOM_NAME = "猎人援助",
-            HERO_HUNTER_SPIRIT_TITLE = "猎人援助",
-            HERO_HUNTER_ULTIMATE_ENTITY_NAME = "但丁的幻影",
-            HERO_LAVA_CLASS = "熔融狂怒",
-            HERO_LAVA_DESC = "脾气火爆、下手凶狠的大家伙，因诡须的活动从沉睡中苏醒。因为不善言辞，喀拉托用拳头说话，冲破敌人的防线，直到将其全部击溃才会冷静下来，再次入睡。",
-            HERO_LAVA_DOUBLE_TROUBLE_DESCRIPTION_1 =
-            "投掷一颗熔岩球，对敌人造成%$heroes.hero_lava.double_trouble.s_damage[1]%$点爆炸伤害，并生成一只熔岩团，其拥有%$heroes.hero_lava.double_trouble.soldier.hp_max[1]%$点生命值，持续战斗%$heroes.hero_lava.double_trouble.soldier.duration%$秒。",
-            HERO_LAVA_DOUBLE_TROUBLE_DESCRIPTION_2 =
-            "投掷一颗熔岩球，对敌人造成%$heroes.hero_lava.double_trouble.s_damage[2]%$点爆炸伤害，并生成一只熔岩团，其拥有%$heroes.hero_lava.double_trouble.soldier.hp_max[2]%$点生命值，持续战斗%$heroes.hero_lava.double_trouble.soldier.duration%$秒。",
-            HERO_LAVA_DOUBLE_TROUBLE_DESCRIPTION_3 =
-            "投掷一颗熔岩球，对敌人造成%$heroes.hero_lava.double_trouble.s_damage[3]%$点爆炸伤害，并生成一只熔岩团，其拥有%$heroes.hero_lava.double_trouble.soldier.hp_max[3]%$点生命值，持续战斗%$heroes.hero_lava.double_trouble.soldier.duration%$秒。",
-            HERO_LAVA_DOUBLE_TROUBLE_SOLDIER_NAME = "熔岩团",
-            HERO_LAVA_DOUBLE_TROUBLE_TITLE = "双倍麻烦",
-            HERO_LAVA_HOTHEADED_DESCRIPTION_1 =
-            "喀拉托复活时，使附近防御塔的伤害提升%$heroes.hero_lava.hotheaded.s_damage_factors[1]%$%，持续%$heroes.hero_lava.hotheaded.durations[1]%$秒。",
-            HERO_LAVA_HOTHEADED_DESCRIPTION_2 =
-            "喀拉托复活时，使附近防御塔的伤害提升%$heroes.hero_lava.hotheaded.s_damage_factors[2]%$%，持续%$heroes.hero_lava.hotheaded.durations[2]%$秒。",
-            HERO_LAVA_HOTHEADED_DESCRIPTION_3 =
-            "喀拉托复活时，使附近防御塔的伤害提升%$heroes.hero_lava.hotheaded.s_damage_factors[3]%$%，持续%$heroes.hero_lava.hotheaded.durations[3]%$秒。",
-            HERO_LAVA_HOTHEADED_TITLE = "起床气",
-            HERO_LAVA_NAME = "喀拉托",
-            HERO_LAVA_TEMPER_TANTRUM_DESCRIPTION_1 =
-            "连续猛击一名敌人，造成%$heroes.hero_lava.temper_tantrum.s_damage_min[1]%$-%$heroes.hero_lava.temper_tantrum.s_damage_max[1]%$点物理伤害，并将目标击晕%$heroes.hero_lava.temper_tantrum.duration[1]%$秒。",
-            HERO_LAVA_TEMPER_TANTRUM_DESCRIPTION_2 =
-            "连续猛击一名敌人，造成%$heroes.hero_lava.temper_tantrum.s_damage_min[2]%$-%$heroes.hero_lava.temper_tantrum.s_damage_max[2]%$点物理伤害，并将目标击晕%$heroes.hero_lava.temper_tantrum.duration[2]%$秒。",
-            HERO_LAVA_TEMPER_TANTRUM_DESCRIPTION_3 =
-            "连续猛击一名敌人，造成%$heroes.hero_lava.temper_tantrum.s_damage_min[3]%$-%$heroes.hero_lava.temper_tantrum.s_damage_max[3]%$点物理伤害，并将目标击晕%$heroes.hero_lava.temper_tantrum.duration[3]%$秒。",
-            HERO_LAVA_TEMPER_TANTRUM_TITLE = "暴怒猛击",
-            HERO_LAVA_ULTIMATE_DESCRIPTION_1 =
-            "向路径喷射%$heroes.hero_lava.ultimate.fireball_count[2]%$发熔岩弹，每发对敌人造成%$heroes.hero_lava.ultimate.bullet.s_damage[2]%$点真实伤害，并使其灼烧%$heroes.hero_lava.ultimate.bullet.scorch.duration%$秒。",
-            HERO_LAVA_ULTIMATE_DESCRIPTION_2 =
-            "向路径喷射%$heroes.hero_lava.ultimate.fireball_count[3]%$发熔岩弹，每发对敌人造成%$heroes.hero_lava.ultimate.bullet.s_damage[3]%$点真实伤害，并使其灼烧%$heroes.hero_lava.ultimate.bullet.scorch.duration%$秒。",
-            HERO_LAVA_ULTIMATE_DESCRIPTION_3 =
-            "向路径喷射%$heroes.hero_lava.ultimate.fireball_count[4]%$发熔岩弹，每发对敌人造成%$heroes.hero_lava.ultimate.bullet.s_damage[4]%$点真实伤害，并使其灼烧%$heroes.hero_lava.ultimate.bullet.scorch.duration%$秒。",
-            HERO_LAVA_ULTIMATE_MENUBOTTOM_DESCRIPTION = "朝路径上喷射数发熔岩弹，持续灼烧地面。",
-            HERO_LAVA_ULTIMATE_MENUBOTTOM_NAME = "愤怒爆发",
-            HERO_LAVA_ULTIMATE_TITLE = "愤怒爆发",
-            HERO_LAVA_WILD_ERUPTION_DESCRIPTION_1 =
-            "甩出飞溅的熔岩攻击敌人，每秒造成%$heroes.hero_lava.wild_eruption.s_damage[1]%$点真实伤害，并使其灼烧%$heroes.hero_lava.wild_eruption.duration[1]%$秒。",
-            HERO_LAVA_WILD_ERUPTION_DESCRIPTION_2 =
-            "甩出飞溅的熔岩攻击敌人，每秒造成%$heroes.hero_lava.wild_eruption.s_damage[2]%$点真实伤害，并使其灼烧%$heroes.hero_lava.wild_eruption.duration[2]%$秒。",
-            HERO_LAVA_WILD_ERUPTION_DESCRIPTION_3 =
-            "甩出飞溅的熔岩攻击敌人，每秒造成%$heroes.hero_lava.wild_eruption.s_damage[3]%$点真实伤害，并使其灼烧%$heroes.hero_lava.wild_eruption.duration[3]%$秒。",
-            HERO_LAVA_WILD_ERUPTION_TITLE = "狂野喷发",
-            HERO_LUMENIR_ARROW_STORM_DESCRIPTION_1 =
-            "召唤%$heroes.hero_lumenir.ultimate.soldier_count[1]%$名光之战士，短暂击晕附近的敌人，并造成%$heroes.hero_lumenir.ultimate.damage_min[1]%$-%$heroes.hero_lumenir.ultimate.damage_max[1]%$点真实伤害。",
-            HERO_LUMENIR_ARROW_STORM_DESCRIPTION_2 =
-            "召唤%$heroes.hero_lumenir.ultimate.soldier_count[2]%$名光之战士，短暂击晕附近的敌人，并造成%$heroes.hero_lumenir.ultimate.damage_min[2]%$-%$heroes.hero_lumenir.ultimate.damage_max[2]%$点真实伤害。",
-            HERO_LUMENIR_ARROW_STORM_DESCRIPTION_3 =
-            "召唤%$heroes.hero_lumenir.ultimate.soldier_count[3]%$名光之战士，短暂击晕附近的敌人，并造成%$heroes.hero_lumenir.ultimate.damage_min[3]%$-%$heroes.hero_lumenir.ultimate.damage_max[3]%$点真实伤害。",
-            HERO_LUMENIR_ARROW_STORM_MENUBOTTOM_DESCRIPTION = "召唤神圣战士与敌人战斗。",
-            HERO_LUMENIR_ARROW_STORM_MENUBOTTOM_NAME = "光耀凯歌",
-            HERO_LUMENIR_ARROW_STORM_TITLE = "光耀凯歌",
+            "对周围所有敌人射击，每0.07秒对每个敌人造成%$heroes.hero_hunter.shoot_around.s_damage_min[3]%$-%$heroes.hero_hunter.shoot_around.s_damage_max[3]%$的真实伤害。",
+            
+            -- 岩浆怪
+            
+            -- 光龙
             HERO_LUMENIR_CELESTIAL_JUDGEMENT_DESCRIPTION_1 =
-            "向附近最强的敌人施放圣光之剑，造成%$heroes.hero_lumenir.celestial_judgement.damage[1]%$点真实伤害，并使其眩晕%$heroes.hero_lumenir.celestial_judgement.stun_duration[1]%$秒。",
+            "向附近最强的敌人施放圣光之剑，造成%$heroes.hero_lumenir.celestial_judgement.damage[1]%$点真实伤害，并使其眩晕%$heroes.hero_lumenir.celestial_judgement.stun_duration[1]%$秒， 同时对附近敌人造成150点伤害。",
             HERO_LUMENIR_CELESTIAL_JUDGEMENT_DESCRIPTION_2 =
-            "向附近最强的敌人施放圣光之剑，造成%$heroes.hero_lumenir.celestial_judgement.damage[2]%$点真实伤害，并使其眩晕%$heroes.hero_lumenir.celestial_judgement.stun_duration[2]%$秒。",
+            "向附近最强的敌人施放圣光之剑，造成%$heroes.hero_lumenir.celestial_judgement.damage[2]%$点真实伤害，并使其眩晕%$heroes.hero_lumenir.celestial_judgement.stun_duration[2]%$秒， 同时对附近敌人造成150点伤害。",
             HERO_LUMENIR_CELESTIAL_JUDGEMENT_DESCRIPTION_3 =
-            "向附近最强的敌人施放圣光之剑，造成%$heroes.hero_lumenir.celestial_judgement.damage[3]%$点真实伤害，并使其眩晕%$heroes.hero_lumenir.celestial_judgement.stun_duration[3]%$秒。",
-            HERO_LUMENIR_CELESTIAL_JUDGEMENT_TITLE = "天国裁决",
-            HERO_LUMENIR_CLASS = "圣光使者",
-            HERO_LUMENIR_DESC =
-            "卢米妮尔翱翔于诸界之间，作为正义与决心的化身屹立不倒。她是传说中的光明使者，受到利尼维亚圣骑士们的崇敬，她向他们赐予祝福，赋予他们强大的力量，以助他们在对抗邪恶的战斗中无往不利。",
+            "向附近最强的敌人施放圣光之剑，造成%$heroes.hero_lumenir.celestial_judgement.damage[3]%$点真实伤害，并使其眩晕%$heroes.hero_lumenir.celestial_judgement.stun_duration[3]%$秒， 同时对附近敌人造成150点伤害。",
             HERO_LUMENIR_FIRE_BALLS_DESCRIPTION_1 =
-            "吐息%$heroes.hero_lumenir.fire_balls.flames_count[1]%$个神圣光球，在路径上移动并对敌人造成伤害。每个光球对每名经过的敌人造成%$heroes.hero_lumenir.fire_balls.flame_damage_min[1]%$-%$heroes.hero_lumenir.fire_balls.flame_damage_max[1]%$点真实伤害。",
+            "吐息5个神圣光球，在路径上移动并对敌人造成伤害。每个光球对每名经过的敌人造成%$heroes.hero_lumenir.fire_balls.flame_damage_min[1]%$-%$heroes.hero_lumenir.fire_balls.flame_damage_max[1]%$点真实伤害。",
             HERO_LUMENIR_FIRE_BALLS_DESCRIPTION_2 =
-            "吐息%$heroes.hero_lumenir.fire_balls.flames_count[2]%$个神圣光球，在路径上移动并对敌人造成伤害。每个光球对每名经过的敌人造成%$heroes.hero_lumenir.fire_balls.flame_damage_min[2]%$-%$heroes.hero_lumenir.fire_balls.flame_damage_max[2]%$点真实伤害。",
+            "吐息6个神圣光球，在路径上移动并对敌人造成伤害。每个光球对每名经过的敌人造成%$heroes.hero_lumenir.fire_balls.flame_damage_min[2]%$-%$heroes.hero_lumenir.fire_balls.flame_damage_max[2]%$点真实伤害。",
             HERO_LUMENIR_FIRE_BALLS_DESCRIPTION_3 =
-            "吐息%$heroes.hero_lumenir.fire_balls.flames_count[3]%$个神圣光球，在路径上移动并对敌人造成伤害。每个光球对每名经过的敌人造成%$heroes.hero_lumenir.fire_balls.flame_damage_min[3]%$-%$heroes.hero_lumenir.fire_balls.flame_damage_max[3]%$点真实伤害。",
-            HERO_LUMENIR_FIRE_BALLS_TITLE = "光辉波动",
-            HERO_LUMENIR_MINI_DRAGON_DESCRIPTION_1 =
-            "召唤一条光明小龙跟随另一位英雄，持续%$heroes.hero_lumenir.mini_dragon.dragon.duration[1]%$秒。每条龙每次攻击造成%$heroes.hero_lumenir.mini_dragon.dragon.ranged_attack.damage_min[1]%$-%$heroes.hero_lumenir.mini_dragon.dragon.ranged_attack.damage_max[1]%$点物理伤害。",
-            HERO_LUMENIR_MINI_DRAGON_DESCRIPTION_2 =
-            "召唤一条光明小龙跟随另一位英雄，持续%$heroes.hero_lumenir.mini_dragon.dragon.duration[2]%$秒。每条龙每次攻击造成%$heroes.hero_lumenir.mini_dragon.dragon.ranged_attack.damage_min[2]%$-%$heroes.hero_lumenir.mini_dragon.dragon.ranged_attack.damage_max[2]%$点物理伤害。",
-            HERO_LUMENIR_MINI_DRAGON_DESCRIPTION_3 =
-            "召唤一条光明小龙跟随另一位英雄，持续%$heroes.hero_lumenir.mini_dragon.dragon.duration[3]%$秒。每条龙每次攻击造成%$heroes.hero_lumenir.mini_dragon.dragon.ranged_attack.damage_min[3]%$-%$heroes.hero_lumenir.mini_dragon.dragon.ranged_attack.damage_max[3]%$点物理伤害。",
-            HERO_LUMENIR_MINI_DRAGON_TITLE = "光明伙伴",
-            HERO_LUMENIR_NAME = "卢米妮尔",
-            HERO_LUMENIR_SHIELD_DESCRIPTION_1 =
-            "赋予友方单位一道提供%$heroes.hero_lumenir.shield.armor[1]%$%护甲的护盾，将%$heroes.hero_lumenir.shield.spiked_armor[1]%$%的伤害反射回敌人身上。",
-            HERO_LUMENIR_SHIELD_DESCRIPTION_2 =
-            "赋予友方单位一道提供%$heroes.hero_lumenir.shield.armor[2]%$%护甲的护盾，将%$heroes.hero_lumenir.shield.spiked_armor[2]%$%的伤害反射回敌人身上。",
-            HERO_LUMENIR_SHIELD_DESCRIPTION_3 =
-            "赋予友方单位一道提供%$heroes.hero_lumenir.shield.armor[3]%$%护甲的护盾，将%$heroes.hero_lumenir.shield.spiked_armor[3]%$%的伤害反射回敌人身上。",
-            HERO_LUMENIR_SHIELD_TITLE = "反伤赐福",
-            HERO_MECHA_CLASS = "巨械危机",
+            "吐息8个神圣光球，在路径上移动并对敌人造成伤害。每个光球对每名经过的敌人造成%$heroes.hero_lumenir.fire_balls.flame_damage_min[3]%$-%$heroes.hero_lumenir.fire_balls.flame_damage_max[3]%$点真实伤害。",
+            
+            -- 哥布林机甲
             HERO_MECHA_DEATH_FROM_ABOVE_DESCRIPTION_1 =
-            "呼叫一架哥布林飞艇，对目标范围附近的敌人进行轰炸，每次攻击造成%$heroes.hero_mecha.ultimate.ranged_attack.damage_min[2]%$-%$heroes.hero_mecha.ultimate.ranged_attack.damage_max[2]%$点真实范围伤害。",
+            "呼叫一架哥布林飞艇，对水平线的敌人进行轰炸，每次攻击造成%$heroes.hero_mecha.ultimate.ranged_attack.damage_min[1]%$-%$heroes.hero_mecha.ultimate.ranged_attack.damage_max[1]%$点真实范围伤害。",
             HERO_MECHA_DEATH_FROM_ABOVE_DESCRIPTION_2 =
-            "呼叫一架哥布林飞艇，对目标范围附近的敌人进行轰炸，每次攻击造成%$heroes.hero_mecha.ultimate.ranged_attack.damage_min[3]%$-%$heroes.hero_mecha.ultimate.ranged_attack.damage_max[3]%$点真实范围伤害。",
+            "呼叫一架哥布林飞艇，对水平线的敌人进行轰炸，每次攻击造成%$heroes.hero_mecha.ultimate.ranged_attack.damage_min[2]%$-%$heroes.hero_mecha.ultimate.ranged_attack.damage_max[2]%$点真实范围伤害。",
             HERO_MECHA_DEATH_FROM_ABOVE_DESCRIPTION_3 =
-            "呼叫一架哥布林飞艇，对目标范围附近的敌人进行轰炸，每次攻击造成%$heroes.hero_mecha.ultimate.ranged_attack.damage_min[4]%$-%$heroes.hero_mecha.ultimate.ranged_attack.damage_max[4]%$点真实范围伤害。",
-            HERO_MECHA_DEATH_FROM_ABOVE_MENUBOTTOM_DESCRIPTION = "召唤一架哥布林飞艇对范围内敌人进行轰炸。",
-            HERO_MECHA_DEATH_FROM_ABOVE_MENUBOTTOM_NAME = "死神天降",
-            HERO_MECHA_DEATH_FROM_ABOVE_TITLE = "死神天降",
-            HERO_MECHA_DESC = "奥纳格罗源自两位疯狂哥布林发明家的奇思妙想，并以窃取的矮人科技作为基础打造而成，是哥布林战争机器的终极形态，对黑暗军的敌人来说，这是令人畏惧的存在。",
+            "呼叫一架哥布林飞艇，对水平线的敌人进行轰炸，每次攻击造成%$heroes.hero_mecha.ultimate.ranged_attack.damage_min[3]%$-%$heroes.hero_mecha.ultimate.ranged_attack.damage_max[3]%$点真实范围伤害。",
             HERO_MECHA_GOBLIDRONES_DESCRIPTION_1 =
-            "召唤%$heroes.hero_mecha.goblidrones.units%$架无人机攻击敌人，持续%$heroes.hero_mecha.goblidrones.drone.duration[1]%$秒，每次攻击造成%$heroes.hero_mecha.goblidrones.drone.ranged_attack.damage_min[1]%$-%$heroes.hero_mecha.goblidrones.drone.ranged_attack.damage_max[1]%$点物理伤害。",
+            "召唤%$heroes.hero_mecha.goblidrones.units%$架无人机攻击敌人，持续12秒，每次攻击造成%$heroes.hero_mecha.goblidrones.drone.ranged_attack.damage_min[1]%$-%$heroes.hero_mecha.goblidrones.drone.ranged_attack.damage_max[1]%$点物理伤害。",
             HERO_MECHA_GOBLIDRONES_DESCRIPTION_2 =
-            "召唤%$heroes.hero_mecha.goblidrones.units%$架无人机攻击敌人，持续%$heroes.hero_mecha.goblidrones.drone.duration[2]%$秒，每次攻击造成%$heroes.hero_mecha.goblidrones.drone.ranged_attack.damage_min[2]%$-%$heroes.hero_mecha.goblidrones.drone.ranged_attack.damage_max[2]%$点物理伤害。",
+            "召唤%$heroes.hero_mecha.goblidrones.units%$架无人机攻击敌人，持续18秒，每次攻击造成%$heroes.hero_mecha.goblidrones.drone.ranged_attack.damage_min[2]%$-%$heroes.hero_mecha.goblidrones.drone.ranged_attack.damage_max[2]%$点物理伤害。",
             HERO_MECHA_GOBLIDRONES_DESCRIPTION_3 =
-            "召唤%$heroes.hero_mecha.goblidrones.units%$架无人机攻击敌人，持续%$heroes.hero_mecha.goblidrones.drone.duration[3]%$秒，每次攻击造成%$heroes.hero_mecha.goblidrones.drone.ranged_attack.damage_min[3]%$-%$heroes.hero_mecha.goblidrones.drone.ranged_attack.damage_max[3]%$点物理伤害。",
-            HERO_MECHA_GOBLIDRONES_TITLE = "哥布林无人机",
+            "召唤%$heroes.hero_mecha.goblidrones.units%$架无人机攻击敌人，持续23秒，每次攻击造成%$heroes.hero_mecha.goblidrones.drone.ranged_attack.damage_min[3]%$-%$heroes.hero_mecha.goblidrones.drone.ranged_attack.damage_max[3]%$点物理伤害。",
             HERO_MECHA_MINE_DROP_DESCRIPTION_1 =
-            "静止时，机甲会定期在路径上安放至多%$heroes.hero_mecha.mine_drop.max_mines[1]%$枚爆炸地雷。每枚地雷的爆炸会造成%$heroes.hero_mecha.mine_drop.damage_min[1]%$-%$heroes.hero_mecha.mine_drop.damage_max[1]%$点爆炸伤害。",
+            "静止时，机甲会定期在路径上安放至多4枚爆炸地雷。每枚地雷的爆炸会造成%$heroes.hero_mecha.mine_drop.damage_min[1]%$-%$heroes.hero_mecha.mine_drop.damage_max[1]%$点爆炸伤害。",
             HERO_MECHA_MINE_DROP_DESCRIPTION_2 =
-            "静止时，机甲会定期在路径上安放至多%$heroes.hero_mecha.mine_drop.max_mines[2]%$枚爆炸地雷。每枚地雷的爆炸会造成%$heroes.hero_mecha.mine_drop.damage_min[2]%$-%$heroes.hero_mecha.mine_drop.damage_max[2]%$点爆炸伤害。",
+            "静止时，机甲会定期在路径上安放至多5枚爆炸地雷。每枚地雷的爆炸会造成%$heroes.hero_mecha.mine_drop.damage_min[2]%$-%$heroes.hero_mecha.mine_drop.damage_max[2]%$点爆炸伤害。",
             HERO_MECHA_MINE_DROP_DESCRIPTION_3 =
-            "静止时，机甲会定期在路径上安放至多%$heroes.hero_mecha.mine_drop.max_mines[3]%$枚爆炸地雷。每枚地雷的爆炸会造成%$heroes.hero_mecha.mine_drop.damage_min[3]%$-%$heroes.hero_mecha.mine_drop.damage_max[3]%$点爆炸伤害。",
-            HERO_MECHA_MINE_DROP_TITLE = "地雷部署",
-            HERO_MECHA_NAME = "奥纳格罗",
-            HERO_MECHA_POWER_SLAM_DESCRIPTION_1 =
-            "机甲撞击地面，短暂眩晕附近所有敌人，并造成%$heroes.hero_mecha.power_slam.s_damage[1]%$点物理伤害。",
-            HERO_MECHA_POWER_SLAM_DESCRIPTION_2 =
-            "机甲撞击地面，短暂眩晕附近所有敌人，并造成%$heroes.hero_mecha.power_slam.s_damage[2]%$点物理伤害。",
-            HERO_MECHA_POWER_SLAM_DESCRIPTION_3 =
-            "机甲撞击地面，短暂眩晕附近所有敌人，并造成%$heroes.hero_mecha.power_slam.s_damage[3]%$点物理伤害。",
-            HERO_MECHA_POWER_SLAM_TITLE = "冲力猛击",
-            HERO_MECHA_TAR_BOMB_DESCRIPTION_1 =
-            "朝路上投掷一颗沥青弹，使敌人减速%$heroes.hero_mecha.tar_bomb.slow_factor%$%, 持续%$heroes.hero_mecha.tar_bomb.duration[1]%$秒。",
-            HERO_MECHA_TAR_BOMB_DESCRIPTION_2 =
-            "朝路上投掷一颗沥青弹，使敌人减速%$heroes.hero_mecha.tar_bomb.slow_factor%$%, 持续%$heroes.hero_mecha.tar_bomb.duration[2]%$秒。",
-            HERO_MECHA_TAR_BOMB_DESCRIPTION_3 =
-            "朝路上投掷一颗沥青弹，使敌人减速%$heroes.hero_mecha.tar_bomb.slow_factor%$%, 持续%$heroes.hero_mecha.tar_bomb.duration[3]%$秒。",
-            HERO_MECHA_TAR_BOMB_TITLE = "焦油炸弹",
-            HERO_MUYRN_CLASS = "森林守卫",
-            HERO_MUYRN_DESC = "尽管外表稚嫩，古灵精怪的尼鲁却已凭借自然之力守护森林数百年之久。为了早日终结日益激烈的入侵，保卫自己的家园，尼鲁加入了联盟。",
-            HERO_MUYRN_FAERY_DUST_DESCRIPTION_1 =
-            "对区域内所有敌人施咒，降低其攻击伤害%$heroes.hero_muyrn.faery_dust.s_damage_factor[1]%$%，持续%$heroes.hero_muyrn.faery_dust.duration[1]%$秒。",
-            HERO_MUYRN_FAERY_DUST_DESCRIPTION_2 =
-            "对区域内所有敌人施咒，降低其攻击伤害%$heroes.hero_muyrn.faery_dust.s_damage_factor[2]%$%，持续%$heroes.hero_muyrn.faery_dust.duration[2]%$秒。",
-            HERO_MUYRN_FAERY_DUST_DESCRIPTION_3 =
-            "对区域内所有敌人施咒，降低其攻击伤害%$heroes.hero_muyrn.faery_dust.s_damage_factor[3]%$%，持续%$heroes.hero_muyrn.faery_dust.duration[3]%$秒。",
-            HERO_MUYRN_FAERY_DUST_TITLE = "衰弱咒语",
-            HERO_MUYRN_LEAF_WHIRLWIND_DESCRIPTION_1 =
-            "战斗时，尼鲁在自己周围创造一个树叶护盾。护盾每秒造成%$heroes.hero_muyrn.leaf_whirlwind.s_damage_min[1]%$-%$heroes.hero_muyrn.leaf_whirlwind.s_damage_max[1]%$点魔法伤害，并治疗尼鲁，持续%$heroes.hero_muyrn.leaf_whirlwind.duration[1]%$秒。",
-            HERO_MUYRN_LEAF_WHIRLWIND_DESCRIPTION_2 =
-            "战斗时，尼鲁在自己周围创造一个树叶护盾。护盾每秒造成%$heroes.hero_muyrn.leaf_whirlwind.s_damage_min[2]%$-%$heroes.hero_muyrn.leaf_whirlwind.s_damage_max[2]%$点魔法伤害，并治疗尼鲁，持续%$heroes.hero_muyrn.leaf_whirlwind.duration[2]%$秒。",
-            HERO_MUYRN_LEAF_WHIRLWIND_DESCRIPTION_3 =
-            "战斗时，尼鲁在自己周围创造一个树叶护盾。护盾每秒造成%$heroes.hero_muyrn.leaf_whirlwind.s_damage_min[3]%$-%$heroes.hero_muyrn.leaf_whirlwind.s_damage_max[3]%$点魔法伤害，并治疗尼鲁，持续%$heroes.hero_muyrn.leaf_whirlwind.duration[3]%$秒。",
-            HERO_MUYRN_LEAF_WHIRLWIND_TITLE = "叶片旋风",
-            HERO_MUYRN_NAME = "尼鲁",
+            "静止时，机甲会定期在路径上安放至多7枚爆炸地雷。每枚地雷的爆炸会造成%$heroes.hero_mecha.mine_drop.damage_min[3]%$-%$heroes.hero_mecha.mine_drop.damage_max[3]%$点爆炸伤害。",
+            
+            -- 尼鲁
             HERO_MUYRN_ROOT_DEFENDER_DESCRIPTION_1 =
-            "在一定范围内生成树根，持续%$heroes.hero_muyrn.ultimate.duration[2]%$秒，减速敌人，且每秒造成%$heroes.hero_muyrn.ultimate.s_damage_min[2]%$-%$heroes.hero_muyrn.ultimate.s_damage_max[2]%$点真实伤害。",
+            "在一定范围内生成树根，持续%$heroes.hero_muyrn.ultimate.duration[1]%$秒，减速敌人，且每秒造成24-40点真实伤害。",
             HERO_MUYRN_ROOT_DEFENDER_DESCRIPTION_2 =
-            "在一定范围内生成树根，持续%$heroes.hero_muyrn.ultimate.duration[3]%$秒，减速敌人，且每秒造成%$heroes.hero_muyrn.ultimate.s_damage_min[3]%$-%$heroes.hero_muyrn.ultimate.s_damage_max[3]%$点真实伤害。",
+            "在一定范围内生成树根，持续%$heroes.hero_muyrn.ultimate.duration[2]%$秒，减速敌人，且每秒造成28-44点真实伤害。",
             HERO_MUYRN_ROOT_DEFENDER_DESCRIPTION_3 =
-            "在一定范围内生成树根，持续%$heroes.hero_muyrn.ultimate.duration[4]%$秒，减速敌人，且每秒造成%$heroes.hero_muyrn.ultimate.s_damage_min[4]%$-%$heroes.hero_muyrn.ultimate.s_damage_max[4]%$点真实伤害。",
-            HERO_MUYRN_ROOT_DEFENDER_MENUBOTTOM_DESCRIPTION = "生长出能减速敌人并造成伤害的树根。",
-            HERO_MUYRN_ROOT_DEFENDER_MENUBOTTOM_NAME = "根系守卫",
-            HERO_MUYRN_ROOT_DEFENDER_TITLE = "根系守卫",
+            "在一定范围内生成树根，持续%$heroes.hero_muyrn.ultimate.duration[3]%$秒，减速敌人，且每秒造成32-48点真实伤害。",
             HERO_MUYRN_SENTINEL_WISPS_DESCRIPTION_1 =
-            "召唤%$heroes.hero_muyrn.sentinel_wisps.max_summons[1]%$只友善的仙灵跟随尼鲁%$heroes.hero_muyrn.sentinel_wisps.wisp.duration[1]%$秒。仙灵会造成%$heroes.hero_muyrn.sentinel_wisps.wisp.damage_min[1]%$-%$heroes.hero_muyrn.sentinel_wisps.wisp.damage_max[1]%$点魔法伤害。",
+            "召唤%$heroes.hero_muyrn.sentinel_wisps.max_summons[1]%$只友善的仙灵跟随尼鲁8秒。仙灵会造成%$heroes.hero_muyrn.sentinel_wisps.wisp.damage_min[1]%$-%$heroes.hero_muyrn.sentinel_wisps.wisp.damage_max[1]%$点魔法伤害。",
             HERO_MUYRN_SENTINEL_WISPS_DESCRIPTION_2 =
-            "召唤%$heroes.hero_muyrn.sentinel_wisps.max_summons[2]%$只友善的仙灵跟随尼鲁%$heroes.hero_muyrn.sentinel_wisps.wisp.duration[2]%$秒。仙灵会造成%$heroes.hero_muyrn.sentinel_wisps.wisp.damage_min[2]%$-%$heroes.hero_muyrn.sentinel_wisps.wisp.damage_max[2]%$点魔法伤害。",
+            "召唤%$heroes.hero_muyrn.sentinel_wisps.max_summons[2]%$只友善的仙灵跟随尼鲁11秒。仙灵会造成%$heroes.hero_muyrn.sentinel_wisps.wisp.damage_min[2]%$-%$heroes.hero_muyrn.sentinel_wisps.wisp.damage_max[2]%$点魔法伤害。",
             HERO_MUYRN_SENTINEL_WISPS_DESCRIPTION_3 =
-            "召唤%$heroes.hero_muyrn.sentinel_wisps.max_summons[3]%$只友善的仙灵跟随尼鲁%$heroes.hero_muyrn.sentinel_wisps.wisp.duration[3]%$秒。仙灵会造成%$heroes.hero_muyrn.sentinel_wisps.wisp.damage_min[3]%$-%$heroes.hero_muyrn.sentinel_wisps.wisp.damage_max[3]%$点魔法伤害。",
-            HERO_MUYRN_SENTINEL_WISPS_TITLE = "哨兵仙灵",
+            "召唤%$heroes.hero_muyrn.sentinel_wisps.max_summons[3]%$只友善的仙灵跟随尼鲁14秒。仙灵会造成%$heroes.hero_muyrn.sentinel_wisps.wisp.damage_min[3]%$-%$heroes.hero_muyrn.sentinel_wisps.wisp.damage_max[3]%$点魔法伤害。",
             HERO_MUYRN_VERDANT_BLAST_DESCRIPTION_1 =
-            "向敌人发射一束绿色能量，造成%$heroes.hero_muyrn.verdant_blast.s_damage[1]%$点魔法伤害。",
+            "向敌人发射一束绿色能量，造成%$heroes.hero_muyrn.verdant_blast.s_damage[1]%$点魔法伤害， 每275秒增加1点生命。",
             HERO_MUYRN_VERDANT_BLAST_DESCRIPTION_2 =
-            "向敌人发射一束绿色能量，造成%$heroes.hero_muyrn.verdant_blast.s_damage[2]%$点魔法伤害。",
+            "向敌人发射一束绿色能量，造成%$heroes.hero_muyrn.verdant_blast.s_damage[2]%$点魔法伤害， 每245秒增加1点生命。",
             HERO_MUYRN_VERDANT_BLAST_DESCRIPTION_3 =
-            "向敌人发射一束绿色能量，造成%$heroes.hero_muyrn.verdant_blast.s_damage[3]%$点魔法伤害。",
-            HERO_MUYRN_VERDANT_BLAST_TITLE = "翠绿迸发",
-            HERO_RAELYN_BRUTAL_SLASH_DESCRIPTION_1 =
-            "用她的剑残忍地攻击敌人，造成%$heroes.hero_raelyn.brutal_slash.s_damage[1]%$点真实伤害。",
-            HERO_RAELYN_BRUTAL_SLASH_DESCRIPTION_2 =
-            "用她的剑残忍地攻击敌人，造成%$heroes.hero_raelyn.brutal_slash.s_damage[2]%$点真实伤害。",
-            HERO_RAELYN_BRUTAL_SLASH_DESCRIPTION_3 =
-            "用她的剑残忍地攻击敌人，造成%$heroes.hero_raelyn.brutal_slash.s_damage[3]%$点真实伤害。",
-            HERO_RAELYN_BRUTAL_SLASH_TITLE = "残酷斩击",
-            HERO_RAELYN_CLASS = "黑暗中尉",
-            HERO_RAELYN_COMMAND_ORDERS_DESCRIPTION_1 =
-            "召唤一名黑暗骑士，其拥有%$heroes.hero_raelyn.ultimate.entity.hp_max[2]%$点生命值，攻击可造成%$heroes.hero_raelyn.ultimate.entity.damage_min[2]%$-%$heroes.hero_raelyn.ultimate.entity.damage_max[2]%$点真实伤害。",
-            HERO_RAELYN_COMMAND_ORDERS_DESCRIPTION_2 =
-            "召唤一名黑暗骑士，其拥有%$heroes.hero_raelyn.ultimate.entity.hp_max[3]%$点生命值，攻击可造成%$heroes.hero_raelyn.ultimate.entity.damage_min[3]%$-%$heroes.hero_raelyn.ultimate.entity.damage_max[3]%$点真实伤害。",
-            HERO_RAELYN_COMMAND_ORDERS_DESCRIPTION_3 =
-            "召唤一名黑暗骑士，其拥有%$heroes.hero_raelyn.ultimate.entity.hp_max[4]%$点生命值，攻击可造成%$heroes.hero_raelyn.ultimate.entity.damage_min[4]%$-%$heroes.hero_raelyn.ultimate.entity.damage_max[4]%$点真实伤害。",
-            HERO_RAELYN_COMMAND_ORDERS_MENUBOTTOM_DESCRIPTION = "召唤一名黑暗骑士到战场上。",
-            HERO_RAELYN_COMMAND_ORDERS_MENUBOTTOM_NAME = "指挥号令",
-            HERO_RAELYN_COMMAND_ORDERS_TITLE = "指挥号令",
-            HERO_RAELYN_DESC = "威风凛凛的蕾琳生来就是为了率领黑暗骑士冲锋陷阵。她的残酷与不屈赢得了卫兹南的认可，也令利尼维亚人闻风丧胆。好勇斗狠的她成为了第一位自愿加入黑暗巫师麾下的人。",
+            "向敌人发射一束绿色能量，造成%$heroes.hero_muyrn.verdant_blast.s_damage[3]%$点魔法伤害， 每210秒增加1点生命。",
+            
+            -- 黑暗中尉
             HERO_RAELYN_INSPIRE_FEAR_DESCRIPTION_1 =
-            "使附近敌人眩晕%$heroes.hero_raelyn.inspire_fear.stun_duration[1]%$秒，并降低其攻击伤害%$heroes.hero_raelyn.inspire_fear.s_inflicted_damage_factor[1]%$%，持续%$heroes.hero_raelyn.inspire_fear.damage_duration[1]%$秒。",
+            "使附近敌人眩晕%$heroes.hero_raelyn.inspire_fear.stun_duration[1]%$秒，并降低其攻击伤害6秒。",
             HERO_RAELYN_INSPIRE_FEAR_DESCRIPTION_2 =
-            "使附近敌人眩晕%$heroes.hero_raelyn.inspire_fear.stun_duration[2]%$秒，并降低其攻击伤害%$heroes.hero_raelyn.inspire_fear.s_inflicted_damage_factor[2]%$%，持续%$heroes.hero_raelyn.inspire_fear.damage_duration[2]%$秒。",
+            "使附近敌人眩晕%$heroes.hero_raelyn.inspire_fear.stun_duration[2]%$秒，并降低其攻击伤害7秒。",
             HERO_RAELYN_INSPIRE_FEAR_DESCRIPTION_3 =
-            "使附近敌人眩晕%$heroes.hero_raelyn.inspire_fear.stun_duration[3]%$秒，并降低其攻击伤害%$heroes.hero_raelyn.inspire_fear.s_inflicted_damage_factor[3]%$%，持续%$heroes.hero_raelyn.inspire_fear.damage_duration[3]%$秒。",
-            HERO_RAELYN_INSPIRE_FEAR_TITLE = "闻风丧胆",
-            HERO_RAELYN_NAME = "蕾琳",
-            HERO_RAELYN_ONSLAUGHT_DESCRIPTION_1 =
-            "在%$heroes.hero_raelyn.onslaught.duration[1]%$秒内，蕾琳的攻击速度加快，并对攻击目标周围小范围内的敌人造成她攻击力%$heroes.hero_raelyn.onslaught.damage_factor[1]%$%的伤害。",
-            HERO_RAELYN_ONSLAUGHT_DESCRIPTION_2 =
-            "在%$heroes.hero_raelyn.onslaught.duration[2]%$秒内，蕾琳的攻击速度加快，并对攻击目标周围小范围内的敌人造成她攻击力%$heroes.hero_raelyn.onslaught.damage_factor[2]%$%的伤害。",
-            HERO_RAELYN_ONSLAUGHT_DESCRIPTION_3 =
-            "在%$heroes.hero_raelyn.onslaught.duration[3]%$秒内，蕾琳的攻击速度加快，并对攻击目标周围小范围内的敌人造成她攻击力%$heroes.hero_raelyn.onslaught.damage_factor[3]%$%的伤害。",
-            HERO_RAELYN_ONSLAUGHT_TITLE = "全力猛攻",
-            HERO_RAELYN_ULTIMATE_ENTITY_NAME = "黑暗骑士",
+            "使附近敌人眩晕%$heroes.hero_raelyn.inspire_fear.stun_duration[3]%$秒，并降低其攻击伤害9秒。",
             HERO_RAELYN_UNBREAKABLE_DESCRIPTION_1 =
-            "蕾琳会在战斗中根据附近敌人的数量生成生命护盾（每有一名敌人，将生成她总生命值%$heroes.hero_raelyn.unbreakable.shield_per_enemy[1]%$%的护盾，上限%$heroes.hero_raelyn.unbreakable.max_targets%$名敌人）",
+            "蕾琳会在战斗中根据附近敌人的数量生成生命护盾（每有一名敌人，将生成她总生命值%$heroes.hero_raelyn.unbreakable.shield_per_enemy[1]%$%的护盾，上限%$heroes.hero_raelyn.unbreakable.max_targets%$名敌人）， 持续6秒",
             HERO_RAELYN_UNBREAKABLE_DESCRIPTION_2 =
-            "蕾琳会在战斗中根据附近敌人的数量生成生命护盾（每有一名敌人，将生成她总生命值%$heroes.hero_raelyn.unbreakable.shield_per_enemy[2]%$%的护盾，上限%$heroes.hero_raelyn.unbreakable.max_targets%$名敌人）",
+            "蕾琳会在战斗中根据附近敌人的数量生成生命护盾（每有一名敌人，将生成她总生命值%$heroes.hero_raelyn.unbreakable.shield_per_enemy[2]%$%的护盾，上限%$heroes.hero_raelyn.unbreakable.max_targets%$名敌人）， 持续8秒",
             HERO_RAELYN_UNBREAKABLE_DESCRIPTION_3 =
-            "蕾琳会在战斗中根据附近敌人的数量生成生命护盾（每有一名敌人，将生成她总生命值%$heroes.hero_raelyn.unbreakable.shield_per_enemy[3]%$%的护盾，上限%$heroes.hero_raelyn.unbreakable.max_targets%$名敌人）",
-            HERO_RAELYN_UNBREAKABLE_TITLE = "坚不可摧",
-            HERO_ROBOT_CLASS = "攻城魔像",
-            HERO_ROBOT_DESC = "黑暗大军的锻造大师们突破极限，创造出一台名为“战争巨头”的战争机械。这台由炽热引擎驱动的无情机器在战场上横扫一切，无论友军还是敌人都不会放在眼里。",
+            "蕾琳会在战斗中根据附近敌人的数量生成生命护盾（每有一名敌人，将生成她总生命值%$heroes.hero_raelyn.unbreakable.shield_per_enemy[3]%$%的护盾，上限%$heroes.hero_raelyn.unbreakable.max_targets%$名敌人）， 持续10秒",
+
+            -- 战争巨头
             HERO_ROBOT_EXPLODE_DESCRIPTION_1 =
-            "制造一阵爆炸，对敌人造成%$heroes.hero_robot.explode.damage_min[1]%$-%$heroes.hero_robot.explode.damage_max[1]%$点爆炸伤害，并使他们燃烧%$heroes.hero_robot.explode.burning_duration%$秒。燃烧每秒造成%$heroes.hero_robot.explode.burning_duration%$点伤害。",
+            "制造一阵爆炸，对敌人造成%$heroes.hero_robot.explode.damage_min[1]%$-%$heroes.hero_robot.explode.damage_max[1]%$点爆炸伤害，并使他们燃烧%$heroes.hero_robot.explode.burning_duration%$秒。燃烧每秒造成12点伤害。",
             HERO_ROBOT_EXPLODE_DESCRIPTION_2 =
-            "制造一阵爆炸，对敌人造成%$heroes.hero_robot.explode.damage_min[2]%$-%$heroes.hero_robot.explode.damage_max[2]%$点爆炸伤害，并使他们燃烧%$heroes.hero_robot.explode.burning_duration%$秒。燃烧每秒造成%$heroes.hero_robot.explode.burning_duration%$点伤害。",
+            "制造一阵爆炸，对敌人造成%$heroes.hero_robot.explode.damage_min[2]%$-%$heroes.hero_robot.explode.damage_max[2]%$点爆炸伤害，并使他们燃烧%$heroes.hero_robot.explode.burning_duration%$秒。燃烧每秒造成16点伤害。",
             HERO_ROBOT_EXPLODE_DESCRIPTION_3 =
-            "制造一阵爆炸，对敌人造成%$heroes.hero_robot.explode.damage_min[3]%$-%$heroes.hero_robot.explode.damage_max[3]%$点爆炸伤害，并使他们燃烧%$heroes.hero_robot.explode.burning_duration%$秒。燃烧每秒造成%$heroes.hero_robot.explode.burning_duration%$点伤害。",
-            HERO_ROBOT_EXPLODE_TITLE = "战争献祭",
+            "制造一阵爆炸，对敌人造成%$heroes.hero_robot.explode.damage_min[3]%$-%$heroes.hero_robot.explode.damage_max[3]%$点爆炸伤害，并使他们燃烧%$heroes.hero_robot.explode.burning_duration%$秒。燃烧每秒造成20点伤害。",
             HERO_ROBOT_FIRE_DESCRIPTION_1 =
-            "发射装满炽热余烬的炮弹，对敌人造成%$heroes.hero_robot.fire.damage_min[1]%$-%$heroes.hero_robot.fire.damage_max[1]%$点物理伤害，并晕眩敌人%$heroes.hero_robot.fire.s_slow_duration[1]%$秒。",
+            "发射装满炽热余烬的炮弹，对敌人造成%$heroes.hero_robot.fire.damage_min[1]%$-%$heroes.hero_robot.fire.damage_max[1]%$点物理伤害，并晕眩点燃敌人%$heroes.hero_robot.fire.s_slow_duration[1]%$秒。",
             HERO_ROBOT_FIRE_DESCRIPTION_2 =
-            "发射装满炽热余烬的炮弹，对敌人造成%$heroes.hero_robot.fire.damage_min[2]%$-%$heroes.hero_robot.fire.damage_max[2]%$点物理伤害，并晕眩敌人%$heroes.hero_robot.fire.s_slow_duration[1]%$秒。",
+            "发射装满炽热余烬的炮弹，对敌人造成%$heroes.hero_robot.fire.damage_min[2]%$-%$heroes.hero_robot.fire.damage_max[2]%$点物理伤害，并晕眩点燃敌人%$heroes.hero_robot.fire.s_slow_duration[1]%$秒。",
             HERO_ROBOT_FIRE_DESCRIPTION_3 =
-            "发射装满炽热余烬的炮弹，对敌人造成%$heroes.hero_robot.fire.damage_min[3]%$-%$heroes.hero_robot.fire.damage_max[3]%$点物理伤害，并晕眩敌人%$heroes.hero_robot.fire.s_slow_duration[1]%$秒。",
+            "发射装满炽热余烬的炮弹，对敌人造成%$heroes.hero_robot.fire.damage_min[3]%$-%$heroes.hero_robot.fire.damage_max[3]%$点物理伤害，并晕眩点燃敌人%$heroes.hero_robot.fire.s_slow_duration[1]%$秒。",
             HERO_ROBOT_FIRE_TITLE = "瓦斯烟幕",
             HERO_ROBOT_JUMP_DESCRIPTION_1 =
-            "跳到空中，砸向一名敌人，使其眩晕%$heroes.hero_robot.jump.stun_duration[1]%$秒，并对范围内造成%$heroes.hero_robot.jump.s_damage[1]%$点物理伤害。",
+            "跳到空中，砸向一名敌人，使其眩晕2秒，并对范围内造成%$heroes.hero_robot.jump.s_damage[1]%$点物理伤害。",
             HERO_ROBOT_JUMP_DESCRIPTION_2 =
-            "跳到空中，砸向一名敌人，使其眩晕%$heroes.hero_robot.jump.stun_duration[2]%$秒，并对范围内造成%$heroes.hero_robot.jump.s_damage[2]%$点物理伤害。",
+            "跳到空中，砸向一名敌人，使其眩晕3秒，并对范围内造成%$heroes.hero_robot.jump.s_damage[2]%$点物理伤害。",
             HERO_ROBOT_JUMP_DESCRIPTION_3 =
-            "跳到空中，砸向一名敌人，使其眩晕%$heroes.hero_robot.jump.stun_duration[3]%$秒，并对范围内造成%$heroes.hero_robot.jump.s_damage[3]%$点物理伤害。",
-            HERO_ROBOT_JUMP_TITLE = "震撼冲击",
-            HERO_ROBOT_NAME = "战争巨头",
+            "跳到空中，砸向一名敌人，使其眩晕4秒，并对范围内造成%$heroes.hero_robot.jump.s_damage[3]%$点物理伤害。",
             HERO_ROBOT_TRAIN_DESCRIPTION_1 =
-            "召唤一辆战车沿路径行进，对敌人造成%$heroes.hero_robot.ultimate.s_damage[2]%$点伤害并使其燃烧，持续%$heroes.hero_robot.ultimate.burning_duration%$秒。燃烧每秒造成%$heroes.hero_robot.ultimate.s_burning_damage%$点伤害。",
+            "召唤一辆战车沿路径行进，对敌人造成%$heroes.hero_robot.ultimate.s_damage[1]%$点伤害并使其燃烧，持续%$heroes.hero_robot.ultimate.burning_duration%$秒。燃烧每秒造成12点伤害。",
             HERO_ROBOT_TRAIN_DESCRIPTION_2 =
-            "召唤一辆战车沿路径行进，对敌人造成%$heroes.hero_robot.ultimate.s_damage[3]%$点伤害并使其燃烧，持续%$heroes.hero_robot.ultimate.burning_duration%$秒。燃烧每秒造成%$heroes.hero_robot.ultimate.s_burning_damage%$点伤害。",
+            "召唤一辆战车沿路径行进，对敌人造成%$heroes.hero_robot.ultimate.s_damage[2]%$点伤害并使其燃烧，持续%$heroes.hero_robot.ultimate.burning_duration%$秒。燃烧每秒造成16点伤害。",
             HERO_ROBOT_TRAIN_DESCRIPTION_3 =
-            "召唤一辆战车沿路径行进，对敌人造成%$heroes.hero_robot.ultimate.s_damage[4]%$点伤害并使其燃烧，持续%$heroes.hero_robot.ultimate.burning_duration%$秒。燃烧每秒造成%$heroes.hero_robot.ultimate.s_burning_damage%$点伤害。",
-            HERO_ROBOT_TRAIN_MENUBOTTOM_DESCRIPTION = "召唤一辆战车，辗压敌人。",
-            HERO_ROBOT_TRAIN_MENUBOTTOM_NAME = "轰鸣火车",
-            HERO_ROBOT_TRAIN_TITLE = "轰鸣火车",
-            HERO_ROBOT_UPPERCUT_DESCRIPTION_1 = "痛殴一名生命值低于%$heroes.hero_robot.uppercut.s_life_threshold[1]%$%的敌人，一拳毙命。",
-            HERO_ROBOT_UPPERCUT_DESCRIPTION_2 = "痛殴一名生命值低于%$heroes.hero_robot.uppercut.s_life_threshold[2]%$%的敌人，一拳毙命。",
-            HERO_ROBOT_UPPERCUT_DESCRIPTION_3 = "痛殴一名生命值低于%$heroes.hero_robot.uppercut.s_life_threshold[3]%$%的敌人，一拳毙命。",
-            HERO_ROBOT_UPPERCUT_TITLE = "钢铁勾拳",
-            HERO_ROOM_DLC_BADGE_TOOLTIP_DESC_KR5_DLC_1 = "此英雄为「巨大的威胁」解锁内容",
-            HERO_ROOM_DLC_BADGE_TOOLTIP_DESC_KR5_DLC_2 = "此英雄为「大圣游记」解锁内容。",
-            HERO_ROOM_DLC_BADGE_TOOLTIP_TITLE_KR5_DLC_1 = "巨大的威胁",
-            HERO_ROOM_DLC_BADGE_TOOLTIP_TITLE_KR5_DLC_2 = "大圣游记",
-            HERO_ROOM_EQUIPPED_HEROES = "已配置英雄",
-            HERO_ROOM_GET_DLC = "得到它",
-            HERO_ROOM_LABEL_ROSTER_THUMB_NEW = "新英雄！",
-            HERO_SPACE_ELF_ASTRAL_REFLECTION_DESCRIPTION_1 =
-            "召唤一名赛莉恩的魔法分身，攻击造成%$heroes.hero_space_elf.astral_reflection.entity.basic_ranged.damage_min[1]%$-%$heroes.hero_space_elf.astral_reflection.entity.basic_ranged.damage_max[1]%$点魔法伤害。",
-            HERO_SPACE_ELF_ASTRAL_REFLECTION_DESCRIPTION_2 =
-            "召唤一名赛莉恩的魔法分身，攻击造成%$heroes.hero_space_elf.astral_reflection.entity.basic_ranged.damage_min[2]%$-%$heroes.hero_space_elf.astral_reflection.entity.basic_ranged.damage_max[2]%$点魔法伤害。",
-            HERO_SPACE_ELF_ASTRAL_REFLECTION_DESCRIPTION_3 =
-            "召唤一名赛莉恩的魔法分身，攻击造成%$heroes.hero_space_elf.astral_reflection.entity.basic_ranged.damage_min[3]%$-%$heroes.hero_space_elf.astral_reflection.entity.basic_ranged.damage_max[3]%$点魔法伤害。",
-            HERO_SPACE_ELF_ASTRAL_REFLECTION_ENTITY_NAME = "星界镜像",
-            HERO_SPACE_ELF_ASTRAL_REFLECTION_TITLE = "星界镜像",
-            HERO_SPACE_ELF_BLACK_AEGIS_DESCRIPTION_1 =
-            "为一名友军单位施加护盾，最多可承受%$heroes.hero_space_elf.black_aegis.shield_base[1]%$点伤害。护盾破碎或效果结束时爆炸，在一定范围内造成%$heroes.hero_space_elf.black_aegis.explosion_damage[1]%$点魔法伤害。",
-            HERO_SPACE_ELF_BLACK_AEGIS_DESCRIPTION_2 =
-            "为一名友军单位施加护盾，最多可承受%$heroes.hero_space_elf.black_aegis.shield_base[2]%$点伤害。护盾破碎或效果结束时爆炸，在一定范围内造成%$heroes.hero_space_elf.black_aegis.explosion_damage[2]%$点魔法伤害。",
-            HERO_SPACE_ELF_BLACK_AEGIS_DESCRIPTION_3 =
-            "为一名友军单位施加护盾，最多可承受%$heroes.hero_space_elf.black_aegis.shield_base[3]%$点伤害。护盾破碎或效果结束时爆炸，在一定范围内造成%$heroes.hero_space_elf.black_aegis.explosion_damage[3]%$点魔法伤害。",
-            HERO_SPACE_ELF_BLACK_AEGIS_TITLE = "黑曜庇护",
-            HERO_SPACE_ELF_CLASS = "虚空法师",
-            HERO_SPACE_ELF_COSMIC_PRISON_DESCRIPTION_1 =
-            "将一群敌人困在虚空中%$heroes.hero_space_elf.ultimate.duration[2]%$秒，并造成%$heroes.hero_space_elf.ultimate.damage[2]%$点伤害。",
-            HERO_SPACE_ELF_COSMIC_PRISON_DESCRIPTION_2 =
-            "将一群敌人困在虚空中%$heroes.hero_space_elf.ultimate.duration[3]%$秒，并造成%$heroes.hero_space_elf.ultimate.damage[3]%$点伤害。",
-            HERO_SPACE_ELF_COSMIC_PRISON_DESCRIPTION_3 =
-            "将一群敌人困在虚空中%$heroes.hero_space_elf.ultimate.duration[4]%$秒，并造成%$heroes.hero_space_elf.ultimate.damage[4]%$点伤害。",
-            HERO_SPACE_ELF_COSMIC_PRISON_MENUBOTTOM_DESCRIPTION = "困住一定范围内的敌人，造成伤害。",
-            HERO_SPACE_ELF_COSMIC_PRISON_MENUBOTTOM_NAME = "异域囚笼",
-            HERO_SPACE_ELF_COSMIC_PRISON_TITLE = "异域囚笼",
-            HERO_SPACE_ELF_DESC = "多年来，虚空法师赛莉恩因涉足未知的异世界力量而被同伴们排斥。如今，她成为了联盟了解全视之魔眼和其他来自这个世界之外的势力的重要渠道。",
-            HERO_SPACE_ELF_NAME = "赛莉恩",
+            "召唤一辆战车沿路径行进，对敌人造成%$heroes.hero_robot.ultimate.s_damage[3]%$点伤害并使其燃烧，持续%$heroes.hero_robot.ultimate.burning_duration%$秒。燃烧每秒造成20点伤害。",
+
+            -- 虚空法师
             HERO_SPACE_ELF_SPATIAL_DISTORTION_DESCRIPTION_1 =
-            "扭曲所有防御塔周围的空间%$heroes.hero_space_elf.spatial_distortion.duration[1]%$秒，增加防御塔%$heroes.hero_space_elf.spatial_distortion.s_range_factor[1]%$%攻击范围。",
+            "扭曲所有防御塔周围的空间8秒，增加防御塔%$heroes.hero_space_elf.spatial_distortion.s_range_factor[1]%$%攻击范围。",
             HERO_SPACE_ELF_SPATIAL_DISTORTION_DESCRIPTION_2 =
-            "扭曲所有防御塔周围的空间%$heroes.hero_space_elf.spatial_distortion.duration[2]%$秒，增加防御塔%$heroes.hero_space_elf.spatial_distortion.s_range_factor[2]%$%攻击范围。",
+            "扭曲所有防御塔周围的空间10秒，增加防御塔%$heroes.hero_space_elf.spatial_distortion.s_range_factor[2]%$%攻击范围。",
             HERO_SPACE_ELF_SPATIAL_DISTORTION_DESCRIPTION_3 =
-            "扭曲所有防御塔周围的空间%$heroes.hero_space_elf.spatial_distortion.duration[3]%$秒，增加防御塔%$heroes.hero_space_elf.spatial_distortion.s_range_factor[3]%$%攻击范围。",
-            HERO_SPACE_ELF_SPATIAL_DISTORTION_TITLE = "空间畸变",
-            HERO_SPACE_ELF_VOID_RIFT_DESCRIPTION_1 =
-            "在路径上打开%$heroes.hero_space_elf.void_rift.cracks_amount[1]%$道裂口，持续%$heroes.hero_space_elf.void_rift.duration[1]%$秒，对每一名经过的敌人每秒造成%$heroes.hero_space_elf.void_rift.damage_min[1]%$-%$heroes.hero_space_elf.void_rift.damage_max[1]%$点伤害。",
-            HERO_SPACE_ELF_VOID_RIFT_DESCRIPTION_2 =
-            "在路径上打开%$heroes.hero_space_elf.void_rift.cracks_amount[2]%$道裂口，持续%$heroes.hero_space_elf.void_rift.duration[2]%$秒，对每一名经过的敌人每秒造成%$heroes.hero_space_elf.void_rift.damage_min[2]%$-%$heroes.hero_space_elf.void_rift.damage_max[2]%$点伤害。",
-            HERO_SPACE_ELF_VOID_RIFT_DESCRIPTION_3 =
-            "在路径上打开%$heroes.hero_space_elf.void_rift.cracks_amount[3]%$道裂口，持续%$heroes.hero_space_elf.void_rift.duration[3]%$秒，对每一名经过的敌人每秒造成%$heroes.hero_space_elf.void_rift.damage_min[3]%$-%$heroes.hero_space_elf.void_rift.damage_max[3]%$点伤害。",
-            HERO_SPACE_ELF_VOID_RIFT_TITLE = "虚空裂缝",
+            "扭曲所有防御塔周围的空间12秒，增加防御塔%$heroes.hero_space_elf.spatial_distortion.s_range_factor[3]%$%攻击范围。",
+            
+            -- 蛛后
             HERO_SPIDER_ARACNID_SPAWNER_DESCRIPTION_1 =
-            "召唤%$heroes.hero_spider.ultimate.spawn_amount[2]%$只蜘蛛，持续战斗%$heroes.hero_spider.ultimate.spider.duration[2]%$秒，蜘蛛攻击敌人时使其眩晕。",
+            "召唤%$heroes.hero_spider.ultimate.spawn_amount[1]%$只蜘蛛，持续战斗8秒，蜘蛛攻击敌人时25%几率使其眩晕。",
             HERO_SPIDER_ARACNID_SPAWNER_DESCRIPTION_2 =
-            "召唤%$heroes.hero_spider.ultimate.spawn_amount[3]%$只蜘蛛，持续战斗%$heroes.hero_spider.ultimate.spider.duration[3]%$秒，蜘蛛攻击敌人时使其眩晕。",
+            "召唤%$heroes.hero_spider.ultimate.spawn_amount[2]%$只蜘蛛，持续战斗10秒，蜘蛛攻击敌人时25%几率使其眩晕。",
             HERO_SPIDER_ARACNID_SPAWNER_DESCRIPTION_3 =
-            "召唤%$heroes.hero_spider.ultimate.spawn_amount[4]%$只蜘蛛，持续战斗%$heroes.hero_spider.ultimate.spider.duration[4]%$秒，蜘蛛攻击敌人时使其眩晕。",
-            HERO_SPIDER_ARACNID_SPAWNER_MENUBOTTOM_DESCRIPTION = "召唤一群能使敌人眩晕的蜘蛛。",
-            HERO_SPIDER_ARACNID_SPAWNER_MENUBOTTOM_NAME = "猎手呼唤",
-            HERO_SPIDER_ARACNID_SPAWNER_TITLE = "猎手呼唤",
-            HERO_SPIDER_AREA_ATTACK_DESCRIPTION_1 =
-            "每%$heroes.hero_spider.area_attack.cooldown[1]%$秒，丝派蒂尔释放威压，使周围的敌人眩晕%$heroes.hero_spider.area_attack.s_stun_time[1]%$秒。",
-            HERO_SPIDER_AREA_ATTACK_DESCRIPTION_2 =
-            "每%$heroes.hero_spider.area_attack.cooldown[2]%$秒，丝派蒂尔释放威压，使周围的敌人眩晕%$heroes.hero_spider.area_attack.s_stun_time[2]%$秒。",
-            HERO_SPIDER_AREA_ATTACK_DESCRIPTION_3 =
-            "每%$heroes.hero_spider.area_attack.cooldown[3]%$秒，丝派蒂尔释放威压，使周围的敌人眩晕%$heroes.hero_spider.area_attack.s_stun_time[3]%$秒。",
-            HERO_SPIDER_AREA_ATTACK_TITLE = "驭蛛威影",
-            HERO_SPIDER_DESC = "丝派蒂尔隶属暮光精灵的一支猎蛛部队，任务是歼灭蜘蛛女王和其手下的邪教，如今她是最后一名队员。她将暗影魔法与独一无二狩猎技巧结合，成为令整片大陆都闻风丧胆致命刺客。",
-            HERO_SPIDER_INSTAKILL_MELEE_DESCRIPTION_1 =
-            "每%$heroes.hero_spider.instakill_melee.cooldown[1]%$秒，丝派蒂尔会处决一名眩晕状态且生命值低于%$heroes.hero_spider.instakill_melee.life_threshold[1]%$的敌人。",
-            HERO_SPIDER_INSTAKILL_MELEE_DESCRIPTION_2 =
-            "每%$heroes.hero_spider.instakill_melee.cooldown[2]%$秒，丝派蒂尔会处决一名眩晕状态且生命值低于%$heroes.hero_spider.instakill_melee.life_threshold[2]%$的敌人。",
-            HERO_SPIDER_INSTAKILL_MELEE_DESCRIPTION_3 =
-            "每%$heroes.hero_spider.instakill_melee.cooldown[3]%$秒，丝派蒂尔会处决一名眩晕状态且生命值低于%$heroes.hero_spider.instakill_melee.life_threshold[3]%$的敌人。",
-            HERO_SPIDER_INSTAKILL_MELEE_TITLE = "死亡之握",
-            HERO_SPIDER_NAME = "丝派蒂尔",
-            HERO_SPIDER_SUPREME_HUNTER_DESCRIPTION_1 =
-            "眨眼之间，丝派蒂尔瞬移至生命值最高的敌人，对其造成%$heroes.hero_spider.supreme_hunter.damage_min[1]%$-%$heroes.hero_spider.supreme_hunter.damage_max[1]%$点伤害。",
-            HERO_SPIDER_SUPREME_HUNTER_DESCRIPTION_2 =
-            "眨眼之间，丝派蒂尔瞬移至生命值最高的敌人，对其造成%$heroes.hero_spider.supreme_hunter.damage_min[2]%$-%$heroes.hero_spider.supreme_hunter.damage_max[2]%$点伤害。",
-            HERO_SPIDER_SUPREME_HUNTER_DESCRIPTION_3 =
-            "眨眼之间，丝派蒂尔瞬移至生命值最高的敌人，对其造成%$heroes.hero_spider.supreme_hunter.damage_min[3]%$-%$heroes.hero_spider.supreme_hunter.damage_max[3]%$点伤害。",
-            HERO_SPIDER_SUPREME_HUNTER_TITLE = "暗影瞬步",
-            HERO_SPIDER_TUNNELING_DESCRIPTION_1 =
-            "丝派蒂尔破土而出时，造成%$heroes.hero_spider.tunneling.damage_min[1]%$-%$heroes.hero_spider.tunneling.damage_max[1]%$点伤害。",
-            HERO_SPIDER_TUNNELING_DESCRIPTION_2 =
-            "丝派蒂尔破土而出时，造成%$heroes.hero_spider.tunneling.damage_min[2]%$-%$heroes.hero_spider.tunneling.damage_max[2]%$点伤害。",
-            HERO_SPIDER_TUNNELING_DESCRIPTION_3 =
-            "丝派蒂尔破土而出时，造成%$heroes.hero_spider.tunneling.damage_min[3]%$-%$heroes.hero_spider.tunneling.damage_max[3]%$点伤害。",
-            HERO_SPIDER_TUNNELING_TITLE = "破土奇袭",
-            HERO_VENOM_CLASS = "污堕杀手",
+            "召唤%$heroes.hero_spider.ultimate.spawn_amount[3]%$只蜘蛛，持续战斗12秒，蜘蛛攻击敌人时25%几率使其眩晕。",
+            
+            -- 毒液
             HERO_VENOM_CREEPING_DEATH_DESCRIPTION_1 =
-            "在一定范围散布粘稠物质，使敌人减速，片刻之后转化为穿刺尖刺，对敌人造成%$heroes.hero_venom.ultimate.s_damage[2]%$点真实伤害。",
+            "在一定范围散布粘稠物质，每3秒对敌人造成10-15点真实伤害，持续40秒，若有另一片粘稠物质则开启传送门，传送友方与敌人。",
             HERO_VENOM_CREEPING_DEATH_DESCRIPTION_2 =
-            "在一定范围散布粘稠物质，使敌人减速，片刻之后转化为穿刺尖刺，对敌人造成%$heroes.hero_venom.ultimate.s_damage[3]%$点真实伤害。",
+            "在一定范围散布粘稠物质，每3秒对敌人造成15-20点真实伤害，持续50秒，若有另一片粘稠物质则开启传送门，传送友方与敌人。",
             HERO_VENOM_CREEPING_DEATH_DESCRIPTION_3 =
-            "在一定范围散布粘稠物质，使敌人减速，片刻之后转化为穿刺尖刺，对敌人造成%$heroes.hero_venom.ultimate.s_damage[4]%$点真实伤害。",
-            HERO_VENOM_CREEPING_DEATH_MENUBOTTOM_DESCRIPTION = "在路径上召唤粘稠物质，使敌人减速并受到伤害。",
-            HERO_VENOM_CREEPING_DEATH_MENUBOTTOM_NAME = "死亡蔓延",
-            HERO_VENOM_CREEPING_DEATH_TITLE = "死亡蔓延",
-            HERO_VENOM_DESC = "邪教徒没能把佣兵格里姆森变成恶煞，便将他囚禁起来，任其腐烂。这段痛苦的经历意外赐予了格里姆森变形的能力，他利用这份力量逃出了邪教的控制，并发誓有朝一日必将归来，完成复仇。",
-            HERO_VENOM_EAT_ENEMY_DESCRIPTION_1 =
-            "格里姆森吞噬一个生命值低于 %$heroes.hero_venom.eat_enemy.hp_trigger%$% 的敌人，同时恢复自身总生命值的 %$heroes.hero_venom.eat_enemy.regen[1]%$%。",
-            HERO_VENOM_EAT_ENEMY_DESCRIPTION_2 =
-            "格里姆森吞噬一个生命值低于 %$heroes.hero_venom.eat_enemy.hp_trigger%$% 的敌人，同时恢复自身总生命值的 %$heroes.hero_venom.eat_enemy.regen[2]%$%。",
-            HERO_VENOM_EAT_ENEMY_DESCRIPTION_3 =
-            "格里姆森吞噬一个生命值低于 %$heroes.hero_venom.eat_enemy.hp_trigger%$% 的敌人，同时恢复自身总生命值的 %$heroes.hero_venom.eat_enemy.regen[3]%$%。",
-            HERO_VENOM_EAT_ENEMY_TITLE = "重塑血肉",
-            HERO_VENOM_FLOOR_SPIKES_DESCRIPTION_1 =
-            "在路径上散布尖刺触须，每根尖刺对附近敌人造成%$heroes.hero_venom.floor_spikes.s_damage[1]%$点真实伤害。",
-            HERO_VENOM_FLOOR_SPIKES_DESCRIPTION_2 =
-            "在路径上散布尖刺触须，每根尖刺对附近敌人造成%$heroes.hero_venom.floor_spikes.s_damage[2]%$点真实伤害。",
-            HERO_VENOM_FLOOR_SPIKES_DESCRIPTION_3 =
-            "在路径上散布尖刺触须，每根尖刺对附近敌人造成%$heroes.hero_venom.floor_spikes.s_damage[3]%$点真实伤害。",
-            HERO_VENOM_FLOOR_SPIKES_TITLE = "致命尖刺",
+            "在一定范围散布粘稠物质，每3秒对敌人造成20-25点真实伤害，持续60秒，若有另一片粘稠物质则开启传送门，传送友方与敌人。",
             HERO_VENOM_INNER_BEAST_DESCRIPTION_1 =
-            "当格里姆森的生命值低于%$heroes.hero_venom.inner_beast.trigger_hp%$% 时将完全变身，攻击伤害提升%$heroes.hero_venom.inner_beast.basic_melee.s_damage_factor[1]%$%，并且每次攻击命中时恢复自身总生命值的%$heroes.hero_venom.inner_beast.basic_melee.regen_health%$%，持续%$heroes.hero_venom.inner_beast.duration%$秒。",
+            "当格里姆森的生命值低于60%时将完全变身，攻击伤害提升%$heroes.hero_venom.inner_beast.basic_melee.s_damage_factor[1]%$%，并且每次攻击命中时恢复自身总生命值的%$heroes.hero_venom.inner_beast.basic_melee.regen_health%$%，持续%$heroes.hero_venom.inner_beast.duration%$秒。",
             HERO_VENOM_INNER_BEAST_DESCRIPTION_2 =
-            "当格里姆森的生命值低于%$heroes.hero_venom.inner_beast.trigger_hp%$% 时将完全变身，攻击伤害提升%$heroes.hero_venom.inner_beast.basic_melee.s_damage_factor[2]%$%，并且每次攻击命中时恢复自身总生命值的%$heroes.hero_venom.inner_beast.basic_melee.regen_health%$%，持续%$heroes.hero_venom.inner_beast.duration%$秒。",
+            "当格里姆森的生命值低于60%时将完全变身，攻击伤害提升%$heroes.hero_venom.inner_beast.basic_melee.s_damage_factor[2]%$%，并且每次攻击命中时恢复自身总生命值的%$heroes.hero_venom.inner_beast.basic_melee.regen_health%$%，持续%$heroes.hero_venom.inner_beast.duration%$秒。",
             HERO_VENOM_INNER_BEAST_DESCRIPTION_3 =
-            "当格里姆森的生命值低于%$heroes.hero_venom.inner_beast.trigger_hp%$% 时将完全变身，攻击伤害提升%$heroes.hero_venom.inner_beast.basic_melee.s_damage_factor[3]%$%，并且每次攻击命中时恢复自身总生命值的%$heroes.hero_venom.inner_beast.basic_melee.regen_health%$%，持续%$heroes.hero_venom.inner_beast.duration%$秒。",
-            HERO_VENOM_INNER_BEAST_TITLE = "原始野性",
-            HERO_VENOM_NAME = "格里姆森",
+            "当格里姆森的生命值低于60%时将完全变身，攻击伤害提升%$heroes.hero_venom.inner_beast.basic_melee.s_damage_factor[3]%$%，并且每次攻击命中时恢复自身总生命值的%$heroes.hero_venom.inner_beast.basic_melee.regen_health%$%，持续%$heroes.hero_venom.inner_beast.duration%$秒。",
             HERO_VENOM_RANGED_TENTACLE_DESCRIPTION_1 =
-            "远程攻击一名敌人，造成%$heroes.hero_venom.ranged_tentacle.s_damage[1]%$点物理伤害，并有%$heroes.hero_venom.ranged_tentacle.bleed_chance[1]%$%机率施加出血效果。出血效果每秒造成%$heroes.hero_venom.ranged_tentacle.s_bleed_damage%$点伤害，持续%$heroes.hero_venom.ranged_tentacle.bleed_duration[1]%$秒。",
+            "远程攻击一名敌人将其向后传送，造成%$heroes.hero_venom.ranged_tentacle.s_damage[1]%$点物理伤害，并有%$heroes.hero_venom.ranged_tentacle.bleed_chance[1]%$%机率施加出血效果。出血效果每秒造成%$heroes.hero_venom.ranged_tentacle.s_bleed_damage%$点伤害，持续%$heroes.hero_venom.ranged_tentacle.bleed_duration[1]%$秒。",
             HERO_VENOM_RANGED_TENTACLE_DESCRIPTION_2 =
-            "远程攻击一名敌人，造成%$heroes.hero_venom.ranged_tentacle.s_damage[2]%$点物理伤害，并有%$heroes.hero_venom.ranged_tentacle.bleed_chance[2]%$%机率施加出血效果。出血效果每秒造成%$heroes.hero_venom.ranged_tentacle.s_bleed_damage%$点伤害，持续%$heroes.hero_venom.ranged_tentacle.bleed_duration[2]%$秒。",
+            "远程攻击一名敌人将其向后传送，造成%$heroes.hero_venom.ranged_tentacle.s_damage[2]%$点物理伤害，并有%$heroes.hero_venom.ranged_tentacle.bleed_chance[2]%$%机率施加出血效果。出血效果每秒造成%$heroes.hero_venom.ranged_tentacle.s_bleed_damage%$点伤害，持续%$heroes.hero_venom.ranged_tentacle.bleed_duration[2]%$秒。",
             HERO_VENOM_RANGED_TENTACLE_DESCRIPTION_3 =
-            "远程攻击一名敌人，造成%$heroes.hero_venom.ranged_tentacle.s_damage[3]%$点物理伤害，并有%$heroes.hero_venom.ranged_tentacle.bleed_chance[3]%$%机率施加出血效果。出血效果每秒造成%$heroes.hero_venom.ranged_tentacle.s_bleed_damage%$点伤害，持续%$heroes.hero_venom.ranged_tentacle.bleed_duration[3]%$秒。",
-            HERO_VENOM_RANGED_TENTACLE_TITLE = "贯心追猎",
+            "远程攻击一名敌人将其向后传送，造成%$heroes.hero_venom.ranged_tentacle.s_damage[3]%$点物理伤害，并有%$heroes.hero_venom.ranged_tentacle.bleed_chance[3]%$%机率施加出血效果。出血效果每秒造成%$heroes.hero_venom.ranged_tentacle.s_bleed_damage%$点伤害，持续%$heroes.hero_venom.ranged_tentacle.bleed_duration[3]%$秒。",
+
+            -- 维斯珀
             HERO_VESPER_ARROW_STORM_DESCRIPTION_1 =
-            "朝一片区域倾泻%$heroes.hero_vesper.ultimate.s_spread[2]%$支箭矢，每支对敌人造成%$heroes.hero_vesper.ultimate.damage[2]%$点物理伤害。",
+            "朝一片区域倾泻%$heroes.hero_vesper.ultimate.s_spread[1]%$支箭矢，每支对敌人造成%$heroes.hero_vesper.ultimate.damage[1]%$点物理伤害，每0.5秒在鼠标光标位置召唤4支箭矢，每支箭造成2.5真实伤害。",
             HERO_VESPER_ARROW_STORM_DESCRIPTION_2 =
-            "朝一片区域倾泻%$heroes.hero_vesper.ultimate.s_spread[3]%$支箭矢，每支对敌人造成%$heroes.hero_vesper.ultimate.damage[3]%$点物理伤害。",
+            "朝一片区域倾泻%$heroes.hero_vesper.ultimate.s_spread[2]%$支箭矢，每支对敌人造成%$heroes.hero_vesper.ultimate.damage[2]%$点物理伤害，每0.5秒在鼠标光标位置召唤4支箭矢，每支箭造成5真实伤害。",
             HERO_VESPER_ARROW_STORM_DESCRIPTION_3 =
-            "朝一片区域倾泻%$heroes.hero_vesper.ultimate.s_spread[4]%$支箭矢，每支对敌人造成%$heroes.hero_vesper.ultimate.damage[4]%$点物理伤害。",
-            HERO_VESPER_ARROW_STORM_MENUBOTTOM_DESCRIPTION = "朝一片区域内倾泻大量箭矢，对敌人造成伤害。",
-            HERO_VESPER_ARROW_STORM_MENUBOTTOM_NAME = "箭矢风暴",
-            HERO_VESPER_ARROW_STORM_TITLE = "箭矢风暴",
+            "朝一片区域倾泻%$heroes.hero_vesper.ultimate.s_spread[3]%$支箭矢，每支对敌人造成%$heroes.hero_vesper.ultimate.damage[3]%$点物理伤害，每0.5秒在鼠标光标位置召唤4支箭矢，每支箭造成7.5真实伤害。",
             HERO_VESPER_ARROW_TO_THE_KNEE_DESCRIPTION_1 =
-            "射出一支利箭，眩晕敌人%$heroes.hero_vesper.arrow_to_the_knee.stun_duration[1]%$秒，造成%$heroes.hero_vesper.arrow_to_the_knee.s_damage[1]%$点物理伤害。",
+            "射出一支利箭，眩晕敌人1秒，造成%$heroes.hero_vesper.arrow_to_the_knee.s_damage[1]%$点真实伤害。",
             HERO_VESPER_ARROW_TO_THE_KNEE_DESCRIPTION_2 =
-            "射出一支利箭，眩晕敌人%$heroes.hero_vesper.arrow_to_the_knee.stun_duration[2]%$秒，造成%$heroes.hero_vesper.arrow_to_the_knee.s_damage[2]%$点物理伤害。",
+            "射出一支利箭，眩晕敌人2秒，造成%$heroes.hero_vesper.arrow_to_the_knee.s_damage[2]%$点真实伤害。",
             HERO_VESPER_ARROW_TO_THE_KNEE_DESCRIPTION_3 =
-            "射出一支利箭，眩晕敌人%$heroes.hero_vesper.arrow_to_the_knee.stun_duration[3]%$秒，造成%$heroes.hero_vesper.arrow_to_the_knee.s_damage[3]%$点物理伤害。",
-            HERO_VESPER_ARROW_TO_THE_KNEE_TITLE = "穿膝利箭",
-            HERO_VESPER_CLASS = "皇家队长",
-            HERO_VESPER_DESC = "维斯珀精通剑术与箭法，凭此胜任利尼维亚军队指挥官的职位。在利尼维亚沦陷、迪纳斯国王失踪之后，他集结了所有能够召集的部队，开始了一场旨在迎回前任统治者的征途。",
+            "射出一支利箭，眩晕敌人3秒，造成%$heroes.hero_vesper.arrow_to_the_knee.s_damage[3]%$点真实伤害。",
             HERO_VESPER_DISENGAGE_DESCRIPTION_1 =
-            "当维斯珀的生命值低于%$heroes.hero_vesper.disengage.hp_to_trigger%$%时，会向后跳跃避开下一次近战攻击，接着射出三支箭矢，每支对附近敌人造成%$heroes.hero_vesper.disengage.s_damage[1]%$点物理伤害。",
+            "当维斯珀受到攻击时，会向后跳跃避开下一次近战攻击，接着射出三支箭矢，每支对附近敌人造成%$heroes.hero_vesper.disengage.s_damage[1]%$点物理伤害。",
             HERO_VESPER_DISENGAGE_DESCRIPTION_2 =
-            "当维斯珀的生命值低于%$heroes.hero_vesper.disengage.hp_to_trigger%$%时，会向后跳跃避开下一次近战攻击，接着射出三支箭矢，每支对附近敌人造成%$heroes.hero_vesper.disengage.s_damage[2]%$点物理伤害。",
+            "当维斯珀受到攻击时，会向后跳跃避开下一次近战攻击，接着射出三支箭矢，每支对附近敌人造成%$heroes.hero_vesper.disengage.s_damage[2]%$点物理伤害。",
             HERO_VESPER_DISENGAGE_DESCRIPTION_3 =
-            "当维斯珀的生命值低于%$heroes.hero_vesper.disengage.hp_to_trigger%$%时，会向后跳跃避开下一次近战攻击，接着射出三支箭矢，每支对附近敌人造成%$heroes.hero_vesper.disengage.s_damage[3]%$点物理伤害。",
-            HERO_VESPER_DISENGAGE_TITLE = "金蝉脱壳",
+            "当维斯珀受到攻击时，会向后跳跃避开下一次近战攻击，接着射出三支箭矢，每支对附近敌人造成%$heroes.hero_vesper.disengage.s_damage[3]%$点物理伤害。",
             HERO_VESPER_MARTIAL_FLOURISH_DESCRIPTION_1 =
-            "攻击一名敌人三次，造成%$heroes.hero_vesper.martial_flourish.s_damage[1]%$点物理伤害。",
+            "攻击一名敌人三次，造成180点物理伤害。",
             HERO_VESPER_MARTIAL_FLOURISH_DESCRIPTION_2 =
-            "攻击一名敌人三次，造成%$heroes.hero_vesper.martial_flourish.s_damage[2]%$点物理伤害。",
+            "攻击一名敌人三次，造成270点物理伤害。",
             HERO_VESPER_MARTIAL_FLOURISH_DESCRIPTION_3 =
-            "攻击一名敌人三次，造成%$heroes.hero_vesper.martial_flourish.s_damage[3]%$点物理伤害。",
-            HERO_VESPER_MARTIAL_FLOURISH_TITLE = "武艺绽放",
-            HERO_VESPER_NAME = "维斯珀",
-            HERO_VESPER_RICOCHET_DESCRIPTION_1 =
-            "射出一支利箭，在%$heroes.hero_vesper.ricochet.s_bounces[1]%$名敌人间弹射，每次造成%$heroes.hero_vesper.ricochet.s_damage[1]%$点物理伤害。",
-            HERO_VESPER_RICOCHET_DESCRIPTION_2 =
-            "射出一支利箭，在%$heroes.hero_vesper.ricochet.s_bounces[2]%$名敌人间弹射，每次造成%$heroes.hero_vesper.ricochet.s_damage[2]%$点物理伤害。",
-            HERO_VESPER_RICOCHET_DESCRIPTION_3 =
-            "射出一支利箭，在%$heroes.hero_vesper.ricochet.s_bounces[3]%$名敌人间弹射，每次造成%$heroes.hero_vesper.ricochet.s_damage[3]%$点物理伤害。",
-            HERO_VESPER_RICOCHET_TITLE = "弹射箭矢",
-            HERO_WITCH_CLASS = "捣蛋女巫",
-            HERO_WITCH_DESC = "斯特蕾吉总喜欢变些不伤人的有趣戏法，给路过仙境森林的人吓一跳。但谁若是威胁到了森林和她的侏儒同胞，立马就会明白平日她顽皮的笑脸只是表象，这位女巫一旦认真起来绝不善罢甘休。",
+            "攻击一名敌人三次，造成340点物理伤害。",
+
+            -- 小女巫
             HERO_WITCH_DISENGAGE_DESCRIPTION_1 =
-            "当斯特蕾吉生命值低于%$heroes.hero_witch.disengage.hp_to_trigger%$%时，会向后传送并在原先位置留下一个诱饵。其拥有%$heroes.hero_witch.disengage.decoy.hp_max[1]%$点生命值，被摧毁时爆炸，眩晕敌人%$heroes.hero_witch.disengage.decoy.explotion.stun_duration[1]%$秒。",
+            "当斯特蕾吉生命值低于%$heroes.hero_witch.disengage.hp_to_trigger%$%时，会向后传送并在原先位置留下一个诱饵。其拥有250生命值，被摧毁时爆炸，眩晕敌人%$heroes.hero_witch.disengage.decoy.explotion.stun_duration[1]%$秒。",
             HERO_WITCH_DISENGAGE_DESCRIPTION_2 =
-            "当斯特蕾吉生命值低于%$heroes.hero_witch.disengage.hp_to_trigger%$%时，会向后传送并在原先位置留下一个诱饵。其拥有%$heroes.hero_witch.disengage.decoy.hp_max[2]%$点生命值，被摧毁时爆炸，眩晕敌人%$heroes.hero_witch.disengage.decoy.explotion.stun_duration[2]%$秒。",
+            "当斯特蕾吉生命值低于%$heroes.hero_witch.disengage.hp_to_trigger%$%时，会向后传送并在原先位置留下一个诱饵。其拥有350点生命值，被摧毁时爆炸，眩晕敌人%$heroes.hero_witch.disengage.decoy.explotion.stun_duration[2]%$秒。",
             HERO_WITCH_DISENGAGE_DESCRIPTION_3 =
-            "当斯特蕾吉生命值低于%$heroes.hero_witch.disengage.hp_to_trigger%$%时，会向后传送并在原先位置留下一个诱饵。其拥有%$heroes.hero_witch.disengage.decoy.hp_max[3]%$点生命值，被摧毁时爆炸，眩晕敌人%$heroes.hero_witch.disengage.decoy.explotion.stun_duration[3]%$秒。",
-            HERO_WITCH_DISENGAGE_TITLE = "闪光诱饵",
-            HERO_WITCH_NAME = "斯特蕾吉",
-            HERO_WITCH_PATH_AOE_DESCRIPTION_1 =
-            "朝路径上投掷一大瓶药水，对范围内敌人造成%$heroes.hero_witch.skill_path_aoe.s_damage[1]%$点魔法伤害，并使其减速%$heroes.hero_witch.skill_path_aoe.duration[1]%$秒。",
-            HERO_WITCH_PATH_AOE_DESCRIPTION_2 =
-            "朝路径上投掷一大瓶药水，对范围内敌人造成%$heroes.hero_witch.skill_path_aoe.s_damage[2]%$点魔法伤害，并使其减速%$heroes.hero_witch.skill_path_aoe.duration[2]%$秒。",
-            HERO_WITCH_PATH_AOE_DESCRIPTION_3 =
-            "朝路径上投掷一大瓶药水，对范围内敌人造成%$heroes.hero_witch.skill_path_aoe.s_damage[3]%$点魔法伤害，并使其减速%$heroes.hero_witch.skill_path_aoe.duration[3]%$秒。",
-            HERO_WITCH_PATH_AOE_TITLE = "咻~啪啦！",
-            HERO_WITCH_POLYMORPH_DESCRIPTION_1 = "将一名敌人变成南瓜%$heroes.hero_witch.skill_polymorph.duration[1]%$秒。",
-            HERO_WITCH_POLYMORPH_DESCRIPTION_2 = "将一名敌人变成南瓜%$heroes.hero_witch.skill_polymorph.duration[2]%$秒。",
-            HERO_WITCH_POLYMORPH_DESCRIPTION_3 = "将一名敌人变成南瓜%$heroes.hero_witch.skill_polymorph.duration[3]%$秒。",
-            HERO_WITCH_POLYMORPH_TITLE = "变成蔬菜！",
+            "当斯特蕾吉生命值低于%$heroes.hero_witch.disengage.hp_to_trigger%$%时，会向后传送并在原先位置留下一个诱饵。其拥有450点生命值，被摧毁时爆炸，眩晕敌人%$heroes.hero_witch.disengage.decoy.explotion.stun_duration[3]%$秒。",
             HERO_WITCH_SOLDIERS_DESCRIPTION_1 =
-            "召唤%$heroes.hero_witch.skill_soldiers.soldiers_amount[1]%$只黑猫与敌人作战，每只拥有%$heroes.hero_witch.skill_soldiers.soldier.hp_max[1]%$点生命值，其攻击可造成%$heroes.hero_witch.skill_soldiers.soldier.melee_attack.damage_min[1]%$-%$heroes.hero_witch.skill_soldiers.soldier.melee_attack.damage_max[1]%$点物理伤害。",
+            "召唤4只黑猫与敌人作战，每只拥有%$heroes.hero_witch.skill_soldiers.soldier.hp_max[1]%$点生命值，其攻击可造成%$heroes.hero_witch.skill_soldiers.soldier.melee_attack.damage_min[1]%$-%$heroes.hero_witch.skill_soldiers.soldier.melee_attack.damage_max[1]%$点物理伤害。",
             HERO_WITCH_SOLDIERS_DESCRIPTION_2 =
-            "召唤%$heroes.hero_witch.skill_soldiers.soldiers_amount[2]%$只黑猫与敌人作战，每只拥有%$heroes.hero_witch.skill_soldiers.soldier.hp_max[2]%$点生命值，其攻击可造成%$heroes.hero_witch.skill_soldiers.soldier.melee_attack.damage_min[2]%$-%$heroes.hero_witch.skill_soldiers.soldier.melee_attack.damage_max[2]%$点物理伤害。",
+            "召唤6只黑猫与敌人作战，每只拥有%$heroes.hero_witch.skill_soldiers.soldier.hp_max[2]%$点生命值，其攻击可造成%$heroes.hero_witch.skill_soldiers.soldier.melee_attack.damage_min[2]%$-%$heroes.hero_witch.skill_soldiers.soldier.melee_attack.damage_max[2]%$点物理伤害。",
             HERO_WITCH_SOLDIERS_DESCRIPTION_3 =
-            "召唤%$heroes.hero_witch.skill_soldiers.soldiers_amount[3]%$只黑猫与敌人作战，每只拥有%$heroes.hero_witch.skill_soldiers.soldier.hp_max[3]%$点生命值，其攻击可造成%$heroes.hero_witch.skill_soldiers.soldier.melee_attack.damage_min[3]%$-%$heroes.hero_witch.skill_soldiers.soldier.melee_attack.damage_max[3]%$点物理伤害。",
-            HERO_WITCH_SOLDIERS_TITLE = "黑夜煞星",
-            HERO_WITCH_ULTIMATE_DESCRIPTION_1 =
-            "将%$heroes.hero_witch.ultimate.max_targets[2]%$名敌人往回传送，传送后使其昏睡%$heroes.hero_witch.ultimate.duration[2]%$秒。",
-            HERO_WITCH_ULTIMATE_DESCRIPTION_2 =
-            "将%$heroes.hero_witch.ultimate.max_targets[3]%$名敌人往回传送，传送后使其昏睡%$heroes.hero_witch.ultimate.duration[3]%$秒。",
-            HERO_WITCH_ULTIMATE_DESCRIPTION_3 =
-            "将%$heroes.hero_witch.ultimate.max_targets[4]%$名敌人往回传送，传送后使其昏睡%$heroes.hero_witch.ultimate.duration[4]%$秒。",
-            HERO_WITCH_ULTIMATE_MENUBOTTOM_DESCRIPTION = "将敌人沿路径往回传送，并昏睡一段时间。",
-            HERO_WITCH_ULTIMATE_MENUBOTTOM_NAME = "昏昏欲退",
-            HERO_WITCH_ULTIMATE_TITLE = "昏昏欲退",
-            HERO_WUKONG_CLASS = "美猴王",
-            HERO_WUKONG_DESC = "话说那孙悟空本是混沌仙石吸收天地灵气、日月精华而生，有举世无双之力、飞天遁地之技、长生不老之身。如今灵珠失窃，大圣重出江湖，须是夺将回来，以免为时晚矣！",
-            HERO_WUKONG_GIANT_STAFF_DESCRIPTION_1 =
-            "将金箍棒变为顶天立地般大小，重压一名敌人，将其秒杀并对目标周围造成%$heroes.hero_wukong.giant_staff.area_damage.damage_min[1]%$-%$heroes.hero_wukong.giant_staff.area_damage.damage_max[1]%$点范围伤害。",
-            HERO_WUKONG_GIANT_STAFF_DESCRIPTION_2 =
-            "将金箍棒变为顶天立地般大小，重压一名敌人，将其秒杀并对目标周围造成%$heroes.hero_wukong.giant_staff.area_damage.damage_min[2]%$-%$heroes.hero_wukong.giant_staff.area_damage.damage_max[2]%$点范围伤害。",
-            HERO_WUKONG_GIANT_STAFF_DESCRIPTION_3 =
-            "将金箍棒变为顶天立地般大小，重压一名敌人，将其秒杀并对目标周围造成%$heroes.hero_wukong.giant_staff.area_damage.damage_min[3]%$-%$heroes.hero_wukong.giant_staff.area_damage.damage_max[3]%$点范围伤害。",
-            HERO_WUKONG_GIANT_STAFF_TITLE = "神珍定海",
-            HERO_WUKONG_HAIR_CLONES_DESCRIPTION_1 =
-            "变出2只毛猴与孙悟空并肩作战。毛猴攻击造成%$heroes.hero_wukong.hair_clones.soldier.melee_attack.damage_min[1]%$-%$heroes.hero_wukong.hair_clones.soldier.melee_attack.damage_max[1]%$点伤害，持续战斗%$heroes.hero_wukong.hair_clones.soldier.duration[1]%$秒。",
-            HERO_WUKONG_HAIR_CLONES_DESCRIPTION_2 =
-            "变出2只毛猴与孙悟空并肩作战。毛猴攻击造成%$heroes.hero_wukong.hair_clones.soldier.melee_attack.damage_min[2]%$-%$heroes.hero_wukong.hair_clones.soldier.melee_attack.damage_max[2]%$点伤害，持续战斗%$heroes.hero_wukong.hair_clones.soldier.duration[2]%$秒。",
-            HERO_WUKONG_HAIR_CLONES_DESCRIPTION_3 =
-            "变出2只毛猴与孙悟空并肩作战。毛猴攻击造成%$heroes.hero_wukong.hair_clones.soldier.melee_attack.damage_min[3]%$-%$heroes.hero_wukong.hair_clones.soldier.melee_attack.damage_max[3]%$点伤害，持续战斗%$heroes.hero_wukong.hair_clones.soldier.duration[3]%$秒。",
-            HERO_WUKONG_HAIR_CLONES_TITLE = "身外身法",
-            HERO_WUKONG_NAME = "孙悟空",
+            "召唤8只黑猫与敌人作战，每只拥有%$heroes.hero_witch.skill_soldiers.soldier.hp_max[3]%$点生命值，其攻击可造成%$heroes.hero_witch.skill_soldiers.soldier.melee_attack.damage_min[3]%$-%$heroes.hero_witch.skill_soldiers.soldier.melee_attack.damage_max[3]%$点物理伤害。",
+
+            -- 悟空
             HERO_WUKONG_POLE_RANGED_DESCRIPTION_1 =
-            "将金箍棒掷向空中，变出%$heroes.hero_wukong.pole_ranged.pole_amounts[1]%$根落向敌人，每根对小范围内的敌人造成%$heroes.hero_wukong.pole_ranged.damage_min[1]%$点伤害，并使其眩晕。",
+            "将金箍棒掷向空中，变出6根落向敌人，每根对小范围内的敌人造成6-10点伤害，并使其眩晕3秒。",
             HERO_WUKONG_POLE_RANGED_DESCRIPTION_2 =
-            "将金箍棒掷向空中，变出%$heroes.hero_wukong.pole_ranged.pole_amounts[2]%$根落向敌人，每根对小范围内的敌人造成%$heroes.hero_wukong.pole_ranged.damage_min[2]%$点伤害，并使其眩晕。",
+            "将金箍棒掷向空中，变出10根落向敌人，每根对小范围内的敌人造成8-15点伤害，并使其眩晕3秒。",
             HERO_WUKONG_POLE_RANGED_DESCRIPTION_3 =
-            "将金箍棒掷向空中，变出%$heroes.hero_wukong.pole_ranged.pole_amounts[3]%$根落向敌人，每根对小范围内的敌人造成%$heroes.hero_wukong.pole_ranged.damage_min[3]%$点伤害，并使其眩晕。",
-            HERO_WUKONG_POLE_RANGED_TITLE = "雨落千钧",
+            "将金箍棒掷向空中，变出14根落向敌人，每根对小范围内的敌人造成11-20点伤害，并使其眩晕3秒。",
             HERO_WUKONG_ULTIMATE_DESCRIPTION_1 =
-            "小白龙从天而降，猛扎进地面，造成%$heroes.hero_wukong.ultimate.damage_total[2]%$点真实伤害，并留下减速区域。",
+            "小白龙从天而降，猛扎进地面，造成%$heroes.hero_wukong.ultimate.damage_total[1]%$点真实伤害，并留下7秒减速区域。",
             HERO_WUKONG_ULTIMATE_DESCRIPTION_2 =
-            "小白龙从天而降，猛扎进地面，造成%$heroes.hero_wukong.ultimate.damage_total[3]%$点真实伤害，并留下减速区域。",
+            "小白龙从天而降，猛扎进地面，造成%$heroes.hero_wukong.ultimate.damage_total[2]%$点真实伤害，并留下8秒减速区域。",
             HERO_WUKONG_ULTIMATE_DESCRIPTION_3 =
-            "小白龙从天而降，猛扎进地面，造成%$heroes.hero_wukong.ultimate.damage_total[4]%$点真实伤害，并留下减速区域。",
-            HERO_WUKONG_ULTIMATE_MENUBOTTOM_DESCRIPTION = "召唤小白龙。",
-            HERO_WUKONG_ULTIMATE_MENUBOTTOM_NAME = "白龙腾渊",
-            HERO_WUKONG_ULTIMATE_TITLE = "白龙腾渊",
-            HERO_WUKONG_ZHU_APPRENTICE_DESCRIPTION_1 =
-            "孙悟空的好师弟猪八戒可是走到哪跟到哪！八戒攻击造成%$heroes.hero_wukong.zhu_apprentice.melee_attack.damage_min[1]%$-%$heroes.hero_wukong.zhu_apprentice.melee_attack.damage_max[1]%$点伤害，有小概率使出大范围攻击。",
-            HERO_WUKONG_ZHU_APPRENTICE_DESCRIPTION_2 =
-            "孙悟空的好师弟猪八戒可是走到哪跟到哪！八戒攻击造成%$heroes.hero_wukong.zhu_apprentice.melee_attack.damage_min[2]%$-%$heroes.hero_wukong.zhu_apprentice.melee_attack.damage_max[2]%$点伤害，有小概率使出大范围攻击。",
-            HERO_WUKONG_ZHU_APPRENTICE_DESCRIPTION_3 =
-            "孙悟空的好师弟猪八戒可是走到哪跟到哪！八戒攻击造成%$heroes.hero_wukong.zhu_apprentice.melee_attack.damage_min[3]%$-%$heroes.hero_wukong.zhu_apprentice.melee_attack.damage_max[3]%$点伤害，有小概率使出大范围攻击。",
-            HERO_WUKONG_ZHU_APPRENTICE_TITLE = "八戒师弟",
+            "小白龙从天而降，猛扎进地面，造成%$heroes.hero_wukong.ultimate.damage_total[3]%$点真实伤害，并留下10秒减速区域。",
         }
     }
 }
