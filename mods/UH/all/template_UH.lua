@@ -3316,7 +3316,10 @@ function template_UH:enhance5()
 		"soldier_death_rider",
 		"soldier_sand_warrior",
 		"tower_necromancer",
-		"hero_dracolich"
+		"hero_dracolich",
+		"soldier_bone_golem",
+		"soldier_flingers_skeleton_warrior",
+		"soldier_flingers_skeleton"
 	}
 	for i = 1, 4 do
 		table.insert(tt.aura.allowed_templates, "soldier_tower_necromancer_skeleton_golem_lvl" .. i)

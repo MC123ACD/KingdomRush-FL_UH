@@ -1,6 +1,6 @@
 return {
     name = "UH",
-    version = "0.7.0",
+    version = "1.0.0",
     game_version = "kr3",
     desc = "FL's reinforce hero",
     url = "https://tieba.baidu.com/p/9714939688",
