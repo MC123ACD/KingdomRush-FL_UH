@@ -50,10 +50,13 @@ local function set_to_table(t)
 	i18n.msgs["zh-Hans"] = t.zh_Hans
 end
 
-local UH = {}
+local UH = {
+	new = {},
+	origin = {}
+}
 
 function UH:load_UH()
-	if not UH.new then
+	if not next(UH.new) then
 		scripts_UH:init()
 		scripts_UH:utils()
 		scripts_UH:script_utils()
@@ -64,8 +67,6 @@ function UH:load_UH()
 			scripts_UH["enhance" .. i](self)
 			template_UH["enhance" .. i](self)
 		end
-
-		UH.new = {}
 
 		save_to_table(UH.new)
 	else
@@ -113,11 +114,9 @@ function hook.E.load(load, self)
 
 	load(self)
 
-	if not UH.origin then
-		UH.origin = {}
-
-		save_to_table(UH.origin)
-	end
+	UH.new = {}
+	UH.origin = {}
+	save_to_table(UH.origin)
 
 	-- 检测补强是否开启，开启则应用补强
 	local user_data = storage:load_slot()
@@ -164,6 +163,8 @@ function hook.hero_room.init(init, self, sw, sh)
 	balance_hero_button.label.vertical_align = CJK("middle-caps", "middle", "middle", "middle")
 	balance_hero_button.label.text = screen_map.user_data.liuhui.balance_hero and _("FLBALANCE") or _("FLSTANDARD")
 	balance_hero_button.label.fit_lines = 1
+
+	local already_use_upgrades
 	function balance_hero_button.on_click()
 		screen_map.user_data.liuhui.balance_hero = not screen_map.user_data.liuhui.balance_hero
 		storage:save_slot(screen_map.user_data)
@@ -172,9 +173,13 @@ function hook.hero_room.init(init, self, sw, sh)
 			UH:load_UH()
 		else
 			set_to_table(UH.origin)
+
+			if not already_use_upgrades then
+				UPGR:patch_templates(5)
+				already_use_upgrades = true
+			end
 		end
 
-		UPGR:patch_templates(5)
 		self:construct_hero(self.selected_index)
 
 		self.balance_hero_button.label.text = screen_map.user_data.liuhui.balance_hero and _("FLBALANCE") or

@@ -2108,7 +2108,7 @@ function template_UH:enhance3()
 		1000
 	}
 	T("hero_veznan").timed_attacks.list[1].trigger_min_total_hp = 0.4
-	
+
 	T("mod_veznan_shackles_dps").dps.damage_inc = 3
 
 	T("hero_veznan").timed_attacks.list[3].cooldown = 14
