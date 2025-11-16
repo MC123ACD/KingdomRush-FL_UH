@@ -158,7 +158,27 @@ function animations_UH.a3()
 end
 
 function animations_UH.a4()
-
+	mod_utils.a_db_reset({
+		-- 杰克
+		hero_jack_o_lantern_teleportIn = {
+			fps = 35
+		},
+		hero_jack_o_lantern_teleportOut = {
+			fps = 35
+		},
+		hero_jack_o_lantern_attack = {
+			fps = 35
+		},
+		hero_jack_o_lantern_hauntedBlade = {
+			fps = 35
+		},
+		hero_jack_o_lantern_spawnGhouls = {
+			fps = 35
+		},
+		hero_jack_o_lantern_explosiveHead = {
+			fps = 35
+		}
+	})
 end
 
 function animations_UH.a5()

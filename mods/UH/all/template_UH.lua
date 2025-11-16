@@ -164,7 +164,7 @@ function template_UH:enhance1()
 	T("hero_malik").melee.attacks[3].min_count = 1
 	T("hero_malik").melee.attacks[3].mod = "mod_malik_stun_short"
 
-	T("hero_malik").melee.attacks[4].cooldown = 11
+	T("hero_malik").melee.attacks[4].cooldown = 15
 	T("hero_malik").hero.skills.fissure.damage_min = {
 		20,
 		40,
@@ -2650,6 +2650,68 @@ end
 function template_UH:enhance4()
 	-- 1. 电云
 	T("hero_dianyun").motion.max_speed = 2.3 * FPS
+
+	T("hero_dianyun").ranged.attacks[1].max_range = 250
+
+	-- 2. 杰克
+	T("hero_jack_o_lantern").hero.level_stats.regen_health = {
+		30,
+		32,
+		34,
+		36,
+		38,
+		40,
+		44,
+		46,
+		48,
+		50
+	}
+	T("hero_jack_o_lantern").motion.max_speed = 95
+
+	T("hero_jack_o_lantern").melee.attacks[1].hit_time = fts(6)
+
+	T("hero_jack_o_lantern").timed_attacks.list[1].cast_time = fts(12)
+
+	T("hero_jack_o_lantern").melee.attacks[2].hit_time = fts(12)
+
+	T("hero_jack_o_lantern").hero.skills.hero_jacko_melee.accumulated_damage_factor = {
+		0.3,
+		0.5,
+		0.75
+	}
+
+	T("hero_jacko_horse").motion.max_speed = 85
+
+	-- 3. 熔岩龙
+	T("bolt_murglun").bullet.damage_type = DAMAGE_EXPLOSION
+
+	T("aura_murglun_firestorm").aura.mods = { "mod_murglun_firestorm", "hero_murglun_slow_mod" }
+
+	tt = RT("hero_murglun_slow_mod", "mod_slow")
+	tt.modifier.duration = 1
+	tt.slow.factor = 0.70
+
+	-- 4. 黑龙
+	T("hero_beresad").ranged.attacks[1].cooldown = 1.15
+
+	T("hero_beresad").hero.skills.conflagration.cooldown = {
+		25,
+		22,
+		19
+	}
+
+	T("hero_beresad").hero.skills.fear_dragon.duration = {
+		3,
+		4,
+		5
+	}
+	T("hero_beresad").timed_attacks.list[1].max_target = 3
+	T("hero_beresad").timed_attacks.list[1].cooldown = 15
+
+	T("hero_beresad").timed_attacks.list[2].cooldown = 38
+	T("hero_beresad_golem_lvl1").melee.range = 75
+	T("hero_beresad_golem_lvl2").melee.range = 75
+	T("hero_beresad_golem_lvl3").melee.range = 75
 end
 
 function template_UH:enhance5()
