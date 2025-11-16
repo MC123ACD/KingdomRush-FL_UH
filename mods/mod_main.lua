@@ -21,7 +21,7 @@ local mod_main = {}
 function mod_main:init(director)
     local config = require("config")
 
-    local descending_mods_data, ascending_mods_data = mod_utils:check_get_available_mods(config)
+    local descending_mods_data, ascending_mods_data = mod_utils.check_get_available_mods(config)
     self.desc_mods_data = descending_mods_data
     self.asc_mods_data = ascending_mods_data
     mod_hook.desc_mods_data = descending_mods_data
@@ -48,7 +48,7 @@ function mod_main:after_init()
     -- 正序加载所有模组，确保加载模块顺序正确
     for _, mod_data in ipairs(self.desc_mods_data) do
         -- 添加模组路径到package.path
-        mod_utils:add_path(mod_data)
+        mod_utils.add_path(mod_data)
 
         -- 加载模组
         mod_data.module = require(mod_data.name)
@@ -57,7 +57,7 @@ function mod_main:after_init()
             error(string.format("Must return table, mod: %s", mod_data.name))
         end
 
-        mod_data.module.config = require(mod_utils.ppref .. mod_data.path .. ".config")
+        mod_data.module.config = require(mod_utils.get_ppref() .. mod_data.path .. ".config")
     end
 
     -- 倒序初始化模组，确保高优先级覆盖低优先级
@@ -66,7 +66,7 @@ function mod_main:after_init()
         mod_data.module:init()
 
         -- 打印模组加载信息
-        log.error(mod_utils:get_debug_info(mod_data.module.config))
+        log.error(mod_utils.get_debug_info(mod_data.module.config))
     end
 
     mod_hook:after_init()

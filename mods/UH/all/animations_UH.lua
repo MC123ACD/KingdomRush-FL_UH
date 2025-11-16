@@ -4,7 +4,7 @@ local mod_utils = require("mod_utils")
 local animations_UH = {}
 
 function animations_UH.a1()
-	mod_utils:a_db_reset({
+	mod_utils.a_db_reset({
 		-- 波林
 		hero_bolin_mine = {
 			fps = 35
@@ -18,7 +18,7 @@ function animations_UH.a1()
 end
 
 function animations_UH.a2()
-	mod_utils:a_db_reset({
+	mod_utils.a_db_reset({
 		-- 大法师
 		hero_wizard_shoot = {
 			fps = 40
@@ -101,7 +101,7 @@ function animations_UH.a2()
 end
 
 function animations_UH.a3()
-	mod_utils:a_db_reset({
+	mod_utils.a_db_reset({
 		-- 艾莉丹
 		hero_elves_archer_walk = {
 			fps = 26
@@ -162,7 +162,7 @@ function animations_UH.a4()
 end
 
 function animations_UH.a5()
-	mod_utils:a_db_reset({
+	mod_utils.a_db_reset({
 		-- 维斯珀
 		hero_vesper_vesper_melee_attack_1 = {
 			fps = 35

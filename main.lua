@@ -451,7 +451,7 @@ function love.run()
 	local updatei, updatef, presi, presf, drawi, drawf
 	local nx, nx_on = love.nx
 
-	while true do
+    while true do
 		if main.profiler and nx and nx.isProfiling() then
 			nx_on = true
 		end
@@ -687,8 +687,8 @@ function love.errhand(msg)
 		LLDEBUGGER.start()
 	end
 
-	while true do
-		love.event.pump()
+    while true do
+        love.event.pump()
 
 		for e, a, b, c in love.event.poll() do
 			if e == "quit" then
