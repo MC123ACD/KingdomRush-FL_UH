@@ -299,7 +299,17 @@ local strings_UH = {
             HERO_ELVES_VEZNAN_SOULBURN_DESCRIPTION_2 = "周围敌人血量大于400点时解体生命值共计不超过750的单个或数个敌人。",
             HERO_ELVES_VEZNAN_SOULBURN_DESCRIPTION_3 = "周围敌人血量大于400点时解体生命值共计不超过1000的单个或数个敌人。",
         },
-        [4] = {},
+        [4] = {
+            HERO_BERESAD_FEAR_DRAGON_DESCRIPTION_1 = "贝雷萨德一声怒吼，受影响的所有敌人均会四散逃命，沿路径倒行3秒。",
+            HERO_BERESAD_FEAR_DRAGON_DESCRIPTION_2 = "贝雷萨德一声怒吼，受影响的所有敌人均会四散逃命，沿路径倒行4秒。",
+            HERO_BERESAD_FEAR_DRAGON_DESCRIPTION_3 = "贝雷萨德一声怒吼，受影响的所有敌人均会四散逃命，沿路径倒行5秒。",
+            HERO_MURGLUN_INFERNAL_HEAT_DESCRIPTION_1 = "每隔22秒，墨尔古伦便会扇动她那燃着火焰的双翼，对一片区域内的所有敌人造成100点真实伤害，并持续减速敌人30%。",
+            HERO_MURGLUN_INFERNAL_HEAT_DESCRIPTION_2 = "每隔18秒，墨尔古伦便会扇动她那燃着火焰的双翼，对一片区域内的所有敌人造成100点真实伤害，并持续减速敌人30%。",
+            HERO_MURGLUN_INFERNAL_HEAT_DESCRIPTION_3 = "每隔14秒，墨尔古伦便会扇动她那燃着火焰的双翼，对一片区域内的所有敌人造成100点真实伤害，并持续减速敌人30%。",
+            HERO_JACK_O_LANTERN_HERO_JACKO_MELEE_DESCRIPTION_1 = "杰克会蓄积每次所受伤害的30%，等到下次攻击时一并释放出来。",
+            HERO_JACK_O_LANTERN_HERO_JACKO_MELEE_DESCRIPTION_2 = "杰克会蓄积每次所受伤害的50%，等到下次攻击时一并释放出来。",
+            HERO_JACK_O_LANTERN_HERO_JACKO_MELEE_DESCRIPTION_3 = "杰克会蓄积每次所受伤害的75%，等到下次攻击时一并释放出来。",
+        },
         [5] = {
             -- 狮鹫
             HERO_BIRD_BIRDS_OF_PREY_DESCRIPTION_1 =

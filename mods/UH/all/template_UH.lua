@@ -2706,7 +2706,7 @@ function template_UH:enhance4()
 		5
 	}
 	T("hero_beresad").timed_attacks.list[1].max_target = 3
-	T("hero_beresad").timed_attacks.list[1].cooldown = 15
+	T("hero_beresad").timed_attacks.list[1].cooldown = 14
 
 	T("hero_beresad").timed_attacks.list[2].cooldown = 38
 	T("hero_beresad_golem_lvl1").melee.range = 75

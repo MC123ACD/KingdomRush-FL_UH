@@ -687,8 +687,8 @@ function love.errhand(msg)
 		LLDEBUGGER.start()
 	end
 
-    while true do
-        love.event.pump()
+	while true do
+		love.event.pump()
 
 		for e, a, b, c in love.event.poll() do
 			if e == "quit" then

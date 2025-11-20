@@ -11,6 +11,7 @@ local game = require("game")
 local scripts = require("scripts")
 local scripts5 = require("scripts_5")
 local SU5 = require("script_utils_5")
+local U5 = require("utils_5")
 local utils_UH = require("utils_UH")
 local function v(v1, v2)
 	return {
@@ -8334,7 +8335,7 @@ function scripts_UH:enhance5()
 				a = ranged_tentacle_attack
 
 				if not this.is_transformed and not a.disabled and store.tick_ts - a.ts > a.cooldown and store.tick_ts - last_ts > a.min_cooldown then
-					local target, _, pred_pos = U.find_foremost_enemy(store.entities, tpos(this), a.min_range,
+					local target, _, pred_pos = U5.find_foremost_enemy(store.entities, tpos(this), a.min_range,
 						a.max_range, a.node_prediction, a.vis_flags, a.vis_bans)
 
 					if not target then
@@ -8361,7 +8362,7 @@ function scripts_UH:enhance5()
 						if SU.soldier_interrupted(this) then
 							-- block empty
 						else
-							local target, _, pred_pos = U.find_foremost_enemy(store.entities, tpos(this), a.min_range,
+							local target, _, pred_pos = U5.find_foremost_enemy(store.entities, tpos(this), a.min_range,
 								a.max_range, a.shoot_time, a.vis_flags, a.vis_bans)
 
 							if target then
@@ -9759,7 +9760,7 @@ function scripts_UH:enhance5()
 					elseif i == 1 then
 						local bullet_t = E:get_template(a.bullet)
 						local flight_time = bullet_t.bullet.flight_time
-						local target = U.find_foremost_enemy(store.entities, this.pos, a.min_range, a.max_range, false,
+						local target = U5.find_foremost_enemy(store.entities, this.pos, a.min_range, a.max_range, false,
 							a.vis_flags, a.vis_bans, function(v)
 								local v_pos = v.pos
 
