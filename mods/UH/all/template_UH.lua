@@ -2605,10 +2605,8 @@ function template_UH:enhance3()
 		35
 	}
 	T("hero_faustus").ranged.attacks[1].bullet_count = 4
-	T("hero_faustus").ranged.attacks[1].bullet = "bolt_faustus_t"
-	tt = RT("bolt_faustus_t", "bolt_faustus")
-	tt.alter_reality_chance = 0.05
-	tt.alter_reality_mod = "mod_teleport_mage"
+	T("bolt_faustus").alter_reality_chance = 0.05
+	T("bolt_faustus").alter_reality_mod = "mod_teleport_mage"
 
 	T("aura_teleport_faustus").aura.mods = {
 		"mod_teleport_faustus",
