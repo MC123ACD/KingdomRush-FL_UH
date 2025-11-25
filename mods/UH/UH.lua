@@ -36,45 +36,22 @@ local function CJK(default, zh, ja, kr)
 	return i18n:cjk(default, zh, ja, kr)
 end
 
-local function save_to_table(t)
-	t.templates = copy(E.entities)
-	t.zh_Hans = copy(zh_Hans)
-	t.scripts = copy(scripts)
-	t.scripts5 = copy(scripts5)
-end
-
-local function set_to_table(t)
-	E.entities = t.templates
-	scripts = t.scripts
-	scripts5 = t.scripts5
-	i18n.msgs["zh-Hans"] = t.zh_Hans
-end
-
-local UH = {
-	new = {},
-	origin = {}
-}
+local UH = {}
 
 function UH:load_UH()
-	if not next(UH.new) then
-		scripts_UH:init()
-		scripts_UH:utils()
-		scripts_UH:script_utils()
-		scripts_UH:scripts()
-		strings_UH:init()
+	scripts_UH:init()
+	scripts_UH:utils()
+	scripts_UH:script_utils()
+	scripts_UH:scripts()
+	strings_UH:init()
 
-		for i = 1, 5 do
-			scripts_UH["enhance" .. i](self)
-			template_UH["enhance" .. i](self)
-		end
-
-		save_to_table(UH.new)
-	else
-		set_to_table(UH.new)
+	for i = 1, 5 do
+		scripts_UH["enhance" .. i](self)
+		template_UH["enhance" .. i](self)
 	end
 end
 
-function UH:init()
+function UH:init(mod_data)
 	local hook = self.hook
 
 	require("game_scripts")
@@ -86,7 +63,6 @@ function UH:init()
 	HOOK(E, "load", hook.E.load)
 	HOOK(E, "register_t", hook.E.RT)
 	HOOK(HeroRoomView, "initialize", hook.hero_room.init)
-	HOOK(HeroRoomView, "show", hook.hero_room.show)
 	HOOK(game_gui, "init", hook.game_gui.init)
 	HOOK(sys.level, "init", hook.sys.level.init)
 	HOOK(game, "mousepressed", hook.game.mousepressed)
@@ -114,82 +90,24 @@ function hook.E.load(load, self)
 
 	load(self)
 
-	UH.new = {}
-	UH.origin = {}
-	save_to_table(UH.origin)
-
-	-- 检测补强是否开启，开启则应用补强
-	local user_data = storage:load_slot()
-	if user_data.liuhui and user_data.liuhui.balance_hero then
-		UH:load_UH()
-	end
+	UH:load_UH()
 end
 
 function hook.sys.level.init(init, self, store)
 	init(self, store)
 
-	local user_data = storage:load_slot()
-
-	if user_data.liuhui and user_data.liuhui.balance_hero then
-		A_UH:a1()
-		A_UH:a2()
-		A_UH:a3()
-		A_UH:a4()
-		A_UH:a5()
-	end
+	A_UH:a1()
+	A_UH:a2()
+	A_UH:a3()
+	A_UH:a4()
+	A_UH:a5()
 end
 
 -- 按钮
 function hook.hero_room.init(init, self, sw, sh)
 	init(self, sw, sh)
 
-	if screen_map.user_data.liuhui == nil then
-		screen_map.user_data.liuhui = {}
-		screen_map.user_data.liuhui.balance_hero = false
-		-- screen_map.user_data.liuhui.balance_hero_level = false
-	end
-
 	local kr3_y_offset = IS_KR3 and 4 or 0
-	-- 是否开启补强按钮
-	local balance_hero_button = GGButton:new("heroroom_btnDone_large_0001", "heroroom_btnDone_large_0002")
-	local done_button = self.done_button
-
-	balance_hero_button.anchor = v(math.floor(done_button.size.x / 2), done_button.size.y / 2)
-	balance_hero_button.pos = v(self.back.size.x - 770 - done_button.size.x - 20, self.back.size.y - 32)
-	balance_hero_button.label.size = v(100, 34)
-	balance_hero_button.label.text_size = done_button.label.size
-	balance_hero_button.label.pos = v(20, 19)
-	balance_hero_button.label.font_size = 24
-	balance_hero_button.label.vertical_align = CJK("middle-caps", "middle", "middle", "middle")
-	balance_hero_button.label.text = screen_map.user_data.liuhui.balance_hero and _("FLBALANCE") or _("FLSTANDARD")
-	balance_hero_button.label.fit_lines = 1
-
-	local already_use_upgrades
-	function balance_hero_button.on_click()
-		screen_map.user_data.liuhui.balance_hero = not screen_map.user_data.liuhui.balance_hero
-		storage:save_slot(screen_map.user_data)
-
-		if screen_map.user_data.liuhui and screen_map.user_data.liuhui.balance_hero then
-			UH:load_UH()
-		else
-			set_to_table(UH.origin)
-
-			if not already_use_upgrades then
-				UPGR:patch_templates(5)
-				already_use_upgrades = true
-			end
-		end
-
-		self:construct_hero(self.selected_index)
-
-		self.balance_hero_button.label.text = screen_map.user_data.liuhui.balance_hero and _("FLBALANCE") or
-		_("FLSTANDARD")
-
-		S:queue("GUIButtonCommon")
-	end
-
-	self.back:add_child(balance_hero_button)
-	self.balance_hero_button = balance_hero_button
 
 	local cheat_up = KImageView:new("heroroom_012")
 
@@ -294,13 +212,6 @@ function hook.hero_room.init(init, self, sw, sh)
 
 	self.back:add_child(cheat_up)
 	self.cheat_up = cheat_up
-end
-
--- 每次显示英雄殿堂刷新英雄属性
-function hook.hero_room.show(show, self)
-	show(self)
-
-	self:construct_hero(self.selected_index)
 end
 
 -- game_gui 初始化
